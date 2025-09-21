@@ -1,27 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_parsing.c                                    :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/21 12:20:39 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/21 21:29:51 by mandre           ###   ########.fr       */
+/*   Created: 2025/09/21 20:27:28 by mandre            #+#    #+#             */
+/*   Updated: 2025/09/21 21:08:34 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
-
-int input_parsing(int argc, char **argv, t_meta *philo_meta)
-{
-	if (argc == 5)
-	{
-		philo_meta->philosophers_count = ft_atoi(argv[1]);
-		philo_meta->time_to_die = ft_atoi(argv[2]);// Wrong have to implement conversion of decimal numbers !!!
-		philo_meta->time_to_eat = ft_atoi(argv[3]);
-		philo_meta->time_to_sleep = ft_atoi(argv[4]);
-		philo_meta->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
-	}
-}

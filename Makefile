@@ -1,7 +1,7 @@
 # <==== Meta Data =====>
 NAME	:= philo
 CC		:= cc
-CFLAGS	:= -Wall -Werror -Wextra
+CFLAGS	:= #-Wall -Werror -Wextra
 
 #Includes
 INC_FILES		:= inc
@@ -17,7 +17,7 @@ CORE_DIR	:= core/
 
 
 
-CORE_FILES	:= $(addprefix $(CORE_DIR), $(addsuffix .c, input_parsing)) # src/*.c
+CORE_FILES	:= $(addprefix $(CORE_DIR), $(addsuffix .c, type_converters)) 
 
 
 # Every folder path including the .c files inside the src/ folder 
