@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 12:20:39 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/22 16:06:34 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/22 16:10:33 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /// @brief This function stores all the values in the right converted format
 /// in the meta_struct
-int input_parsing(int argc, char **argv, t_meta *philo_meta)
+int	input_parsing(int argc, char **argv, t_meta *philo_meta)
 {
 	if (argc == 5)
 	{
