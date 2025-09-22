@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/22 15:51:47 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/22 18:04:52 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@
 
 typedef struct s_meta
 {
-	int		philosophers_count;
-	double	time_to_die;
-	double	time_to_eat;
-	double	time_to_sleep;
-	int		number_of_times_each_philosopher_must_eat;
+	int			philosophers_count;
+	double		time_to_die;
+	double		time_to_eat;
+	double		time_to_sleep;
+	int			number_of_times_each_philosopher_must_eat;
+	pthread_t	*thread;
 }   t_meta;
 
 
@@ -44,7 +45,7 @@ int		ft_atoi(const char *s);
 double	str_to_double(char *s);
 void	write_error(int status);
 int		input_parsing(int argc, char **argv, t_meta *philo_meta);
-
+int		create_threads(t_meta *philo_meta);
 
 
 #endif

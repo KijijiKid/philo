@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:03 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/22 16:11:30 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/22 18:04:31 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int argc, char **argv)
 	{
 		if (input_parsing(argc, argv, &philo_meta) == 1)
 			write_error(2);
+		create_threads(&philo_meta);
 	}
 	else 
 		write_error(1);
