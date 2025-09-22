@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/21 21:18:27 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/22 14:14:09 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ typedef struct s_meta
 
 
 /*Function Prototypes*/
-int ft_atoi(const char *s);
+int		ft_atoi(const char *s);
+double	str_to_double(char *s);
 
 
 
