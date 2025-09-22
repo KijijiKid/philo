@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 20:32:53 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/22 14:57:03 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/22 15:16:54 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,13 @@ double	str_to_double(char *s)
 	if (s[i] == '.')
 			i++;
 	decimal = 0;
+	while ('0' <= s[i + 1] && s[i + 1] <= '9')
+		i++;
 	while ('0' <= s[i] && s[i] <= '9')
 	{
 		decimal += (s[i]) - '0';
-		decimal /= 0.10;
-		i++;
+		decimal /= 10;
+		i--;
 	}
 	return ((decimal + whole_num) * multiplier);
 }
