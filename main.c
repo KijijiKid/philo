@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:03 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/22 14:15:47 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/22 15:20:56 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 int main(int argc, char **argv)
 {
-    // t_meta  philo_meta;
+    t_meta  philo_meta;
 
-	printf("%f\n", str_to_double(argv[1]));
+	if (argc == 6)
+	{
+		input_parsing(argc, argv, &philo_meta);
+	}
+	else 
+		write_error(1);
 }

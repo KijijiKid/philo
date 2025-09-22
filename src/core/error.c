@@ -6,9 +6,14 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 20:27:28 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/21 21:08:34 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/22 15:26:07 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void	write_error(int status)
+{
+	if (status == 1)
+		printf("%s", WRONG_INPUT);
+}

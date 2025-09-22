@@ -17,7 +17,7 @@ CORE_DIR	:= core/
 
 
 
-CORE_FILES	:= $(addprefix $(CORE_DIR), $(addsuffix .c, type_converters)) 
+CORE_FILES	:= $(addprefix $(CORE_DIR), $(addsuffix .c, type_converters error input_parsing)) 
 
 
 # Every folder path including the .c files inside the src/ folder 
