@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:42:10 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/22 19:11:44 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/23 18:11:17 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ pthread_mutex_t mutex;
 
 void	*routine(void)
 {
-	// sleep(1);
 	pthread_mutex_lock(&mutex);
 	printf("%d\n", a);
 	a++;
@@ -31,31 +30,13 @@ int	create_threads(t_meta *philo_meta)
 	int	i;
 
 	pthread_mutex_init(&mutex, NULL);
-	philo_meta->thread = malloc(sizeof(pthread_t) * philo_meta->philosophers_count );
-	i = 0;
+	i = 1;
 	while (i < philo_meta->philosophers_count)
 	{
-		if (pthread_create(&philo_meta->thread[i], NULL, ((void *)routine), NULL) != 0)
+		philo_meta->philo[i].id = i + 1; // Increment by one to not have Philo with Id 0
+		if (pthread_create(&(philo_meta->philo)[i].thread, NULL, ((void *)routine), NULL) != 0)
 			perror("Creation Failed"); //Implement verbose -> TODO
 		i++;
 	}
-	i--;
-	while (0 <= i)
-	{
-		sleep(1);
-		printf("%d\n", i);
-		if (pthread_join(philo_meta->thread[i], NULL) != 0)
-			perror("Join Failed"); //Implement verbose -> TODO
-		printf("Thread joined\n");
-		i--;
-	}
-	pthread_mutex_destroy(&mutex);
-	// i--;
-	// while (0 <= i)
-	// {
-	// 	printf("freed\n");
-	free(&philo_meta->thread[0]);
-	// 	i--;
-	// }
 	return (0);
 }

@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   thread_destroy.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/21 11:25:03 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/23 18:04:16 by mandre           ###   ########.fr       */
+/*   Created: 2025/09/23 17:51:39 by mandre            #+#    #+#             */
+/*   Updated: 2025/09/23 18:10:48 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+int	clean_all(t_meta *philo_meta)
 {
-	t_meta	philo_meta;
+	int	i;
 
-	if (argc == 6 || argc == 5)
+	i = 0;
+	while (i < philo_meta->philosophers_count)
 	{
-		if (input_parsing(argc, argv, &philo_meta) == 1)
-			write_error(2);
-		init_structs(&philo_meta);
-		create_threads(&philo_meta);
-		sleep(2);
-		clean_all(&philo_meta);
+		if (pthread_join((philo_meta->philo)[i].thread, NULL) != 0)
+			perror("Creation Failed"); //Implement verbose -> TODO
+		free(&(philo_meta->philo)[i]);
+		i++;
 	}
-	else 
-		write_error(1);
+	return (0);
 }

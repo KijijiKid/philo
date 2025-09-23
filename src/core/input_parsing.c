@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 12:20:39 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/22 16:10:33 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/23 17:34:46 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	input_parsing(int argc, char **argv, t_meta *philo_meta)
 		philo_meta->time_to_sleep = str_to_double(argv[4]);
 		philo_meta->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
 	}
-	if (philo_meta->philosophers_count <= 1 || !(0.0 < philo_meta->time_to_die && philo_meta->time_to_die < 1.0)
+	if (!(1 < philo_meta->philosophers_count && philo_meta->philosophers_count <= 200)
+		|| !(0.0 < philo_meta->time_to_die && philo_meta->time_to_die < 1.0)
 		|| !(0.0 < philo_meta->time_to_eat && philo_meta->time_to_eat < 1.0)
 		|| !(0.0 < philo_meta->time_to_sleep && philo_meta->time_to_sleep < 1.0) 
 		|| philo_meta->number_of_times_each_philosopher_must_eat <= 0)

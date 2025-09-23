@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/22 18:04:52 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/23 17:59:55 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <sys/time.h> // get_time_of_day
 # include <pthread.h> // Thread functions
+# include <stdbool.h> //Boolean
 
 /*Error MSG define*/
 
@@ -27,7 +28,16 @@
 # define WRONG_TYPE		"One of the provided options wasn't the right type.\n"
 # define EXPECTED_INPUT	"Expected Input:\n./philo number_of_philosophers(int) time_to_die time_to_eat(double) time_to_sleep(double) [number_of_times_each_philosopher_must_eat](int)\n"
 
-/*Meta Struct*/
+/*Meta Structs*/
+
+typedef struct	philo_s
+{
+	pthread_t	thread;
+	size_t		id; // Philo ID for printing MSG
+	double		time_last_meal;
+	size_t		number_of_meals; //Times the philo already had a meal
+	bool		dead;
+}	philo_t;
 
 typedef struct s_meta
 {
@@ -36,7 +46,7 @@ typedef struct s_meta
 	double		time_to_eat;
 	double		time_to_sleep;
 	int			number_of_times_each_philosopher_must_eat;
-	pthread_t	*thread;
+	philo_t		*philo;
 }   t_meta;
 
 
@@ -46,6 +56,7 @@ double	str_to_double(char *s);
 void	write_error(int status);
 int		input_parsing(int argc, char **argv, t_meta *philo_meta);
 int		create_threads(t_meta *philo_meta);
-
+int		init_structs(t_meta *philo_meta);
+int		clean_all(t_meta *philo_meta);
 
 #endif

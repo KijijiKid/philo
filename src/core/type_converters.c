@@ -6,21 +6,21 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 20:32:53 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/22 16:09:19 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/23 18:00:32 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	ft_strlen(char *s)
-{
-	int i;
+// static int	ft_strlen(char *s)
+// {
+// 	int i;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	while (s[i])
+// 		i++;
+// 	return (i);
+// }
 
 static int parse_digits_rec(const char *p, int acc)
 {
