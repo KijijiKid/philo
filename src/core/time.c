@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread_destroy.c                                   :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/23 17:51:39 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/23 19:27:09 by mandre           ###   ########.fr       */
+/*   Created: 2025/09/23 19:29:09 by mandre            #+#    #+#             */
+/*   Updated: 2025/09/23 19:55:32 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	clean_all(t_meta *philo_meta)
+size_t	get_curr_time(void)
 {
-	int	i;
+	struct timeval time;
 
-	i = 0;
-	while (i < philo_meta->philosophers_count)
-	{
-		if (pthread_join((philo_meta->philo)[i].thread, NULL) != 0)
-			perror("Creation Failed"); //Implement verbose -> TODO
-		i++;
-	}
-	free(&(philo_meta->philo)[0]);
-	return (0);
+	if (gettimeofday(&time, NULL) == -1)
+		write(2, TIME_ERROR, 22);
+	return(time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+/// @brief Just a more accurate usleep fucntion
+/// @param ms Milliseconds to sleep
+/// @return 
+void ft_usleep(size_t ms)
+{
+	int start;
+	
+	start = get_curr_time();
+	while (get_curr_time() - start < ms)
+		usleep(500);
 }

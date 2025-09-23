@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/23 17:59:55 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/23 19:56:13 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define WRONG_INPUT	"You provided wrong amount of input.\n"
 # define WRONG_TYPE		"One of the provided options wasn't the right type.\n"
 # define EXPECTED_INPUT	"Expected Input:\n./philo number_of_philosophers(int) time_to_die time_to_eat(double) time_to_sleep(double) [number_of_times_each_philosopher_must_eat](int)\n"
+# define TIME_ERROR		"gettimeofday() failed\n"
 
 /*Meta Structs*/
 
@@ -58,5 +59,6 @@ int		input_parsing(int argc, char **argv, t_meta *philo_meta);
 int		create_threads(t_meta *philo_meta);
 int		init_structs(t_meta *philo_meta);
 int		clean_all(t_meta *philo_meta);
+void	ft_usleep(size_t ms);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:42:10 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/23 18:11:17 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/23 19:39:50 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ pthread_mutex_t mutex;
 
 void	*routine(void)
 {
+	print_time();
 	pthread_mutex_lock(&mutex);
 	printf("%d\n", a);
 	a++;
@@ -30,7 +31,7 @@ int	create_threads(t_meta *philo_meta)
 	int	i;
 
 	pthread_mutex_init(&mutex, NULL);
-	i = 1;
+	i = 0;
 	while (i < philo_meta->philosophers_count)
 	{
 		philo_meta->philo[i].id = i + 1; // Increment by one to not have Philo with Id 0
