@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/24 12:26:34 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/24 12:37:12 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ void	*routine(philo_t *philo);
 void	init_forks(t_meta *philo_meta);
 void	assign_forks(t_meta *philo_meta, philo_t *philo);
 void	*monitor_thread(void);
+void	destroy_forks(t_meta *philo_meta);
 
 #endif

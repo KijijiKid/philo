@@ -6,11 +6,27 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 10:41:09 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/24 12:23:23 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/24 12:36:07 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void destroy_forks(t_meta *philo_meta)
+{
+	int i;
+
+	i = 0;
+	while (i <= philo_meta->philosophers_count)
+	{
+		if (pthread_mutex_destroy(&(philo_meta->total_forks)[i]) != 0)
+		{
+			write(2, MUTEX_ERROR, 31);
+			return ;
+		}
+		i++;
+	}
+}
 
 void	assign_forks(t_meta *philo_meta, philo_t *philo)
 {

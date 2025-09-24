@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 17:51:39 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/23 19:27:09 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/24 12:36:44 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	clean_all(t_meta *philo_meta)
 	int	i;
 
 	i = 0;
+	destroy_forks(philo_meta);
 	while (i < philo_meta->philosophers_count)
 	{
 		if (pthread_join((philo_meta->philo)[i].thread, NULL) != 0)
