@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/24 19:07:53 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/24 19:21:25 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_meta
 	int				number_of_times_each_philosopher_must_eat;
 	pthread_mutex_t	total_forks[200];
 	pthread_t		msg_thread; // For displaying msg's on the board
+	pthread_mutex_t	msg_mutex;
 	philo_t			philo[200];
 }   t_meta;
 
@@ -70,5 +71,7 @@ void	ft_usleep(size_t ms);
 void	*routine(philo_t *philo);
 void	init_forks(t_meta *philo_meta);
 void	assign_forks(t_meta *philo_meta, philo_t *philo);
+void	destroy_forks(t_meta *philo_meta);
+void	*monitor_init(void);
 
 #endif
