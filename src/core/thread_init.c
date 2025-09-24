@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:42:10 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/24 19:31:53 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/24 19:37:32 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 /// @brief This creates the philosopher struct with
 /// initialised variables 
-static void	philo_create(philo_t *philo, int id)
+static void	philo_create(t_meta *philo_meta ,philo_t *philo , int id)
 {
 	philo->id = id;
 	philo->number_of_meals = 0;
 	philo->time_last_meal = 0;
+	philo->dead = &philo_meta->dead;
 }
 
 int	create_threads(t_meta *philo_meta)
@@ -31,7 +32,7 @@ int	create_threads(t_meta *philo_meta)
 	i = 0;
 	while (i < philo_meta->philosophers_count)
 	{
-		philo_create(&(philo_meta->philo)[i] ,i);
+		philo_create(philo_meta, &(philo_meta->philo)[i] ,i);
 		if (pthread_create(&(philo_meta->philo)[i].thread, NULL, ((void *)routine), &(philo_meta->philo)[i]) != 0)
 			perror("Creation Failed"); //Implement verbose -> TODO
 		assign_forks(philo_meta, &(philo_meta->philo)[i]);
