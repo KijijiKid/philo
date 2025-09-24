@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/24 11:18:47 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/24 12:26:34 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,15 @@
 typedef struct	philo_s
 {
 	pthread_t	thread;
+
+	size_t			time_to_die;
+	size_t			time_to_eat;
+	size_t			time_to_sleep;
+	
 	size_t		id; // Philo ID for printing MSG
 	double		time_last_meal;
 	size_t		number_of_meals; //Times the philo already had a meal
+
 	pthread_mutex_t		*r_fork;
 	pthread_mutex_t		*l_fork;
 	pthread_mutex_t		*meal_lock;
@@ -48,9 +54,9 @@ typedef struct s_meta
 {
 	int				philosophers_count;
 	bool			dead;
-	double			time_to_die;
-	double			time_to_eat;
-	double			time_to_sleep;
+	size_t			time_to_die;
+	size_t			time_to_eat;
+	size_t			time_to_sleep;
 	int				number_of_times_each_philosopher_must_eat;
 	pthread_mutex_t	*total_forks;
 	pthread_t		msg_thread; // For displaying msg's on the board
@@ -70,5 +76,6 @@ void	ft_usleep(size_t ms);
 void	*routine(philo_t *philo);
 void	init_forks(t_meta *philo_meta);
 void	assign_forks(t_meta *philo_meta, philo_t *philo);
+void	*monitor_thread(void);
 
 #endif
