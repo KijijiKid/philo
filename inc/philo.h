@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/23 20:26:11 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/24 11:18:47 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define WRONG_TYPE		"One of the provided options wasn't the right type.\n"
 # define EXPECTED_INPUT	"Expected Input:\n./philo number_of_philosophers(int) time_to_die time_to_eat(double) time_to_sleep(double) [number_of_times_each_philosopher_must_eat](int)\n"
 # define TIME_ERROR		"gettimeofday() failed\n"
+# define MUTEX_ERROR	"Initialization of mutex failed\n"
 
 /*Meta Structs*/
 
@@ -45,13 +46,15 @@ typedef struct	philo_s
 
 typedef struct s_meta
 {
-	int			philosophers_count;
-	bool		dead;
-	double		time_to_die;
-	double		time_to_eat;
-	double		time_to_sleep;
-	int			number_of_times_each_philosopher_must_eat;
-	philo_t		*philo;
+	int				philosophers_count;
+	bool			dead;
+	double			time_to_die;
+	double			time_to_eat;
+	double			time_to_sleep;
+	int				number_of_times_each_philosopher_must_eat;
+	pthread_mutex_t	*total_forks;
+	pthread_t		msg_thread; // For displaying msg's on the board
+	philo_t			*philo;
 }   t_meta;
 
 
@@ -65,5 +68,7 @@ int		init_structs(t_meta *philo_meta);
 int		clean_all(t_meta *philo_meta);
 void	ft_usleep(size_t ms);
 void	*routine(philo_t *philo);
+void	init_forks(t_meta *philo_meta);
+void	assign_forks(t_meta *philo_meta, philo_t *philo);
 
 #endif
