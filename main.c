@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:03 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/23 19:57:26 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/24 19:08:23 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 	{
 		if (input_parsing(argc, argv, &philo_meta) == 1)
 			write_error(2);
-		init_structs(&philo_meta);
+		// init_structs(&philo_meta);
 		create_threads(&philo_meta);
 		clean_all(&philo_meta);
 	}

@@ -17,7 +17,7 @@ CORE_DIR	:= core/
 
 
 
-CORE_FILES	:= $(addprefix $(CORE_DIR), $(addsuffix .c, type_converters error input_parsing thread_init thread_destroy struct_init time routine forks_init)) 
+CORE_FILES	:= $(addprefix $(CORE_DIR), $(addsuffix .c, type_converters error input_parsing thread_init thread_destroy time routine forks_init)) 
 
 
 # Every folder path including the .c files inside the src/ folder 
