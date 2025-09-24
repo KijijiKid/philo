@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 10:41:09 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/24 19:16:27 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/24 20:02:00 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	destroy_forks(t_meta *philo_meta)
 void	assign_forks(t_meta *philo_meta, philo_t *philo)
 {
 	int	curr_philo_id;
-
 	curr_philo_id = philo->id;
 	philo->r_fork = &(philo_meta->total_forks)[curr_philo_id - 1];
 	if (curr_philo_id == 0)

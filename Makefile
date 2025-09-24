@@ -1,7 +1,8 @@
 # <==== Meta Data =====>
 NAME	:= philo
 CC		:= cc
-CFLAGS	:= -Wall -Werror -Wextra -pthread
+# CFLAGS	:= -Wall -Werror -Wextra -pthread
+CFLAGS	:= -pthread
 
 #Includes
 INC_FILES		:= inc
