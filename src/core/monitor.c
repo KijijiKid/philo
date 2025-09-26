@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 19:17:41 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 20:16:34 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 22:01:24 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	check_if_meals(t_meta *philo_meta)
 	pthread_mutex_lock(&philo_meta->monitor_thread);
 	i++;
 	pthread_mutex_unlock(&philo_meta->monitor_thread);
-	if (i == 10)
+	if (i == 100)
 		return (true);
 	return (false);
 }
@@ -50,7 +50,7 @@ void	stop_philos(t_meta *philo_meta)
 /// ! This function runs on the main thread !
 void	monitor_init(t_meta *philo_meta)
 {
-	while (1)
+	while (philo_meta->run_philo)
 	{
 		if (check_if_dead(philo_meta) || check_if_meals(philo_meta))
 			break ;

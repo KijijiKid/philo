@@ -6,11 +6,23 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 20:18:31 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 20:28:06 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 21:57:59 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+bool	sim_stopped(philo_t *philo)
+{
+	bool r;
+
+	r  = true;
+	pthread_mutex_lock(&philo->sim_stop_lock);
+	if (philo->run_philo == false)
+		r = false;
+	pthread_mutex_lock(&philo->sim_stop_lock);
+	return (r);
+}
 
 static void	think_routine(philo_t *philo, bool silent)
 {
@@ -40,8 +52,11 @@ static void	eating_routine(philo_t *philo, bool silent)
 	philo->time_last_meal = get_curr_time();
 	philo->number_of_meals += 1;
 	pthread_mutex_unlock(philo->l_fork);
+	print_states(philo, FORK_LAID_BACK);
 	pthread_mutex_unlock(philo->r_fork);
+	print_states(philo, FORK_LAID_BACK);
 	think_routine(philo, silent);
+	sleep(1);
 }
 
 /// @brief This is the common sleep and after finishing 
@@ -65,7 +80,7 @@ void	*routine(void *data)
 	philo = (philo_t *)data;
 	if (philo->id % 2)
 		sleep_think_routine(philo, false);
-	while (philo->run_philo)
+	while (sim_stopped(philo))
 	{
 		eating_routine(philo, false);
 		sleep_think_routine(philo, false);

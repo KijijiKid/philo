@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 20:40:08 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 21:54:34 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,14 @@
 # define IS_SLEEPING	"is sleeping\n"
 # define IS_THINKING	"is thinking\n"
 # define DEAD_MSG		"died\n"
+# define LAID_BACK		"fork laid back\n"
 
 /*Meta Structs*/
 
 typedef struct	philo_s
 {
 	pthread_t		thread;
-	size_t			id; // Philo ID for printing MSG
+	int				id; // Philo ID for printing MSG
 
 	bool			*run_philo; //Points to the flag for the loop in routine
 
@@ -55,6 +56,7 @@ typedef struct	philo_s
 	size_t			number_of_meals; //Times the philo already had a meal
 	time_t			last_meal;
 
+	pthread_mutex_t	sim_stop_lock;
 	pthread_mutex_t	msg_lock;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
@@ -72,6 +74,8 @@ typedef struct s_meta
 	pthread_mutex_t	monitor_thread; // For displaying msg's on the board
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	msg_lock;
+	pthread_mutex_t	sim_stop_lock;
+
 	
 	pthread_mutex_t	total_forks[200];
 	philo_t			philo[200];
@@ -86,7 +90,8 @@ typedef enum e_status
 	PHILO_DEAD = 3,
 	PHILO_THINKS = 4,
 	PHILO_SLEEPS = 5,
-	PHILO_EATS = 6
+	PHILO_EATS = 6,
+	FORK_LAID_BACK = 7
 }	t_status;
 
 /*Function Prototypes*/

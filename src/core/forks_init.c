@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 10:41:09 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 20:35:42 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 21:55:32 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	destroy_forks(t_meta *philo_meta)
 		i++;
 	}
 	pthread_mutex_destroy(&philo_meta->msg_lock);
+	pthread_mutex_destroy(&philo_meta->sim_stop_lock);
 }
 
 /// @brief Assign l/r fork to the philosophers -> mutex_l_fork
@@ -53,6 +54,11 @@ void	init_forks(t_meta *philo_meta)
 		i++;
 	}
 	if (pthread_mutex_init(&philo_meta->msg_lock, NULL) != 0)
+	{
+		write(2, MUTEX_ERROR, 31);
+		return ;
+	}
+	if (pthread_mutex_init(&philo_meta->sim_stop_lock, NULL) != 0)
 	{
 		write(2, MUTEX_ERROR, 31);
 		return ;
