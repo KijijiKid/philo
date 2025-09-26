@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 12:35:18 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 18:18:06 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,44 @@
 # define TIME_ERROR		"gettimeofday() failed\n"
 # define MUTEX_ERROR	"Initialization of mutex failed\n"
 
+/*Philo State MSG*/
+
+# define FORK_TAKEN		"has taken a fork\n"
+# define IS_EATING		"is eating\n"
+# define IS_SLEEPING	"is sleeping\n"
+# define IS_THINKING	"is thinking\n"
+# define DEAD_MSG		"died\n"
+
 /*Meta Structs*/
 
 typedef struct	philo_s
 {
 	pthread_t		thread;
 	size_t			id; // Philo ID for printing MSG
+
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	
 	double			time_last_meal;
 	size_t			number_of_meals; //Times the philo already had a meal
+	time_t			last_meal;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	*meal_lock;
-	pthread_mutex_t	*dead_lock;
 }	philo_t;
 
 typedef struct s_meta
 {
 	int				philosophers_count;
 	bool			dead;
-	double			time_to_die;
-	double			time_to_eat;
-	double			time_to_sleep;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
 	int				number_of_times_each_philosopher_must_eat;
-	pthread_mutex_t	total_forks[200];
 	pthread_t		msg_thread; // For displaying msg's on the board
-	pthread_mutex_t	msg_mutex;
+	pthread_mutex_t	dead_lock;
+	
+	pthread_mutex_t	total_forks[200];
 	philo_t			philo[200];
 }   t_meta;
 
@@ -65,7 +78,9 @@ typedef enum e_status
 	GOT_L_FORK = 1,
 	GOT_R_FORK = 2,
 	PHILO_DEAD = 3,
-	PHILO_THINKS = 4
+	PHILO_THINKS = 4,
+	PHILO_SLEEPS = 5,
+	PHILO_EATS = 6
 }	t_status;
 
 /*Function Prototypes*/
@@ -82,6 +97,6 @@ void	init_forks(t_meta *philo_meta);
 void	assign_forks(t_meta *philo_meta, philo_t *philo);
 void	destroy_forks(t_meta *philo_meta);
 void	*monitor_init(void);
-void	print_states(t_status status);
+void	print_states(philo_t *philo, t_status status);
 
 #endif

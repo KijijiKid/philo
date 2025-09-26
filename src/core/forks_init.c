@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 10:41:09 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 12:30:44 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 17:48:51 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	destroy_forks(t_meta *philo_meta)
 	}
 }
 
+/// @brief Assign l/r fork to the philosophers -> mutex_l_fork
 void	assign_forks(t_meta *philo_meta, philo_t *philo)
 {
 	int	curr_philo_id;
@@ -35,8 +36,7 @@ void	assign_forks(t_meta *philo_meta, philo_t *philo)
 		philo->l_fork = &(philo_meta->total_forks)[curr_philo_id - 2];
 }
 
-/// @brief Creates as many forks as they are philosophers
-/// @param philo 
+/// @brief Creates as many forks as there are philosophers
 void	init_forks(t_meta *philo_meta)
 {
 	int i;
