@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:42:10 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 18:46:57 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 19:14:52 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	create_threads(t_meta *philo_meta)
 	i = 0;
 	while (i < philo_meta->philosophers_count)
 	{
-		philo_create(philo_meta, &(philo_meta->philo)[i] ,i);
+		philo_create(philo_meta, &(philo_meta->philo)[i] ,i + 1);
 		if (pthread_create(&(philo_meta->philo)[i].thread, NULL, ((void *)routine), &(philo_meta->philo)[i]) != 0)
 			perror("Creation Failed"); //Implement verbose -> TODO
 		assign_forks(philo_meta, &(philo_meta->philo)[i]);

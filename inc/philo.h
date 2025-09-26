@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 18:55:30 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 19:23:44 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,13 @@ typedef enum e_status
 
 /*Function Prototypes*/
 int		ft_atoi(const char *s);
-double	str_to_double(char *s);
 void	write_error(int status);
 int		input_parsing(int argc, char **argv, t_meta *philo_meta);
 int		create_threads(t_meta *philo_meta);
 int		init_structs(t_meta *philo_meta);
 int		clean_all(t_meta *philo_meta);
 void	ft_usleep(size_t ms);
-void	*routine(philo_t *philo);
+void	*routine(void *data);
 void	init_forks(t_meta *philo_meta);
 void	assign_forks(t_meta *philo_meta, philo_t *philo);
 void	destroy_forks(t_meta *philo_meta);

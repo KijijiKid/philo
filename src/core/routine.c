@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 20:18:31 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 18:56:17 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 19:37:20 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,17 @@ static void	sleep_think_routine(philo_t *philo, bool silent)
 
 /// @brief Here i set the routine a philosopher has
 /// eating, sleeping and thinking
-void	*routine(philo_t *philo)
+void	*routine(void *data)
 {
+	philo_t *philo;
+
+	philo = (philo_t *)data;
 	if (philo->id % 2)
 		sleep_think_routine(philo, false);
 	while (philo->run_philo)
 	{
 		eating_routine(philo, false);
-		sleep(1);
+		// sleep(5);
 		sleep_think_routine(philo, false);
-		sleep(1);
 	}
 }
