@@ -6,20 +6,34 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 20:18:31 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 19:52:47 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 20:28:06 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+static void	think_routine(philo_t *philo, bool silent)
+{
+	if (!silent)
+		print_states(philo, PHILO_THINKS);
+}
+
 static void	eating_routine(philo_t *philo, bool silent)
 {
-	if (pthread_mutex_lock(philo->l_fork) != 0)
-		return ;
-	print_states(philo, GOT_L_FORK);
-	if (pthread_mutex_lock(philo->r_fork))
-		return ;
-	print_states(philo, GOT_R_FORK);
+	if (philo->id % 2)
+	{
+		pthread_mutex_lock(philo->l_fork);
+		print_states(philo, GOT_L_FORK);
+		pthread_mutex_lock(philo->r_fork);
+		print_states(philo, GOT_R_FORK);
+	}
+	else
+	{
+		pthread_mutex_lock(philo->r_fork);
+		print_states(philo, GOT_R_FORK);
+		pthread_mutex_lock(philo->l_fork);
+		print_states(philo, GOT_L_FORK);
+	}
 	if (!silent)
 		print_states(philo, PHILO_EATS);
 	ft_usleep(philo->time_to_eat);
@@ -27,12 +41,7 @@ static void	eating_routine(philo_t *philo, bool silent)
 	philo->number_of_meals += 1;
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
-}
-
-static void	think_routine(philo_t *philo, bool silent)
-{
-	if (!silent)
-		print_states(philo, PHILO_THINKS);
+	think_routine(philo, silent);
 }
 
 /// @brief This is the common sleep and after finishing 
@@ -55,10 +64,10 @@ void	*routine(void *data)
 
 	philo = (philo_t *)data;
 	if (philo->id % 2)
-		sleep_think_routine(philo, true);
-	while (0)
+		sleep_think_routine(philo, false);
+	while (philo->run_philo)
 	{
-		eating_routine(philo, true);
-		sleep_think_routine(philo, true);
+		eating_routine(philo, false);
+		sleep_think_routine(philo, false);
 	}
 }

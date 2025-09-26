@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 12:02:27 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 19:35:31 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 20:40:02 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	print_states(philo_t *philo, t_status status)
 {
+	pthread_mutex_lock(&philo->msg_lock);
 	printf("%ld ", get_curr_time());
 	if (status == GOT_L_FORK || status == GOT_R_FORK)
 		printf("%ld %s", philo->id, FORK_TAKEN);
@@ -25,6 +26,5 @@ void	print_states(philo_t *philo, t_status status)
 		printf("%ld %s", philo->id, IS_SLEEPING);
 	else if (status == PHILO_EATS)
 		printf("%ld %s", philo->id, IS_EATING);
-	else 
-		printf("Hello\n\n");
+	pthread_mutex_unlock(&philo->msg_lock);
 }

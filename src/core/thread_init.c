@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:42:10 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 19:53:09 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 20:36:06 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	philo_create(t_meta *philo_meta ,philo_t *philo , int id)
 	philo->time_last_meal = 0;
 	philo_meta->run_philo = true;
 	philo->run_philo = &philo_meta->run_philo;
+	philo->msg_lock = philo_meta->msg_lock;
 }
 
 int	create_threads(t_meta *philo_meta)
@@ -34,7 +35,6 @@ int	create_threads(t_meta *philo_meta)
 		if (pthread_create(&(philo_meta->philo)[i].thread, NULL, ((void *)routine), &(philo_meta->philo)[i]) != 0)
 			perror("Creation Failed"); //Implement verbose -> TODO
 		assign_forks(philo_meta, &(philo_meta->philo)[i]);
-		sleep(2);
 		i++;
 	}
 	return (0);
