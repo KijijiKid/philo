@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:42:10 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/24 20:07:44 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 11:36:22 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	create_threads(t_meta *philo_meta)
 	if (pthread_create(&philo_meta->msg_thread, NULL, ((void *)monitor_init), NULL) != 0)
 		perror("Creation Failed"); //Implement verbose -> TODO
 	init_forks(philo_meta);
+	usleep(500); // I just do that to make sure that msg_thread is already up and going till philo logic runs
 	i = 0;
 	while (i < philo_meta->philosophers_count)
 	{
