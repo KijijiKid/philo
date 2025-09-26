@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:42:10 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 12:37:48 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 18:39:20 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,13 @@ static void	philo_create(t_meta *philo_meta ,philo_t *philo , int id)
 	philo->id = id;
 	philo->number_of_meals = 0;
 	philo->time_last_meal = 0;
+	philo_meta->run_philo = true;
 }
 
 int	create_threads(t_meta *philo_meta)
 {
 	int	i;
 
-	if (pthread_create(&philo_meta->msg_thread, NULL, ((void *)monitor_init), NULL) != 0)
-		perror("Creation Failed"); //Implement verbose -> TODO
-	init_forks(philo_meta);
-	usleep(500); // I just do that to make sure that msg_thread is already up and going till philo logic runs -> TODO: find better way
 	i = 0;
 	while (i < philo_meta->philosophers_count)
 	{

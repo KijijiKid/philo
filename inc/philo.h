@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 18:18:06 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 18:35:34 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct	philo_s
 	pthread_t		thread;
 	size_t			id; // Philo ID for printing MSG
 
+	bool			*run_philo; //Points to the flag for the loop in routine
+
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
@@ -59,12 +61,13 @@ typedef struct	philo_s
 typedef struct s_meta
 {
 	int				philosophers_count;
-	bool			dead;
+	// bool			dead;
+	bool			run_philo;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				number_of_times_each_philosopher_must_eat;
-	pthread_t		msg_thread; // For displaying msg's on the board
+	pthread_mutex_t	monitor_thread; // For displaying msg's on the board
 	pthread_mutex_t	dead_lock;
 	
 	pthread_mutex_t	total_forks[200];
@@ -96,7 +99,8 @@ void	*routine(philo_t *philo);
 void	init_forks(t_meta *philo_meta);
 void	assign_forks(t_meta *philo_meta, philo_t *philo);
 void	destroy_forks(t_meta *philo_meta);
-void	*monitor_init(void);
+void	monitor_init(t_meta *philo_meta);
 void	print_states(philo_t *philo, t_status status);
+size_t	get_curr_time(void);
 
 #endif
