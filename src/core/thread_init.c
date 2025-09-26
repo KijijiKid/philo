@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:42:10 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 12:31:52 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 12:37:48 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void	philo_create(t_meta *philo_meta ,philo_t *philo , int id)
 	philo->id = id;
 	philo->number_of_meals = 0;
 	philo->time_last_meal = 0;
-	philo->dead = (bool *)philo_meta->dead;
 }
 
 int	create_threads(t_meta *philo_meta)

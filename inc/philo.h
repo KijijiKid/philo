@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 12:20:37 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 12:35:18 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct	philo_s
 	size_t			id; // Philo ID for printing MSG
 	double			time_last_meal;
 	size_t			number_of_meals; //Times the philo already had a meal
-	bool			*dead;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*meal_lock;
