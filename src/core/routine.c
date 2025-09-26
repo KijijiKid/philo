@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 20:18:31 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 19:37:20 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 19:52:47 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,10 @@ void	*routine(void *data)
 
 	philo = (philo_t *)data;
 	if (philo->id % 2)
-		sleep_think_routine(philo, false);
-	while (philo->run_philo)
+		sleep_think_routine(philo, true);
+	while (0)
 	{
-		eating_routine(philo, false);
-		// sleep(5);
-		sleep_think_routine(philo, false);
+		eating_routine(philo, true);
+		sleep_think_routine(philo, true);
 	}
 }
