@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/24 19:36:53 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 12:20:37 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ typedef struct	philo_s
 	double			time_last_meal;
 	size_t			number_of_meals; //Times the philo already had a meal
 	bool			*dead;
-	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*meal_lock;
 	pthread_mutex_t	*dead_lock;
 }	philo_t;
@@ -59,6 +59,15 @@ typedef struct s_meta
 	philo_t			philo[200];
 }   t_meta;
 
+// Currently not knowing the enum keyword but
+// using it here to understand it
+typedef enum e_status
+{
+	GOT_L_FORK = 1,
+	GOT_R_FORK = 2,
+	PHILO_DEAD = 3,
+	PHILO_THINKS = 4
+}	t_status;
 
 /*Function Prototypes*/
 int		ft_atoi(const char *s);
@@ -74,5 +83,6 @@ void	init_forks(t_meta *philo_meta);
 void	assign_forks(t_meta *philo_meta, philo_t *philo);
 void	destroy_forks(t_meta *philo_meta);
 void	*monitor_init(void);
+void	print_states(t_status status);
 
 #endif

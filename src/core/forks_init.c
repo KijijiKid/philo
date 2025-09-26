@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 10:41:09 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/24 20:02:00 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 12:30:44 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	init_forks(t_meta *philo_meta)
 	int i;
 
 	i = 0;
-	// philo_meta->total_forks = malloc(sizeof(pthread_mutex_t) * philo_meta->philosophers_count);
 	while (i < philo_meta->philosophers_count)
 	{
 		if (pthread_mutex_init(&(philo_meta->total_forks)[i], NULL) != 0)

@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monitor.c                                          :+:      :+:    :+:   */
+/*   output.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/24 19:17:41 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 12:21:28 by mandre           ###   ########.fr       */
+/*   Created: 2025/09/26 12:02:27 by mandre            #+#    #+#             */
+/*   Updated: 2025/09/26 12:21:52 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <unistd.h>
-#include <sys/types.h>
 
-/// @brief The monitor init initializes a endless while loop
-/// that checks	if a philiosopher is dead -> if so the flag 
-/// for philo is dead turns true. The other case is when 
-/// all of the philosophers ate enough
-void	*monitor_init(void)
+void	print_states(t_status status)
 {
-	// while (1)
-	// {
-		
-	// }
-	return (NULL);
+	printf ("Enum: %d\n", status);
 }
