@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 20:18:31 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 18:33:55 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 18:56:17 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 static void	eating_routine(philo_t *philo, bool silent)
 {
-	pthread_mutex_lock(philo->l_fork);
-	pthread_mutex_lock(philo->r_fork);
+	if (pthread_mutex_lock(philo->l_fork) != 0)
+		return ;
+	print_states(philo, GOT_L_FORK);
+	if (pthread_mutex_lock(philo->r_fork))
+		return ;
+	print_states(philo, GOT_R_FORK);
 	if (!silent)
 		print_states(philo, PHILO_EATS);
 	ft_usleep(philo->time_to_eat);
@@ -48,10 +52,12 @@ static void	sleep_think_routine(philo_t *philo, bool silent)
 void	*routine(philo_t *philo)
 {
 	if (philo->id % 2)
-		sleep_think_routine(philo, true);
+		sleep_think_routine(philo, false);
 	while (philo->run_philo)
 	{
 		eating_routine(philo, false);
+		sleep(1);
 		sleep_think_routine(philo, false);
+		sleep(1);
 	}
 }

@@ -6,13 +6,15 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 19:17:41 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 18:38:55 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/26 18:46:38 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <unistd.h>
 #include <sys/types.h>
+
+int i = 0;
 
 bool	check_if_dead(t_meta *philo_meta)
 {
@@ -24,8 +26,16 @@ bool	check_if_dead(t_meta *philo_meta)
 bool	check_if_meals(t_meta *philo_meta)
 {
 	//Check Logic TODO
-	if (philo_meta->time_to_die == 100)
-		printf("Hello Chiau\n");
+	
+	pthread_mutex_lock(&philo_meta->monitor_thread);
+	i++;
+	pthread_mutex_unlock(&philo_meta->monitor_thread);
+	if (i == 1000)
+	{
+		pthread_mutex_lock(&philo_meta->monitor_thread);
+		philo_meta->run_philo = false;
+		pthread_mutex_unlock(&philo_meta->monitor_thread);
+	}
 }
 
 void	stop_philos(t_meta *philo_meta)
