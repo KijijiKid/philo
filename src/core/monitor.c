@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 19:17:41 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/27 12:53:13 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/27 13:29:08 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ bool	check_if_dead(t_meta *philo_meta)
 	i = 0;
 	while (i < philo_meta->philosophers_count)
 	{
-		curr_time_span = (size_t)&(philo_meta->philo)[i].last_meal - get_curr_time();
+		pthread_mutex_lock(&philo_meta->dead_lock);
+		curr_time_span = get_curr_time() - (philo_meta->philo[i].last_meal);
+		pthread_mutex_unlock(&philo_meta->dead_lock);
 		if (curr_time_span >= philo_meta->time_to_die)
 		{
 			pthread_mutex_lock(&philo_meta->monitor_thread);
-			printf("Philo is Dead: %ld\n", curr_time_span);
+			printf("Philo is Dead\n");
 			pthread_mutex_unlock(&philo_meta->monitor_thread);
 			return (true);
 		}
@@ -40,7 +42,6 @@ bool	check_if_dead(t_meta *philo_meta)
 bool	check_if_meals(t_meta *philo_meta)
 {
 	//Check Logic TODO
-	
 	int i;
 
 	i = 0;

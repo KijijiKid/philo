@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 20:18:31 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/27 12:30:35 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/27 13:20:18 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ static void	eating_routine(philo_t *philo, bool silent)
 	if (!silent)
 		print_states(philo, PHILO_EATS);
 	ft_usleep(philo->time_to_eat);
+	pthread_mutex_lock(&philo->dead_lock);
 	philo->time_last_meal = get_curr_time();
 	philo->number_of_meals += 1;
+	pthread_mutex_unlock(&philo->dead_lock);
 	pthread_mutex_unlock(philo->l_fork);
 	print_states(philo, FORK_LAID_BACK);
 	pthread_mutex_unlock(philo->r_fork);
