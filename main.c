@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:03 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 22:05:40 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/27 12:25:12 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 			write_error(2);
 		create_threads(&philo_meta);
 		// if (philo_meta.run_philo)
-			monitor_init(&philo_meta);
+		monitor_init(&philo_meta);
 		clean_all(&philo_meta);
 	}
 	else 

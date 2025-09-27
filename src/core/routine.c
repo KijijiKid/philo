@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 20:18:31 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 22:04:51 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/27 12:30:35 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool	sim_stopped(philo_t *philo)
 
 	r  = true;
 	pthread_mutex_lock(&philo->sim_stop_lock);
-	if (philo->run_philo == false)
+	if (*philo->run_philo == false)
 		r = false;
 	pthread_mutex_unlock(&philo->sim_stop_lock);
 	return (r);

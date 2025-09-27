@@ -6,12 +6,11 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 12:02:27 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 21:14:47 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/27 12:24:12 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 void	print_states(philo_t *philo, t_status status)
 {
 	pthread_mutex_lock(&philo->msg_lock);

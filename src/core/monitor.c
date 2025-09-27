@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 19:17:41 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/26 22:06:08 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/27 12:40:53 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,15 @@ int i = 0;
 
 bool	check_if_dead(t_meta *philo_meta)
 {
-	// Check Logic TODO
-	if (philo_meta->time_to_die == 100)
-		printf("Hello Chiau\n");
+	int i;
+
+	i = 0;
+	while (i < philo_meta->philosophers_count)
+	{
+		if ((philo_meta->philo)[i].last_meal - get_curr_time() == philo_meta->time_to_die)
+			return (true);
+		i++;
+	}
 	return (false);
 }
 
@@ -28,11 +34,16 @@ bool	check_if_meals(t_meta *philo_meta)
 {
 	//Check Logic TODO
 	
-	pthread_mutex_lock(&philo_meta->monitor_thread);
-	i++;
-	pthread_mutex_unlock(&philo_meta->monitor_thread);
-	if (i == 3)
-		return (true);
+	int i;
+
+	i = 0;
+	while (i < philo_meta->philosophers_count)
+	{
+		if ((philo_meta->philo)[i].number_of_meals == philo_meta->number_of_times_each_philosopher_must_eat)
+			return (true);
+		i++;
+	}
+	return (false);
 	return (false);
 }
 
