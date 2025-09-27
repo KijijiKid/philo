@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/27 13:04:29 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/27 18:14:48 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,94 +22,7 @@
 # include <pthread.h> // Thread functions
 # include <stdbool.h> //Boolean
 
-/*Error MSG define*/
-
-# define WRONG_INPUT	"You provided wrong amount of input.\n"
-# define WRONG_TYPE		"One of the provided options wasn't the right type.\n"
-# define EXPECTED_INPUT	"Expected Input:\n./philo number_of_philosophers(int) time_to_die time_to_eat(double) time_to_sleep(double) [number_of_times_each_philosopher_must_eat](int)\n"
-# define TIME_ERROR		"gettimeofday() failed\n"
-# define MUTEX_ERROR	"Initialization of mutex failed\n"
-
-/*Philo State MSG*/
-
-# define FORK_TAKEN		"has taken a fork\n"
-# define IS_EATING		"is eating\n"
-# define IS_SLEEPING	"is sleeping\n"
-# define IS_THINKING	"is thinking\n"
-# define DEAD_MSG		"died\n"
-# define LAID_BACK		"fork laid back\n"
-
-/*Meta Structs*/
-
-typedef struct	philo_s
-{
-	pthread_t		thread;
-	int				id; // Philo ID for printing MSG
-
-	bool			*run_philo; //Points to the flag for the loop in routine
-
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	
-	double			time_last_meal;
-	size_t			number_of_meals; //Times the philo already had a meal
-	time_t			last_meal;
-
-	pthread_mutex_t dead_lock;
-
-	pthread_mutex_t	sim_stop_lock;
-	pthread_mutex_t	msg_lock;
-	pthread_mutex_t	*l_fork;
-	pthread_mutex_t	*r_fork;
-}	philo_t;
-
-typedef struct s_meta
-{
-	int				philosophers_count;
-	// bool			dead;
-	bool			run_philo;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				number_of_times_each_philosopher_must_eat;
-	pthread_mutex_t	monitor_thread; // For displaying msg's on the board
-	pthread_mutex_t	dead_lock;
-	pthread_mutex_t	msg_lock;
-	pthread_mutex_t	sim_stop_lock;
-
-	
-	pthread_mutex_t	total_forks[200];
-	philo_t			philo[200];
-}   t_meta;
-
-// Currently not knowing the enum keyword but
-// using it here to understand it
-typedef enum e_status
-{
-	GOT_L_FORK = 1,
-	GOT_R_FORK = 2,
-	PHILO_DEAD = 3,
-	PHILO_THINKS = 4,
-	PHILO_SLEEPS = 5,
-	PHILO_EATS = 6,
-	FORK_LAID_BACK = 7
-}	t_status;
-
-/*Function Prototypes*/
-int		ft_atoi(const char *s);
-void	write_error(int status);
-int		input_parsing(int argc, char **argv, t_meta *philo_meta);
-int		create_threads(t_meta *philo_meta);
-int		init_structs(t_meta *philo_meta);
-int		clean_all(t_meta *philo_meta);
-void	ft_usleep(size_t ms);
-void	*routine(void *data);
-void	init_forks(t_meta *philo_meta);
-void	assign_forks(t_meta *philo_meta, philo_t *philo);
-void	destroy_forks(t_meta *philo_meta);
-void	monitor_init(t_meta *philo_meta);
-void	print_states(philo_t *philo, t_status status);
 size_t	get_curr_time(void);
+char	*formated_time(void);
 
 #endif
