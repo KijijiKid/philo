@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 19:17:41 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/27 12:40:53 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/27 12:53:13 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,20 @@ int i = 0;
 
 bool	check_if_dead(t_meta *philo_meta)
 {
-	int i;
+	int		i;
+	size_t	curr_time_span;
 
 	i = 0;
 	while (i < philo_meta->philosophers_count)
 	{
-		if ((philo_meta->philo)[i].last_meal - get_curr_time() == philo_meta->time_to_die)
+		curr_time_span = (size_t)&(philo_meta->philo)[i].last_meal - get_curr_time();
+		if (curr_time_span >= philo_meta->time_to_die)
+		{
+			pthread_mutex_lock(&philo_meta->monitor_thread);
+			printf("Philo is Dead: %ld\n", curr_time_span);
+			pthread_mutex_unlock(&philo_meta->monitor_thread);
 			return (true);
+		}
 		i++;
 	}
 	return (false);
@@ -40,10 +47,14 @@ bool	check_if_meals(t_meta *philo_meta)
 	while (i < philo_meta->philosophers_count)
 	{
 		if ((philo_meta->philo)[i].number_of_meals == philo_meta->number_of_times_each_philosopher_must_eat)
+		{
+			pthread_mutex_lock(&philo_meta->monitor_thread);
+			printf("Philos ate enough");
+			pthread_mutex_unlock(&philo_meta->monitor_thread);
 			return (true);
+		}
 		i++;
 	}
-	return (false);
 	return (false);
 }
 
