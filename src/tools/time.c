@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 17:45:16 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/27 19:46:55 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/27 20:10:53 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,50 @@ void ft_usleep(size_t ms)
 		usleep(500);
 }
 
+static void	append_int(char *buf, int *pos, unsigned int v)
+{
+	char tmp[10];
+    int i = 0;
+    if (v == 0) {
+        buf[(*pos)++] = '0';
+        return;
+    }
+    while (v) {
+        tmp[i++] = (char)('0' + (v % 10));
+        v /= 10;
+    }
+    while (i-- > 0) {
+        buf[(*pos)++] = tmp[i];
+    }
+}
+
 char	*formated_time(void)
 {
-	char *formatted_time;
-	struct timeval time;
-	int seconds_in_day;
-	int	hours;
-	int min;
-	int sec;
-	int ms;
+	static char		time_arr[2048];
+	struct timeval	time;
+	unsigned int	seconds_in_day;
+	unsigned int	hours;
+	unsigned int	min;
+	unsigned int	sec;
+	unsigned int	ms;
+	unsigned int	pos;
 	
 	if (gettimeofday(&time, NULL) == -1)
 		write(2, "Schaise2\n", 9);
 	seconds_in_day = time.tv_sec % 86400;
-	hours	= seconds_in_day / 3600;
+	hours	= (seconds_in_day / 3600) + TIME_ZONE_OFFSET;
 	min		= (seconds_in_day % 3600) / 60;
 	sec		= seconds_in_day % 60;
 	ms		= time.tv_usec / 1000;
-	printf("%d:%d:%d:%d", hours, min, sec, ms);
-	return (NULL);
+
+	pos = 0;
+	append_int(time_arr, &pos, hours);
+	time_arr[pos++] = ':';
+	append_int(time_arr, &pos, min);
+	time_arr[pos++] = ':';
+	append_int(time_arr, &pos, sec);
+	time_arr[pos++] = ':';
+	append_int(time_arr, &pos, ms);
+	time_arr[pos++] = '\0';
+	return (time_arr);
 }

@@ -6,9 +6,35 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 17:56:13 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/27 17:56:24 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/27 20:39:46 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+int	input_parsing(int argc, char **argv, t_meta *philo_meta)
+{
+	if (argc == 5)
+	{
+		philo_meta->option.p_num = ft_atoi(argv[1]);
+		philo_meta->option.p_ttd = ft_atoi(argv[2]);
+		philo_meta->option.p_tte = ft_atoi(argv[3]);
+		philo_meta->option.p_tts = ft_atoi(argv[4]);
+		philo_meta->option.p_mec = 10;
+	}
+	else if (argc == 6)
+	{
+		philo_meta->option.p_num = ft_atoi(argv[1]);
+		philo_meta->option.p_ttd = ft_atoi(argv[2]);
+		philo_meta->option.p_tte = ft_atoi(argv[3]);
+		philo_meta->option.p_tts = ft_atoi(argv[4]);
+		philo_meta->option.p_mec = ft_atoi(argv[5]);
+	}
+	if (!(1 < philo_meta->option.p_num && philo_meta->option.p_num <= 200)
+		|| !(0 < philo_meta->option.p_ttd && philo_meta->option.p_ttd < 1000)
+		|| !(0 < philo_meta->option.p_tte && philo_meta->option.p_tte < 1000)
+		|| !(0 < philo_meta->option.p_tts && philo_meta->option.p_tts < 1000) 
+		|| philo_meta->option.p_mec <= 0)
+		return (1);
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:03 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/27 18:15:17 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/27 20:11:22 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,4 @@
 
 int	main(int argc, char **argv)
 {
-	printf("%ld\n", get_curr_time());
-	formated_time();
 }

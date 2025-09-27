@@ -15,14 +15,15 @@ OBJS_DIR	:= objs/
 
 #Folders inside src/
 CORE_DIR	:= core/
+TOOL_DIR	:= tools/
 
 
-
-CORE_FILES	:= $(addprefix $(CORE_DIR), $(addsuffix .c, parsing time)) 
+CORE_FILES	:= $(addprefix $(CORE_DIR), $(addsuffix .c, parsing)) 
+TOOL_FILES	:= $(addprefix $(TOOL_DIR), $(addsuffix .c, time type_converters)) 
 
 
 # Every folder path including the .c files inside the src/ folder 
-MELTING_POT	:= $(CORE_FILES)
+MELTING_POT	:= $(CORE_FILES) $(TOOL_FILES)
 
 
 # Every Folder path prefixed with src/ and the main (top level)
