@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 16:15:22 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 16:35:15 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct s_meta
 	t_options		options;
 	bool			wait_flag; //Holds already created threads in a while loop as long as not all threads are created, set by init_meta()
 	pthread_mutex_t	wait_lock; //Lock for the threads for setting and reading the wait_flag
+	bool			run_flag; // Condition for the philo routine while loop to run or not
+	pthread_mutex_t	run_lock; //Lock for the threads for setting and reading the run_flag
 }	t_meta;
 
 typedef enum e_status

@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 15:04:32 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 16:17:13 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 16:27:30 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ void	assign_philos(t_meta *meta, t_philo *philo, unsigned int id)
 int	init_meta(t_meta *meta)
 {
 	meta->wait_flag = true;
+	meta->run_flag = true;
 	return (init_mutexes(meta));
 }
