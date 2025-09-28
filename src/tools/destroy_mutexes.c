@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   destroy_mutexes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/28 13:32:55 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 15:25:49 by mandre           ###   ########.fr       */
+/*   Created: 2025/09/28 15:27:58 by mandre            #+#    #+#             */
+/*   Updated: 2025/09/28 15:29:10 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*philo_routine(void *data)
+int	destroy_mutexes(t_meta *meta)
 {
-	t_meta *meta;
-
-	meta = data;
-	philo_hold(meta);
-	
-	write(1, "ALLO\n", 5);
+	if (pthread_mutex_destroy(&meta->wait_lock) != 0)
+		return(throw_error(DSTRY_MUTEX_FAILED));
+	if (pthread_mutex_destroy(&meta->write_lock) != 0)
+		return(throw_error(DSTRY_MUTEX_FAILED));
+	return (0);
 }

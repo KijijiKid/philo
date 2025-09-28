@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:47:10 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 13:47:24 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 15:30:32 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,9 @@ int	throw_error(t_status status)
 		write_input(T_C_FAILED, NULL);
 	else if (status == THREAD_JOIN_FAILED)
 		write_input(T_J_FAILED, NULL);
+	else if (status == INIT_MUTEX_FAILED)
+		write_input(I_MTX_FAILED, NULL);
+	else if (status == DSTRY_MUTEX_FAILED)
+		write_input(D_MTX_FAILED, NULL);
 	return (status);
 }
