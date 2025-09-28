@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:21:55 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 15:27:22 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 15:36:28 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	join_philos(t_meta *meta)
 			return(throw_error(THREAD_JOIN_FAILED));
 		i++;
 	}
+	destroy_mutexes(meta);
 }
 
 /// @brief Creates the threads/philos inside a while loop

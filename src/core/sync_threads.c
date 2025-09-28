@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 15:10:48 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 15:14:03 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 15:38:36 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ void	philo_hold(t_meta *meta)
 		pthread_mutex_lock(&meta->wait_lock);
 		if (meta->wait_flag == false)
 			i = 0;
-		pthread_mutex_lock(&meta->wait_lock);
+		pthread_mutex_unlock(&meta->wait_lock);
 	}
 }

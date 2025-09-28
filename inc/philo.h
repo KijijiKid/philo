@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 15:29:50 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 15:33:01 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ size_t	get_curr_time(void);
 char	*formated_time(void);
 int		input_parsing(int argc, char **argv, t_meta *philo_meta);
 int		init_meta(t_meta *meta);
+int		destroy_mutexes(t_meta *meta);
 
 //Error
 int		throw_error(t_status status);
