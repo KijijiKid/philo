@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 15:04:32 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 16:27:30 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 17:57:39 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	init_mutexes(t_meta *meta)
 
 /// @brief This assigns the variables of each philo.
 /// So Id, L/R Fork and macros(tte, ttd, tts, [tpme])
-void	assign_philos(t_meta *meta, t_philo *philo, unsigned int id)
+int	assign_philos(t_meta *meta, t_philo *philo, unsigned int id)
 {
 	philo->id = id;
 	philo->options.p_mec = meta->options.p_mec;
@@ -34,6 +34,10 @@ void	assign_philos(t_meta *meta, t_philo *philo, unsigned int id)
 	philo->options.p_ttd = meta->options.p_ttd;
 	philo->options.p_tte = meta->options.p_tte;
 	philo->options.p_tts = meta->options.p_tts;
+	philo->last_meal = 0;
+	if (pthread_mutex_init(&philo->meal_time_lock, NULL) != 0)
+		return(throw_error(INIT_MUTEX_FAILED));
+	return (0);
 }
 
 /// @brief Sets Flags and starting params of the meta_structs.

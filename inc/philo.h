@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 16:35:15 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 17:55:25 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct s_philo
 	pthread_t		thread;
 	pthread_mutex_t	forks[2];
 	t_options		options;
+	pthread_mutex_t	meal_time_lock;
+	unsigned int	last_meal;
 	
 }	t_philo;
 
@@ -81,7 +83,7 @@ typedef enum e_status
 int		init_philos(t_meta *meta);
 int		join_philos(t_meta *meta);
 void	*philo_routine(void *data);
-void	assign_philos(t_meta *meta, t_philo *philo, unsigned int id);
+int	assign_philos(t_meta *meta, t_philo *philo, unsigned int id);
 	//Thread Synchronisation
 void	philo_hold(t_meta *meta);
 void	philo_start(t_meta *meta);
