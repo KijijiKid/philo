@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:21:55 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 16:12:38 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 16:19:41 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	join_philos(t_meta *meta)
 	int i;
 
 	i = 0;
-	while (i < meta->option.p_num)
+	while (i < meta->options.p_num)
 	{
 		if (pthread_join((meta->philo[i]).thread, NULL) != 0)
 			return(throw_error(THREAD_JOIN_FAILED));
@@ -40,7 +40,7 @@ int	init_philos(t_meta *meta)
 
 	init_meta(meta);
 	i = 0;
-	while (i < meta->option.p_num)
+	while (i < meta->options.p_num)
 	{
 		assign_philos(meta, &meta->philo[i], i + 1);
 		if (pthread_create(&(meta->philo[i]).thread, NULL, &philo_routine, meta) != 0)
