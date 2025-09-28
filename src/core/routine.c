@@ -6,18 +6,19 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:32:55 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 18:25:46 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 18:36:53 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	eat_routine(t_philo *philo)
+static int	eat_routine(t_philo *philo)
 {
-	
+	printf("%d", philo->id);
+	return (1);
 }
 
-static void	sleep_routine(t_philo *philo)
+static int	sleep_routine(t_philo *philo)
 {
 	
 }
@@ -40,7 +41,8 @@ void	*philo_routine(void *data)
 		if (meta->run_flag == false)
 			i = 0;
 		pthread_mutex_unlock(&meta->run_lock);
-		eat_routine(&(meta->philo[p_id]));
-		sleep_routine(&(meta->philo[p_id]));
+		if (eat_routine(&(meta->philo[p_id])))
+			break ;
+		// sleep_routine(&(meta->philo[p_id]));
 	}
 }
