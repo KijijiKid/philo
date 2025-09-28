@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 15:33:01 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 16:15:22 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_philo
 {
 	unsigned int	id;
 	pthread_t		thread;
+	pthread_mutex_t	forks[2];
+	t_options		options;
 	
 }	t_philo;
 
@@ -59,7 +61,7 @@ typedef struct s_meta
 {
 	t_philo			philo[200];
 	pthread_mutex_t	write_lock; //Whenever printf or write gets called
-	t_options		option;
+	t_options		options;
 	bool			wait_flag; //Holds already created threads in a while loop as long as not all threads are created, set by init_meta()
 	pthread_mutex_t	wait_lock; //Lock for the threads for setting and reading the wait_flag
 }	t_meta;
@@ -77,6 +79,7 @@ typedef enum e_status
 int		init_philos(t_meta *meta);
 int		join_philos(t_meta *meta);
 void	*philo_routine(void *data);
+void	assign_philos(t_meta *meta, t_philo *philo, unsigned int id);
 	//Thread Synchronisation
 void	philo_hold(t_meta *meta);
 void	philo_start(t_meta *meta);
