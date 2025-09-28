@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:47:10 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 13:17:32 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 13:47:24 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,9 @@ int	throw_error(t_status status)
 {
 	if (status == WRONG_INPUT)
 		write_input(W_INPUT, E_INPUT);
+	else if (status == THREAD_CREATION_FAILED)
+		write_input(T_C_FAILED, NULL);
+	else if (status == THREAD_JOIN_FAILED)
+		write_input(T_J_FAILED, NULL);
+	return (status);
 }

@@ -19,7 +19,7 @@ TOOL_DIR	:= tools/
 ERR_DIR		:= error/
 
 
-CORE_FILES	:= $(addprefix $(CORE_DIR), $(addsuffix .c, )) 
+CORE_FILES	:= $(addprefix $(CORE_DIR), $(addsuffix .c, thread routine monitor)) 
 TOOL_FILES	:= $(addprefix $(TOOL_DIR), $(addsuffix .c, time type_converters parsing)) 
 ERR_FILES	:= $(addprefix $(ERR_DIR), $(addsuffix .c, error)) 
 

@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 13:19:15 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 13:48:57 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 //Error MSG define
 # define W_INPUT "Wrong Input\n"
 # define E_INPUT "Expected: NUM_PHILO(1-200) ttd tte tts [tepme]\n"
+# define T_C_FAILED "Thread creation failed\n"
+# define T_J_FAILED "Thread joining/termination failed\n"
 
 /// @brief 
 /// p_num Number of philosophers
@@ -47,6 +49,7 @@ typedef struct s_options
 typedef struct s_philo
 {
 	unsigned int	id;
+	pthread_t		thread;
 	
 }	t_philo;
 
@@ -60,11 +63,14 @@ typedef struct s_meta
 typedef enum e_status
 {
 	WRONG_INPUT = 1,
-	
+	THREAD_CREATION_FAILED = 2,
+	THREAD_JOIN_FAILED = 3,	
 }	t_status;
 
 //Core
-
+int		init_philos(t_meta *meta);
+int		join_philos(t_meta *meta);
+void	*philo_routine(void *data);
 
 //Tools
 int		ft_atoi(const char *str);
