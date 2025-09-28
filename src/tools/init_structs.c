@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 15:04:32 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 17:57:39 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 18:19:20 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ int	assign_philos(t_meta *meta, t_philo *philo, unsigned int id)
 	philo->options.p_tte = meta->options.p_tte;
 	philo->options.p_tts = meta->options.p_tts;
 	philo->last_meal = 0;
+	pthread_mutex_lock(&meta->curr_id_lock);
+	meta->curr_id = id;
+	pthread_mutex_unlock(&meta->curr_id_lock);
 	if (pthread_mutex_init(&philo->meal_time_lock, NULL) != 0)
 		return(throw_error(INIT_MUTEX_FAILED));
 	return (0);

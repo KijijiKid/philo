@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 17:55:25 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 18:21:09 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct s_meta
 	pthread_mutex_t	wait_lock; //Lock for the threads for setting and reading the wait_flag
 	bool			run_flag; // Condition for the philo routine while loop to run or not
 	pthread_mutex_t	run_lock; //Lock for the threads for setting and reading the run_flag
+	unsigned int	curr_id; // For passing id to each philo thru meta struct
+	pthread_mutex_t	curr_id_lock; //Lock for the threads for having each philo id inside the routine function
 }	t_meta;
 
 typedef enum e_status
@@ -83,7 +85,7 @@ typedef enum e_status
 int		init_philos(t_meta *meta);
 int		join_philos(t_meta *meta);
 void	*philo_routine(void *data);
-int	assign_philos(t_meta *meta, t_philo *philo, unsigned int id);
+int		assign_philos(t_meta *meta, t_philo *philo, unsigned int id);
 	//Thread Synchronisation
 void	philo_hold(t_meta *meta);
 void	philo_start(t_meta *meta);
