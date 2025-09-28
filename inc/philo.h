@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 13:48:57 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 14:55:39 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct s_meta
 	t_philo			philo[200];
 	pthread_mutex_t	write_lock; //Whenever printf or write gets called
 	t_options		option;
+	bool			wait_flag; //Holds already created threads in a while loop as long as not all threads are created
+	pthread_mutex_t	wait_lock; //Lock for the threads for setting and reading the wait_flag
 }	t_meta;
 
 typedef enum e_status
