@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:32:55 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 18:36:53 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 19:36:32 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	*philo_routine(void *data)
 		if (meta->run_flag == false)
 			i = 0;
 		pthread_mutex_unlock(&meta->run_lock);
+		write(1, "A\n", 2);
 		if (eat_routine(&(meta->philo[p_id])))
 			break ;
 		// sleep_routine(&(meta->philo[p_id]));

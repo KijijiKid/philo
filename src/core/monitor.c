@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:54:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 18:04:08 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 19:39:32 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static bool	check_if_dead(t_meta *meta)
 
 static bool	check_if_fed_up(t_meta *meta)
 {
-	
+	sleep(2);
+	return (true);
 }
 
 /// @brief Sets the run_flag to false, whereupon
@@ -40,15 +41,19 @@ static void	stop_routine(t_meta *meta)
 {
 	pthread_mutex_lock(&meta->run_lock);
 	meta->run_flag = false;
-	pthread_mutex_lock(&meta->run_lock);
+	pthread_mutex_unlock(&meta->run_lock);
 }
 
-void	init_monitor(t_meta *meta)
+int	init_monitor(t_meta *meta)
 {
 	while (1)
 	{
-		check_if_fed_up(meta);
-		check_if_dead(meta);
+		if (check_if_fed_up(meta))
+			break ;
+		// check_if_dead(meta);
 	}
+	write(1, "39\n", 3);
 	stop_routine(meta);
+	write(1, "37\n", 3);
+	return (0);
 }

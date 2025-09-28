@@ -6,11 +6,24 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 15:27:58 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 18:30:37 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 19:11:42 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	philo_specified_mtx(t_meta *meta)
+{
+	int	i;
+
+	i = 0;
+	while (i < meta->options.p_num)
+	{
+		if (pthread_mutex_destroy(&(meta->philo[i]).meal_time_lock) != 0)
+			return(throw_error(DSTRY_MUTEX_FAILED));
+		i++;
+	}
+}
 
 int	destroy_mutexes(t_meta *meta)
 {
@@ -18,7 +31,10 @@ int	destroy_mutexes(t_meta *meta)
 		return(throw_error(DSTRY_MUTEX_FAILED));
 	if (pthread_mutex_destroy(&meta->write_lock) != 0)
 		return(throw_error(DSTRY_MUTEX_FAILED));
+	if (pthread_mutex_destroy(&meta->run_lock) != 0)
+		return(throw_error(DSTRY_MUTEX_FAILED));
 	if (pthread_mutex_destroy(&meta->curr_id_lock) != 0)
 		return(throw_error(DSTRY_MUTEX_FAILED));
+	philo_specified_mtx(meta);
 	return (0);
 }

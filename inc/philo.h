@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 18:21:09 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 19:07:58 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_philo
 	pthread_t		thread;
 	pthread_mutex_t	forks[2];
 	t_options		options;
-	pthread_mutex_t	meal_time_lock;
+	pthread_mutex_t	meal_time_lock; //For setting/reading meal time
 	unsigned int	last_meal;
 	
 }	t_philo;
@@ -86,6 +86,7 @@ int		init_philos(t_meta *meta);
 int		join_philos(t_meta *meta);
 void	*philo_routine(void *data);
 int		assign_philos(t_meta *meta, t_philo *philo, unsigned int id);
+int		init_monitor(t_meta *meta);
 	//Thread Synchronisation
 void	philo_hold(t_meta *meta);
 void	philo_start(t_meta *meta);

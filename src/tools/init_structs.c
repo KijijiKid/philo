@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 15:04:32 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 18:30:05 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 19:38:42 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static int	init_mutexes(t_meta *meta)
 	if (pthread_mutex_init(&meta->wait_lock, NULL) != 0)
 		return(throw_error(INIT_MUTEX_FAILED));
 	if (pthread_mutex_init(&meta->write_lock, NULL) != 0)
+		return(throw_error(INIT_MUTEX_FAILED));
+	if (pthread_mutex_init(&meta->run_lock, NULL) != 0)
 		return(throw_error(INIT_MUTEX_FAILED));
 	if (pthread_mutex_init(&meta->curr_id_lock, NULL) != 0)
 		return(throw_error(INIT_MUTEX_FAILED));
