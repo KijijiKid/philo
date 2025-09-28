@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/27 20:42:52 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/28 13:19:15 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@
 # include <pthread.h> // Thread functions
 # include <stdbool.h> //Boolean
 
+//Time magic number UTC to ETC (hours
 # define TIME_ZONE_OFFSET 2
+
+//Error MSG define
+# define W_INPUT "Wrong Input\n"
+# define E_INPUT "Expected: NUM_PHILO(1-200) ttd tte tts [tepme]\n"
 
 /// @brief 
 /// p_num Number of philosophers
@@ -52,10 +57,22 @@ typedef struct s_meta
 	t_options		option;
 }	t_meta;
 
+typedef enum e_status
+{
+	WRONG_INPUT = 1,
+	
+}	t_status;
+
+//Core
+
 
 //Tools
 int		ft_atoi(const char *str);
 size_t	get_curr_time(void);
 char	*formated_time(void);
+int		input_parsing(int argc, char **argv, t_meta *philo_meta);
+
+//Error
+int		throw_error(t_status status);
 
 #endif

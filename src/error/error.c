@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/21 11:25:03 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 13:20:24 by mandre           ###   ########.fr       */
+/*   Created: 2025/09/28 12:47:10 by mandre            #+#    #+#             */
+/*   Updated: 2025/09/28 13:17:32 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+static int	ft_strlen(char *str)
 {
-	t_meta meta;
+	int i;
 
-	if (argc == 5 || argc == 6)
-	{
-		if (input_parsing(argc, argv, &meta))
-			throw_error(WRONG_INPUT);
-	}
-	else
-		throw_error(WRONG_INPUT);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+static int	write_input(char *msg1, char *msg2)
+{
+	write(2, msg1, ft_strlen(msg1));
+	if (msg2)
+		write(2, msg2, ft_strlen(msg2));
+}
+
+int	throw_error(t_status status)
+{
+	if (status == WRONG_INPUT)
+		write_input(W_INPUT, E_INPUT);
 }
