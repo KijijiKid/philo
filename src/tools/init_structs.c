@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 15:04:32 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 17:12:29 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 17:59:03 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,7 @@ int	init_meta(t_meta *meta)
 	meta->wait_flag = true;
 	meta->run_flag = true;
 	meta->start_time = get_curr_time();
+	if (init_forks(meta) != 0)
+		return (1);
 	return (init_mutexes(meta));
 }

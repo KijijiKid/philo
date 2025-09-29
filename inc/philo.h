@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 17:28:35 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 17:53:07 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_philo
 typedef struct s_meta
 {
 	t_philo			philo[200];
+	pthread_mutex_t	total_forks[200];
 	size_t			start_time;
 	pthread_mutex_t	write_lock; //Whenever printf or write gets called
 	t_options		options;
@@ -105,6 +106,10 @@ int		join_philos(t_meta *meta);
 void	*philo_routine(void *data);
 int		assign_philos(t_meta *meta, t_philo *philo, unsigned int id);
 int		init_monitor(t_meta *meta);
+	//Fork Management
+int		init_forks(t_meta *meta);
+void	assign_forks(t_meta *meta);
+int		destory_forks(t_meta *meta);
 	//Thread Synchronisation
 void	philo_hold(t_philo *philo);
 void	philo_start(t_meta *meta);
