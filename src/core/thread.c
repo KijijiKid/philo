@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:21:55 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 19:34:53 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 14:56:13 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ int	init_philos(t_meta *meta)
 	{
 		if (assign_philos(meta, &meta->philo[i], i + 1) != 0)
 			return (1);
-		if (pthread_create(&(meta->philo[i]).thread, NULL, &philo_routine, meta) != 0)
+		if (pthread_create(&(meta->philo[i]).thread, NULL, &philo_routine, &meta->philo[i]) != 0)
 			return (throw_error(THREAD_CREATION_FAILED));
 		i++;
 	}
+	sleep(2);
 	write(1, "B\n", 2);
 	philo_start(meta);
 	return (0);

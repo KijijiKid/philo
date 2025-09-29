@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 17:45:16 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/27 20:10:53 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 14:58:38 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*formated_time(void)
 	unsigned int	pos;
 	
 	if (gettimeofday(&time, NULL) == -1)
-		write(2, "Schaise2\n", 9);
+		throw_error(GET_TIME_FAILED);
 	seconds_in_day = time.tv_sec % 86400;
 	hours	= (seconds_in_day / 3600) + TIME_ZONE_OFFSET;
 	min		= (seconds_in_day % 3600) / 60;

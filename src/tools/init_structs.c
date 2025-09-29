@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 15:04:32 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 19:38:42 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 14:54:38 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ static int	init_mutexes(t_meta *meta)
 		return(throw_error(INIT_MUTEX_FAILED));
 	if (pthread_mutex_init(&meta->run_lock, NULL) != 0)
 		return(throw_error(INIT_MUTEX_FAILED));
-	if (pthread_mutex_init(&meta->curr_id_lock, NULL) != 0)
-		return(throw_error(INIT_MUTEX_FAILED));
 	return (0);
 }
 
@@ -39,9 +37,10 @@ int	assign_philos(t_meta *meta, t_philo *philo, unsigned int id)
 	philo->options.p_tte = meta->options.p_tte;
 	philo->options.p_tts = meta->options.p_tts;
 	philo->last_meal = 0;
-	pthread_mutex_lock(&meta->curr_id_lock);
-	meta->curr_id = id;
-	pthread_mutex_unlock(&meta->curr_id_lock);
+	philo->run_lock = meta->run_lock;
+	philo->run_flag = &meta->run_flag;
+	philo->wait_lock = meta->wait_lock;
+	philo->wait_flag = &meta->wait_flag;
 	if (pthread_mutex_init(&philo->meal_time_lock, NULL) != 0)
 		return(throw_error(INIT_MUTEX_FAILED));
 	return (0);

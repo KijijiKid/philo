@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 19:07:58 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 14:59:42 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define T_J_FAILED "Thread joining/termination failed\n"
 # define I_MTX_FAILED "Initalization of Mutexes failed\n"
 # define D_MTX_FAILED "Destroying Mutexes failed\n"
+# define GTOD_FAILED "gettimeofday() failed\n"
 
 /// @brief 
 /// p_num Number of philosophers
@@ -56,7 +57,12 @@ typedef struct s_philo
 	t_options		options;
 	pthread_mutex_t	meal_time_lock; //For setting/reading meal time
 	unsigned int	last_meal;
-	
+
+	//Monitor Check Flags
+	bool			*wait_flag; //Holds already created threads in a while loop as long as not all threads are created, set by init_meta()
+	pthread_mutex_t	wait_lock; //Lock for the threads for setting and reading the wait_flag
+	bool			*run_flag; // Condition for the philo routine while loop to run or not
+	pthread_mutex_t	run_lock; //Lock for the threads for setting and reading the run_flag
 }	t_philo;
 
 typedef struct s_meta
@@ -68,8 +74,6 @@ typedef struct s_meta
 	pthread_mutex_t	wait_lock; //Lock for the threads for setting and reading the wait_flag
 	bool			run_flag; // Condition for the philo routine while loop to run or not
 	pthread_mutex_t	run_lock; //Lock for the threads for setting and reading the run_flag
-	unsigned int	curr_id; // For passing id to each philo thru meta struct
-	pthread_mutex_t	curr_id_lock; //Lock for the threads for having each philo id inside the routine function
 }	t_meta;
 
 typedef enum e_status
@@ -78,7 +82,8 @@ typedef enum e_status
 	THREAD_CREATION_FAILED = 2,
 	THREAD_JOIN_FAILED = 3,
 	INIT_MUTEX_FAILED = 4,
-	DSTRY_MUTEX_FAILED = 5
+	DSTRY_MUTEX_FAILED = 5,
+	GET_TIME_FAILED = 6
 }	t_status;
 
 //Core
@@ -88,7 +93,7 @@ void	*philo_routine(void *data);
 int		assign_philos(t_meta *meta, t_philo *philo, unsigned int id);
 int		init_monitor(t_meta *meta);
 	//Thread Synchronisation
-void	philo_hold(t_meta *meta);
+void	philo_hold(t_philo *philo);
 void	philo_start(t_meta *meta);
 
 //Tools
