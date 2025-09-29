@@ -6,21 +6,21 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:29:09 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 17:05:37 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 21:09:25 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 /// @brief Returns a unsigned long
-/// of the seconds since Year stared 
+/// of the seconds 
 size_t	get_curr_time(void)
 {
 	struct timeval time;
 
 	if (gettimeofday(&time, NULL) == -1)
 		write(2, "Schaise\n", 8);
-	return(time.tv_sec * 1000 + time.tv_usec / 1000);
+	return((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
 /// @brief Just a more accurate usleep fucntion

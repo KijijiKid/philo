@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:01:19 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 20:36:14 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 21:32:10 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,27 @@ static size_t	ft_strlen(char *str)
 
 int	write_action(t_philo *philo, t_action action, unsigned int id)
 {
-	char	*curr_time_s;
-	char	*id_s;
+	bool	write;
+	size_t	time;
 
+	write = true;
 	pthread_mutex_lock(&philo->run_lock);
 	if (*philo->run_flag == false)
-		return 1;
-	pthread_mutex_unlock(&philo->run_lock);
+		write = false;
 	pthread_mutex_lock(&philo->write_lock);
-	curr_time_s = ft_ltoa(get_curr_time() - philo->options.start_time);
-	id_s = ft_ltoa(id);
-	if (action == SLEEP)
-		printf("%s %s is sleeping\n", curr_time_s, id_s);
-	else if (action == THINK)
-		printf("%s %s is thinking\n", curr_time_s, id_s);
-	else if (action == EAT)
-		printf("%s %s is eating\n", curr_time_s, id_s);
-	else if (action == T_FORK)
-		printf("%s %s has taken a fork\n", curr_time_s, id_s);
-	else if  (action == P_IS_DEAD)
-		printf("%s %s is dead\n", curr_time_s, id_s);
-	else if (action == P_ARE_FULL)
+	time = get_curr_time() - philo->options.start_time;
+	if (action == SLEEP && write)
+		printf("%ld %d is sleeping\n", time, id);
+	else if (action == THINK && write)
+		printf("%ld %d is thinking\n", time, id);
+	else if (action == EAT && write)
+		printf("%ld %d is eating\n", time, id);
+	else if (action == T_FORK && write)
+		printf("%ld %d has taken a fork\n", time, id);
+	else if  (action == P_IS_DEAD && write)
+		printf("%ld %d is dead\n", time, id);
+	else if (action == P_ARE_FULL && write)
 		printf("Philos are full\n");
-	free(curr_time_s);
-	free(id_s);
 	pthread_mutex_unlock(&philo->write_lock);
+	pthread_mutex_unlock(&philo->run_lock);
 }

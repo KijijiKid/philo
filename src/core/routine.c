@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:32:55 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 20:47:31 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 21:16:11 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,15 @@ void	*philo_routine(void *data)
 	t_philo *philo;
 	int 	i;
 
-	write(1, "A\n", 2);
 	philo = data;
 	philo_hold(philo);
 	if (philo->id % 2)
 		think_routine(philo);
 	i = 1;
-	while (i)
+	while (1)
 	{
 		pthread_mutex_lock(&philo->run_lock);
-		if (philo->run_flag == false)
+		if (*philo->run_flag == false)
 			return (NULL);
 		pthread_mutex_unlock(&philo->run_lock);
 		eat_routine(philo);
