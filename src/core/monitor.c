@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:54:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 21:25:10 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 21:34:17 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static bool	check_if_dead(t_meta *meta)
 		if (meta->options.p_ttd <= ((meta->philo[i]).last_meal - a))
 		{
 			stop_routine(meta);
-			write(1, "A\n", 2);
 			return (true);
 		}
 		pthread_mutex_unlock(&(meta->philo[i]).meal_time_lock);
@@ -74,7 +73,6 @@ int	init_monitor(t_meta *meta)
 {
 	while (1)
 	{
-		sleep(1);
 		if (check_if_fed_up(meta))
 			break ;
 		if (check_if_dead(meta))

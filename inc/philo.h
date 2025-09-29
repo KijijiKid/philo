@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 20:15:20 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 21:39:08 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_philo
 	pthread_mutex_t	forks[2]; // [0] = l_fork && [1] == r_fork
 	t_options		options;
 	pthread_mutex_t	meal_time_lock; //For setting/reading meal time
-	unsigned int	last_meal; //Time of the last meal == getcurrtime()
+	size_t			last_meal; //Time of the last meal == getcurrtime()
 	pthread_mutex_t	meal_count_lock; //For setting/reading meal count
 	unsigned int	total_meals; //Total meal counter of each philosopher
 	pthread_mutex_t	write_lock;  //Whenever printf or write gets called
