@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 14:59:42 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 15:56:25 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,14 @@ typedef struct s_philo
 {
 	unsigned int	id;
 	pthread_t		thread;
-	pthread_mutex_t	forks[2];
+	pthread_mutex_t	forks[2]; // [0] = l_fork && [1] == r_fork
 	t_options		options;
 	pthread_mutex_t	meal_time_lock; //For setting/reading meal time
-	unsigned int	last_meal;
-
+	unsigned int	last_meal; //Time of the last meal == getcurrtime()
+	pthread_mutex_t	meal_count_lock; //For setting/reading meal count
+	unsigned int	total_meals; //Total meal counter of each philosopher
+	pthread_mutex_t	write_lock;  //Whenever printf or write gets called
+	
 	//Monitor Check Flags
 	bool			*wait_flag; //Holds already created threads in a while loop as long as not all threads are created, set by init_meta()
 	pthread_mutex_t	wait_lock; //Lock for the threads for setting and reading the wait_flag
@@ -86,6 +89,13 @@ typedef enum e_status
 	GET_TIME_FAILED = 6
 }	t_status;
 
+typedef enum e_action
+{
+	SLEEP = 1,
+	EAT = 2,
+	THINK = 3
+}	t_action;
+
 //Core
 int		init_philos(t_meta *meta);
 int		join_philos(t_meta *meta);
@@ -103,6 +113,9 @@ char	*formated_time(void);
 int		input_parsing(int argc, char **argv, t_meta *philo_meta);
 int		init_meta(t_meta *meta);
 int		destroy_mutexes(t_meta *meta);
+int		write_action(pthread_mutex_t write_lock,t_action action, unsigned int id, bool display);
+void 	ft_usleep(size_t ms);
+char	*ft_itoa(size_t n);
 
 //Error
 int		throw_error(t_status status);

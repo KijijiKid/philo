@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:41:14 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 13:21:02 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 15:59:48 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,52 @@ int	ft_atoi(const char *str)
 	}
 	number *= multiply;
 	return (number);
+}
+
+static size_t	get_length(size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	if (n == 0)
+		return (1);
+	if (n < 0)
+	{
+		i = 1;
+		n *= -1;
+	}
+	while (n != 0)
+	{
+		n /= 10;
+		i++;
+	}
+	return (i);
+}
+
+char	*ft_ltoa(size_t n)
+{
+	char	*array;
+	size_t	i;
+	size_t	num;
+
+	num = ((long)n);
+	i = get_length(n);
+	array = (char *)malloc(sizeof(char) * (i + 1));
+	if (!array)
+		return (NULL);
+	if (num < 0)
+	{
+		num *= -1;
+		array[0] = '-';
+	}
+	array[i] = '\0';
+	while (0 <= i && num != 0)
+	{
+		i--;
+		array[i] = (num % 10) + '0';
+		num /= 10;
+	}
+	if (0 == n)
+		array[0] = '0';
+	return (array);
 }

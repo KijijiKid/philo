@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:54:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 19:39:32 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 15:55:13 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,26 @@ static bool	check_if_dead(t_meta *meta)
 	return (false);
 }
 
+/// @brief Checks if all philos/threads ates enough
+/// when yes it stops simulation
 static bool	check_if_fed_up(t_meta *meta)
 {
-	sleep(2);
-	return (true);
+	int i;
+	int count;
+
+	i = 0;
+	count = 0;
+	while (i < meta->options.p_num)
+	{
+		pthread_mutex_lock(&(meta->philo[i]).meal_count_lock);
+		if (meta->options.p_mec == (meta->philo[i]).total_meals)
+			count += 1;
+		pthread_mutex_unlock(&(meta->philo[i]).meal_count_lock);
+		i++;
+	}
+	if (count == meta->options.p_num)
+		return (true);
+	return (false);
 }
 
 /// @brief Sets the run_flag to false, whereupon
@@ -50,10 +66,9 @@ int	init_monitor(t_meta *meta)
 	{
 		if (check_if_fed_up(meta))
 			break ;
-		// check_if_dead(meta);
+		if (check_if_dead(meta))
+			break ;
 	}
-	write(1, "39\n", 3);
 	stop_routine(meta);
-	write(1, "37\n", 3);
 	return (0);
 }
