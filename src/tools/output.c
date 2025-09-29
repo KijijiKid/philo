@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:01:19 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 18:15:21 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 18:28:29 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static size_t	ft_strlen(char *str)
 
 int	write_action(t_philo *philo, t_action action, unsigned int id, bool display)
 {
-	// pthread_mutex_lock(&write_lock);
 	char	*curr_time_s;
 	char	*id_s;
 
