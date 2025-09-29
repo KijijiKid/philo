@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:54:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 17:18:14 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 18:15:23 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,14 @@ static bool	check_if_dead(t_meta *meta)
 	{
 		pthread_mutex_lock(&(meta->philo[i]).meal_time_lock);
 		if (meta->options.p_ttd <= (get_curr_time() - (meta->philo[i]).last_meal))
-			return (true);
+			break ;
 		pthread_mutex_unlock(&(meta->philo[i]).meal_time_lock);
 		i++;
+	}
+	if (i != meta->options.p_num)
+	{
+		write_action(&meta->philo[i], P_IS_DEAD, meta->philo[i].id, true);
+		return (true);
 	}
 	return (false);
 }
@@ -47,7 +52,11 @@ static bool	check_if_fed_up(t_meta *meta)
 		i++;
 	}
 	if (count == meta->options.p_num)
+	{
+		//Here just passing random philo cause we won't use this just for write_lock(here)
+		write_action(&meta->philo[0], P_ARE_FULL, 0, true);
 		return (true);
+	}
 	return (false);
 }
 

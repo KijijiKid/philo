@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 17:53:07 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 18:07:21 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,9 @@ typedef enum e_action
 	SLEEP = 1,
 	EAT = 2,
 	THINK = 3,
-	T_FORK = 4
+	T_FORK = 4,
+	P_ARE_FULL = 5,
+	P_IS_DEAD = 6
 }	t_action;
 
 //Core
