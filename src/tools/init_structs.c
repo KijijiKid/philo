@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 15:04:32 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 15:45:23 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 17:12:29 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	assign_philos(t_meta *meta, t_philo *philo, unsigned int id)
 	philo->wait_lock = meta->wait_lock;
 	philo->wait_flag = &meta->wait_flag;
 	philo->write_lock = meta->write_lock;
+	philo->options.start_time = meta->start_time;
 	if (pthread_mutex_init(&philo->meal_time_lock, NULL) != 0)
 		return(throw_error(INIT_MUTEX_FAILED));
 	if (pthread_mutex_init(&philo->meal_count_lock, NULL) != 0)
@@ -58,5 +59,6 @@ int	init_meta(t_meta *meta)
 {
 	meta->wait_flag = true;
 	meta->run_flag = true;
+	meta->start_time = get_curr_time();
 	return (init_mutexes(meta));
 }

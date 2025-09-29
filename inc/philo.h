@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 15:56:25 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 17:28:35 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_options
 	unsigned int	p_tte;
 	unsigned int	p_tts;
 	unsigned int	p_mec;
+	size_t			start_time;
 }	t_options;
 
 typedef struct s_philo
@@ -71,6 +72,7 @@ typedef struct s_philo
 typedef struct s_meta
 {
 	t_philo			philo[200];
+	size_t			start_time;
 	pthread_mutex_t	write_lock; //Whenever printf or write gets called
 	t_options		options;
 	bool			wait_flag; //Holds already created threads in a while loop as long as not all threads are created, set by init_meta()
@@ -93,7 +95,8 @@ typedef enum e_action
 {
 	SLEEP = 1,
 	EAT = 2,
-	THINK = 3
+	THINK = 3,
+	T_FORK = 4
 }	t_action;
 
 //Core
@@ -113,9 +116,9 @@ char	*formated_time(void);
 int		input_parsing(int argc, char **argv, t_meta *philo_meta);
 int		init_meta(t_meta *meta);
 int		destroy_mutexes(t_meta *meta);
-int		write_action(pthread_mutex_t write_lock,t_action action, unsigned int id, bool display);
+int		write_action(t_philo *philo, t_action action, unsigned int id, bool display);
 void 	ft_usleep(size_t ms);
-char	*ft_itoa(size_t n);
+char	*ft_ltoa(size_t n);
 
 //Error
 int		throw_error(t_status status);
