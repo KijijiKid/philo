@@ -6,11 +6,20 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:54:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 18:27:05 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 20:48:38 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+/// @brief Sets the run_flag to false, whereupon
+/// the philo routine loop breaks
+static void	stop_routine(t_meta *meta)
+{
+	pthread_mutex_lock(&meta->run_lock);
+	meta->run_flag = false;
+	pthread_mutex_unlock(&meta->run_lock);
+}
 
 /// @brief Returns true if a philo died
 static bool	check_if_dead(t_meta *meta)
@@ -22,14 +31,13 @@ static bool	check_if_dead(t_meta *meta)
 	{
 		pthread_mutex_lock(&(meta->philo[i]).meal_time_lock);
 		if (meta->options.p_ttd <= (get_curr_time() - (meta->philo[i]).last_meal))
-			break ;
+		{
+			stop_routine(meta);
+			write_action(&meta->philo[i], P_IS_DEAD, meta->philo[i].id);
+			return (true);
+		}
 		pthread_mutex_unlock(&(meta->philo[i]).meal_time_lock);
 		i++;
-	}
-	if (i != meta->options.p_num)
-	{
-		write_action(&meta->philo[i], P_IS_DEAD, meta->philo[i].id, true);
-		return (true);
 	}
 	return (false);
 }
@@ -53,20 +61,12 @@ static bool	check_if_fed_up(t_meta *meta)
 	}
 	if (count == meta->options.p_num)
 	{
+		stop_routine(meta);
 		//Here just passing random philo cause we won't use this just for write_lock(here)
-		write_action(&meta->philo[0], P_ARE_FULL, 0, true);
+		write_action(&meta->philo[0], P_ARE_FULL, 0);
 		return (true);
 	}
 	return (false);
-}
-
-/// @brief Sets the run_flag to false, whereupon
-/// the philo routine loop breaks
-static void	stop_routine(t_meta *meta)
-{
-	pthread_mutex_lock(&meta->run_lock);
-	meta->run_flag = false;
-	pthread_mutex_unlock(&meta->run_lock);
 }
 
 int	init_monitor(t_meta *meta)
@@ -78,6 +78,5 @@ int	init_monitor(t_meta *meta)
 		if (check_if_dead(meta))
 			break ;
 	}
-	stop_routine(meta);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 17:56:13 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/28 16:15:36 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/29 18:48:46 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	input_parsing(int argc, char **argv, t_meta *philo_meta)
 {
-	if (argc == 5)
+	if (argc == 6)
 	{
 		philo_meta->options.p_num = ft_atoi(argv[1]);
 		philo_meta->options.p_ttd = ft_atoi(argv[2]);
@@ -22,7 +22,7 @@ int	input_parsing(int argc, char **argv, t_meta *philo_meta)
 		philo_meta->options.p_tts = ft_atoi(argv[4]);
 		philo_meta->options.p_mec = 10;
 	}
-	else if (argc == 6)
+	else if (argc == 7)
 	{
 		philo_meta->options.p_num = ft_atoi(argv[1]);
 		philo_meta->options.p_ttd = ft_atoi(argv[2]);
