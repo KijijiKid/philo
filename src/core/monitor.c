@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:54:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/30 10:52:56 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/30 11:46:36 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	stop_routine(t_meta *meta)
 /// @brief Returns true if a philo died
 static bool	check_if_dead(t_meta *meta)
 {
-	int i;
+	unsigned int	i;
 
 	i = 0;
 	while (i < meta->options.p_num)
@@ -46,7 +46,7 @@ static bool	check_if_dead(t_meta *meta)
 /// when yes it stops simulation
 static bool	check_if_fed_up(t_meta *meta)
 {
-	int i;
+	unsigned int i;
 	bool	all_ate_enough;
 
 	// Diable eating terminator argc[5] isn't provieded

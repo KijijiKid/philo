@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:29:09 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 21:09:25 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/30 11:37:23 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,50 +35,50 @@ void ft_usleep(size_t ms)
 		usleep(500);
 }
 
-static void	append_int(char *buf, int *pos, unsigned int v)
-{
-	char tmp[10];
-    int i = 0;
-    if (v == 0) {
-        buf[(*pos)++] = '0';
-        return;
-    }
-    while (v) {
-        tmp[i++] = (char)('0' + (v % 10));
-        v /= 10;
-    }
-    while (i-- > 0) {
-        buf[(*pos)++] = tmp[i];
-    }
-}
+// static void	append_int(char *buf, int *pos, unsigned int v)
+// {
+// 	char tmp[10];
+//     int i = 0;
+//     if (v == 0) {
+//         buf[(*pos)++] = '0';
+//         return;
+//     }
+//     while (v) {
+//         tmp[i++] = (char)('0' + (v % 10));
+//         v /= 10;
+//     }
+//     while (i-- > 0) {
+//         buf[(*pos)++] = tmp[i];
+//     }
+// }
 
-char	*formated_time(void)
-{
-	static char		time_arr[2048];
-	struct timeval	time;
-	unsigned int	seconds_in_day;
-	unsigned int	hours;
-	unsigned int	min;
-	unsigned int	sec;
-	unsigned int	ms;
-	unsigned int	pos;
+// char	*formated_time(void)
+// {
+// 	static char		time_arr[2048];
+// 	struct timeval	time;
+// 	unsigned int	seconds_in_day;
+// 	unsigned int	hours;
+// 	unsigned int	min;
+// 	unsigned int	sec;
+// 	unsigned int	ms;
+// 	unsigned int	pos;
 	
-	if (gettimeofday(&time, NULL) == -1)
-		throw_error(GET_TIME_FAILED);
-	seconds_in_day = time.tv_sec % 86400;
-	hours	= (seconds_in_day / 3600) + TIME_ZONE_OFFSET;
-	min		= (seconds_in_day % 3600) / 60;
-	sec		= seconds_in_day % 60;
-	ms		= time.tv_usec / 1000;
+// 	if (gettimeofday(&time, NULL) == -1)
+// 		throw_error(GET_TIME_FAILED);
+// 	seconds_in_day = time.tv_sec % 86400;
+// 	hours	= (seconds_in_day / 3600) + TIME_ZONE_OFFSET;
+// 	min		= (seconds_in_day % 3600) / 60;
+// 	sec		= seconds_in_day % 60;
+// 	ms		= time.tv_usec / 1000;
 
-	pos = 0;
-	append_int(time_arr, &pos, hours);
-	time_arr[pos++] = ':';
-	append_int(time_arr, &pos, min);
-	time_arr[pos++] = ':';
-	append_int(time_arr, &pos, sec);
-	time_arr[pos++] = ':';
-	append_int(time_arr, &pos, ms);
-	time_arr[pos++] = '\0';
-	return (time_arr);
-}
+// 	pos = 0;
+// 	append_int(time_arr, &pos, hours);
+// 	time_arr[pos++] = ':';
+// 	append_int(time_arr, &pos, min);
+// 	time_arr[pos++] = ':';
+// 	append_int(time_arr, &pos, sec);
+// 	time_arr[pos++] = ':';
+// 	append_int(time_arr, &pos, ms);
+// 	time_arr[pos++] = '\0';
+// 	return (time_arr);
+// }

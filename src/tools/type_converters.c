@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:41:14 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 15:59:48 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/30 11:38:51 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	ft_atoi(const char *str)
 	return (number);
 }
 
-static size_t	get_length(size_t n)
+static size_t	get_length(long n)
 {
-	size_t	i;
+	long	i;
 
 	i = 0;
 	if (n == 0)
@@ -73,11 +73,11 @@ static size_t	get_length(size_t n)
 	return (i);
 }
 
-char	*ft_ltoa(size_t n)
+char	*ft_ltoa(long n)
 {
 	char	*array;
-	size_t	i;
-	size_t	num;
+	long	i;
+	long	num;
 
 	num = ((long)n);
 	i = get_length(n);

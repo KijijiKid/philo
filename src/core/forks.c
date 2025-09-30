@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:36:49 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 17:59:52 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/30 11:36:41 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /// @brief Destroys/deinitializes the forks/mutexes
 int	destory_forks(t_meta *meta)
 {
-	int i;
+	unsigned int i;
 
 	i = 0;
 	while (i < meta->options.p_num)
@@ -31,7 +31,7 @@ int	destory_forks(t_meta *meta)
 /// [0] = l_fork, [1] = r_fork
 void	assign_forks(t_meta *meta)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
 	while (i < meta->options.p_num)
@@ -49,7 +49,7 @@ void	assign_forks(t_meta *meta)
 /// as provided via argv[1]
 int	init_forks(t_meta *meta)
 {
-	int i;
+	unsigned int i;
 
 	i = 0;
 	while (i < meta->options.p_num)

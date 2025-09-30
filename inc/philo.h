@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/30 08:54:08 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/30 11:39:48 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,13 +120,13 @@ void	philo_start(t_meta *meta);
 //Tools
 int		ft_atoi(const char *str);
 size_t	get_curr_time(void);
-char	*formated_time(void);
+// char	*formated_time(void);
 int		input_parsing(int argc, char **argv, t_meta *philo_meta);
 int		init_meta(t_meta *meta);
 int		destroy_mutexes(t_meta *meta);
 int		write_action(t_philo *philo, t_action action, unsigned int id);
 void 	ft_usleep(size_t ms);
-char	*ft_ltoa(size_t n);
+char	*ft_ltoa(long n);
 
 //Error
 int		throw_error(t_status status);

@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 15:27:58 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 17:52:44 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/30 11:40:47 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	philo_specified_mtx(t_meta *meta)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
 	while (i < meta->options.p_num)
@@ -23,6 +23,7 @@ int	philo_specified_mtx(t_meta *meta)
 			return(throw_error(DSTRY_MUTEX_FAILED));
 		i++;
 	}
+	return (0);
 }
 
 int	destroy_mutexes(t_meta *meta)
