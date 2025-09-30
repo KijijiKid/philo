@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 15:10:48 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 20:46:01 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/30 16:55:15 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,8 @@ void	philo_hold(t_philo *philo)
 			i = 0;
 		pthread_mutex_unlock(&philo->wait_lock);
 	}
+	///Totaly synced start/last meal times
+	pthread_mutex_lock(&philo->meal_time_lock);
+	philo->last_meal = get_curr_time();
+	pthread_mutex_unlock(&philo->meal_time_lock);
 }

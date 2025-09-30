@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:03 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/30 12:36:29 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/30 16:36:43 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 			if (init_philos(&meta) != 0)
 				return (1);
 			usleep(1800);
-			// init_monitor(&meta);
+			init_monitor(&meta);
 			if (join_philos(&meta) != 0)
 				return (2);
 		}

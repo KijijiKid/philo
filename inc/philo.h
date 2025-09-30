@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/30 11:39:48 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/30 17:05:04 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_options
 {
 	unsigned int	p_num;
 	unsigned int	p_ttd;
-	unsigned int	p_tte;
+	size_t			p_tte;
 	unsigned int	p_tts;
 	unsigned int	p_mec;
 	size_t			start_time;

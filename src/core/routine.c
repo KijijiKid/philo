@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:32:55 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/30 12:44:36 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/30 17:09:13 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@ static bool	cal_if_dead(t_philo *philo)
 	pthread_mutex_lock(&philo->meal_time_lock);
 	time = philo->last_meal;
 	pthread_mutex_unlock(&philo->meal_time_lock);
-	if (philo->options.p_ttd <= (time - get_curr_time()))
-	{
-		write_action(philo, P_IS_DEAD, philo->id);
+	if (philo->options.p_ttd < (time - get_curr_time()))
 		return (true);
-	}
 	return (false);
 }
 
@@ -59,13 +56,13 @@ static int	eat_routine(t_philo *philo)
 	pthread_mutex_unlock(&philo->meal_count_lock);
 	if (philo->id % 2)
 	{
-		pthread_mutex_unlock(&philo->forks[1]);
 		pthread_mutex_unlock(&philo->forks[0]);
+		pthread_mutex_unlock(&philo->forks[1]);
 	}
 	else
 	{
-		pthread_mutex_unlock(&philo->forks[0]);
 		pthread_mutex_unlock(&philo->forks[1]);
+		pthread_mutex_unlock(&philo->forks[0]);
 	}
 	sleep_routine(philo);
 	return (0);
@@ -113,7 +110,7 @@ void	*philo_routine(void *data)
 			return (NULL);
 		if (think_routine(philo) == 1)
 			return (NULL);
-		// usleep(90000);
+		usleep(90000);
 	}
 	return (NULL);
 }
