@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:32:55 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/30 12:38:06 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/30 12:44:36 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ static int	think_routine(t_philo *philo)
 void	*philo_routine(void *data)
 {
 	t_philo *philo;
+	bool	run_flag;
 
 	philo = data;
 	philo_hold(philo);
@@ -104,9 +105,10 @@ void	*philo_routine(void *data)
 	while (1)
 	{
 		pthread_mutex_lock(&philo->run_lock);
-		if (*philo->run_flag == false)
-			return (NULL);
+		run_flag = philo->run_flag;
 		pthread_mutex_unlock(&philo->run_lock);
+		if (!run_flag)
+			return (NULL);
 		if (eat_routine(philo) == 1)
 			return (NULL);
 		if (think_routine(philo) == 1)
