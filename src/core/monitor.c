@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:54:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 21:34:17 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/30 10:49:43 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static bool	check_if_dead(t_meta *meta)
 	while (i < meta->options.p_num)
 	{
 		pthread_mutex_lock(&(meta->philo[i]).meal_time_lock);
-		int a =  get_curr_time();
-		if (meta->options.p_ttd <= ((meta->philo[i]).last_meal - a))
+		if (meta->options.p_ttd <= ((meta->philo[i]).last_meal - get_curr_time()))
 		{
 			stop_routine(meta);
+			write_action(&meta->philo[i], P_IS_DEAD, meta->philo[i].id);
 			return (true);
 		}
 		pthread_mutex_unlock(&(meta->philo[i]).meal_time_lock);
@@ -47,26 +47,27 @@ static bool	check_if_dead(t_meta *meta)
 static bool	check_if_fed_up(t_meta *meta)
 {
 	int i;
-	int count;
+	bool	all_ate_enough;
 
+	// Diable eating terminator argc[5] isn't provieded
+	if (meta->options.p_mec == 0)
+		return (false);
 	i = 0;
-	count = 0;
-	while (i < meta->options.p_num)
+	all_ate_enough = true;
+	while (i < meta->options.p_num && all_ate_enough)
 	{
 		pthread_mutex_lock(&(meta->philo[i]).meal_count_lock);
-		if (meta->options.p_mec == (meta->philo[i]).total_meals)
-			count += 1;
+		if ((meta->philo[i]).total_meals < meta->options.p_mec)
+			all_ate_enough = false;
 		pthread_mutex_unlock(&(meta->philo[i]).meal_count_lock);
 		i++;
 	}
-	if (count == meta->options.p_num)
+	if (all_ate_enough)
 	{
-		stop_routine(meta);
-		//Here just passing random philo cause we won't use this just for write_lock(here)
 		write_action(&meta->philo[0], P_ARE_FULL, 0);
-		return (true);
+		stop_routine(meta);
 	}
-	return (false);
+	return (all_ate_enough);
 }
 
 int	init_monitor(t_meta *meta)

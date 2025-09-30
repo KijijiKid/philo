@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:32:55 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 21:16:11 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/30 09:21:38 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ static int	sleep_routine(t_philo *philo)
 
 static int	eat_routine(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->meal_time_lock);
+	if (philo->options.p_ttd <= ((philo->last_meal - get_curr_time())))
+		philo->philo_alive = false;
+	pthread_mutex_unlock(&philo->meal_time_lock);
 	pthread_mutex_lock(&philo->forks[0]);
 	write_action(philo, T_FORK, philo->id);
 	pthread_mutex_lock(&philo->forks[1]);
@@ -35,7 +39,7 @@ static int	eat_routine(t_philo *philo)
 	pthread_mutex_unlock(&philo->meal_count_lock);
 	pthread_mutex_unlock(&philo->forks[0]);
 	pthread_mutex_unlock(&philo->forks[1]);
-	sleep_routine(philo);
+	// sleep_routine(philo);
 	return (0);
 }
 

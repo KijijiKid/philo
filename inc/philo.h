@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 21:39:08 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/30 08:54:08 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_philo
 	pthread_mutex_t	meal_count_lock; //For setting/reading meal count
 	unsigned int	total_meals; //Total meal counter of each philosopher
 	pthread_mutex_t	write_lock;  //Whenever printf or write gets called
+	bool			philo_alive;
 	
 	//Monitor Check Flags
 	bool			*wait_flag; //Holds already created threads in a while loop as long as not all threads are created, set by init_meta()
