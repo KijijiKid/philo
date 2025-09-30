@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:01:19 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/29 21:32:10 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/30 10:58:15 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	write_action(t_philo *philo, t_action action, unsigned int id)
 	write = true;
 	pthread_mutex_lock(&philo->run_lock);
 	if (*philo->run_flag == false)
-		write = false;
+		return 1;
 	pthread_mutex_lock(&philo->write_lock);
 	time = get_curr_time() - philo->options.start_time;
 	if (action == SLEEP && write)
