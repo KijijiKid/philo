@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 15:04:32 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/30 16:53:17 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/30 17:56:28 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static int	init_mutexes(t_meta *meta)
 		return(throw_error(INIT_MUTEX_FAILED));
 	if (pthread_mutex_init(&meta->run_lock, NULL) != 0)
 		return(throw_error(INIT_MUTEX_FAILED));
+	if (pthread_mutex_init(&meta->alive_flag_lock, NULL) != 0)
+		return(throw_error(INIT_MUTEX_FAILED));
 	return (0);
 }
 
@@ -31,6 +33,7 @@ static int	init_mutexes(t_meta *meta)
 int	assign_philos(t_meta *meta, t_philo *philo, unsigned int id)
 {
 	philo->id = id;
+	philo->philo_alive = true;
 	philo->options.p_mec = meta->options.p_mec;
 	philo->options.p_num = meta->options.p_num;
 	philo->options.p_ttd = meta->options.p_ttd;
@@ -43,6 +46,7 @@ int	assign_philos(t_meta *meta, t_philo *philo, unsigned int id)
 	philo->wait_flag = &meta->wait_flag;
 	philo->write_lock = meta->write_lock;
 	philo->options.start_time = meta->start_time;
+	philo->alive_flag_lock = meta->alive_flag_lock;
 	if (pthread_mutex_init(&philo->meal_time_lock, NULL) != 0)
 		return(throw_error(INIT_MUTEX_FAILED));
 	if (pthread_mutex_init(&philo->meal_count_lock, NULL) != 0)

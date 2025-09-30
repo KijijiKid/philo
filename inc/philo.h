@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/30 17:05:04 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/30 17:52:31 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_philo
 	pthread_mutex_t	meal_count_lock; //For setting/reading meal count
 	unsigned int	total_meals; //Total meal counter of each philosopher
 	pthread_mutex_t	write_lock;  //Whenever printf or write gets called
+	pthread_mutex_t	alive_flag_lock; // Cpy from main struct
 	bool			philo_alive;
 	
 	//Monitor Check Flags
@@ -81,6 +82,7 @@ typedef struct s_meta
 	pthread_mutex_t	wait_lock; //Lock for the threads for setting and reading the wait_flag
 	bool			run_flag; // Condition for the philo routine while loop to run or not
 	pthread_mutex_t	run_lock; //Lock for the threads for setting and reading the run_flag
+	pthread_mutex_t	alive_flag_lock; // Cpy from main struct
 }	t_meta;
 
 typedef enum e_status

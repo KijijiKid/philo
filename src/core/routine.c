@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:32:55 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/30 17:09:13 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/30 17:56:00 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@ static bool	cal_if_dead(t_philo *philo)
 	time = philo->last_meal;
 	pthread_mutex_unlock(&philo->meal_time_lock);
 	if (philo->options.p_ttd < (time - get_curr_time()))
+	{
+		pthread_mutex_lock(&philo->alive_flag_lock);
+		philo->philo_alive = false;
+		pthread_mutex_unlock(&philo->alive_flag_lock);
 		return (true);
+	}
 	return (false);
 }
 
@@ -33,8 +38,8 @@ static int	sleep_routine(t_philo *philo)
 
 static int	eat_routine(t_philo *philo)
 {
-	if (cal_if_dead(philo))
-		return (1);
+	// if (cal_if_dead(philo))
+	// 	return (1);
 	if (philo->id % 2 != 0)
 	{
 		pthread_mutex_lock(&philo->forks[1]);
@@ -72,8 +77,8 @@ static int	think_routine(t_philo *philo)
 {
 	long	time_to_think;
 
-	if (cal_if_dead(philo))
-		return (1);
+	// if (cal_if_dead(philo))
+	// 	return (1);
 	pthread_mutex_lock(&philo->meal_time_lock);
 	time_to_think = (philo->options.p_ttd - (get_curr_time() - philo->last_meal) 
 			- philo->options.p_tte) / 2;
@@ -97,8 +102,11 @@ void	*philo_routine(void *data)
 
 	philo = data;
 	philo_hold(philo);
-	if (philo->id % 2)
+	if (philo->id % 2 == 1)
+	{
 		think_routine(philo);
+		ft_usleep(30000);
+	}
 	while (1)
 	{
 		pthread_mutex_lock(&philo->run_lock);

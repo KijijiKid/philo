@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:54:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/30 16:56:27 by mandre           ###   ########.fr       */
+/*   Updated: 2025/09/30 17:54:48 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ static bool	check_if_dead(t_meta *meta)
 	i = 0;
 	while (i < meta->options.p_num)
 	{
-		pthread_mutex_lock(&(meta->philo[i]).meal_time_lock);
-		if (meta->philo[i].philo_alive == false)
+		pthread_mutex_lock(&(meta->philo[i]).alive_flag_lock);
+		if ((meta->philo)[i].philo_alive == false)
 		{
 			stop_routine(meta);
 			printf("%ld %d is dead\n", get_curr_time() - meta->philo[i].options.start_time, meta->philo[i].id);
 			return (true);
 		}
-		pthread_mutex_unlock(&(meta->philo[i]).meal_time_lock);
+		pthread_mutex_unlock(&(meta->philo[i]).alive_flag_lock);
 		i++;
 	}
 	return (false);
