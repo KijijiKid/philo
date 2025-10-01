@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/01 15:11:45 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/01 16:12:58 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@
 # define D_MTX_FAILED "Destroying Mutexes failed\n"
 # define GTOD_FAILED "gettimeofday() failed\n"
 
-typedef struct s_meta t_meta;
-
 /// @brief 
 /// p_num Number of philosophers
 /// p_ttd Time to die
@@ -54,36 +52,10 @@ typedef struct s_options
 
 typedef struct s_philo
 {
-	unsigned int	id;
-	pthread_t		thread;
-	pthread_mutex_t	forks[2]; // [0] = l_fork && [1] == r_fork
-	t_options		options;
-	pthread_mutex_t	meal_time_lock; //For setting/reading meal time
-	size_t			last_meal; //Time of the last meal == getcurrtime()
-	pthread_mutex_t	meal_count_lock; //For setting/reading meal count
-	unsigned int	total_meals; //Total meal counter of each philosopher
-	//Shared Check Flags
-	pthread_mutex_t	*write_lock;  //Whenever printf or write gets called
-	pthread_mutex_t	*alive_flag_lock; // Cpy from main struct
-	bool			philo_alive;
-	bool			*wait_flag; //Holds already created threads in a while loop as long as not all threads are created, set by init_meta()
-	pthread_mutex_t	*wait_lock; //Lock for the threads for setting and reading the wait_flag
-	bool			*run_flag; // Condition for the philo routine while loop to run or not
-	pthread_mutex_t	*run_lock; //Lock for the threads for setting and reading the run_flag
-}	t_philo;
+}
 
 typedef struct s_meta
 {
-	t_philo			philo[200];
-	pthread_mutex_t	total_forks[200];
-	size_t			start_time;
-	pthread_mutex_t	write_lock; //Whenever printf or write gets called
-	t_options		options;
-	bool			wait_flag; //Holds already created threads in a while loop as long as not all threads are created, set by init_meta()
-	pthread_mutex_t	wait_lock; //Lock for the threads for setting and reading the wait_flag
-	bool			run_flag; // Condition for the philo routine while loop to run or not
-	pthread_mutex_t	run_lock; //Lock for the threads for setting and reading the run_flag
-	pthread_mutex_t	alive_flag_lock; // Cpy from main struct
 }	t_meta;
 
 typedef enum e_status
