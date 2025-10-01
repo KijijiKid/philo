@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/01 16:12:58 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/01 16:43:45 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <sys/time.h> // get_time_of_day
-# include <pthread.h> // Thread functions
-# include <stdbool.h> //Boolean
+# include <sys/time.h>
+# include <pthread.h>
+# include <stdbool.h>
 
 //Time magic number UTC to ETC (hours
 # define TIME_ZONE_OFFSET 2
@@ -52,10 +52,17 @@ typedef struct s_options
 
 typedef struct s_philo
 {
-}
+	pthread_t		thread;
+	pthread_mutex_t	*sync_lock_ptr;
+	bool			*sync_flag_ptr;
+}	t_philo;
 
 typedef struct s_meta
 {
+	t_options	options;
+	pthread_mutex_t	sync_lock;
+	bool			sync_flag;
+	t_philo		philo[200];
 }	t_meta;
 
 typedef enum e_status
@@ -77,16 +84,8 @@ typedef enum e_action
 }	t_action;
 
 //Core
-int		init_philos(t_meta *meta);
-int		join_philos(t_meta *meta);
-void	*philo_routine(void *data);
-int		assign_philos(t_meta *meta, t_philo *philo, unsigned int id);
-int		init_monitor(t_meta *meta);
-	//Fork Management
+void	*routine(void *data);
 int		init_forks(t_meta *meta);
-void	assign_forks(t_meta *meta);
-int		destory_forks(t_meta *meta);
-	//Thread Synchronisation
 void	philo_hold(t_philo *philo);
 void	philo_start(t_meta *meta);
 
@@ -95,9 +94,7 @@ int		ft_atoi(const char *str);
 size_t	get_curr_time(void);
 // char	*formated_time(void);
 int		input_parsing(int argc, char **argv, t_meta *philo_meta);
-int		init_meta(t_meta *meta);
-int		destroy_mutexes(t_meta *meta);
-int		write_action(t_philo *philo, t_action action);
+// int		write_action(t_philo *philo, t_action action);
 void 	ft_usleep(size_t ms);
 char	*ft_ltoa(long n);
 
