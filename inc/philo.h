@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/01 16:43:45 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/01 16:56:39 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	*routine(void *data);
 int		init_forks(t_meta *meta);
 void	philo_hold(t_philo *philo);
 void	philo_start(t_meta *meta);
+void	init_monitor(t_meta *meta);
 
 //Tools
 int		ft_atoi(const char *str);
