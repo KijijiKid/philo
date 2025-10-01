@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/30 17:52:31 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/01 13:47:58 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@
 typedef struct s_options
 {
 	unsigned int	p_num;
-	unsigned int	p_ttd;
+	size_t			p_ttd;
 	size_t			p_tte;
-	unsigned int	p_tts;
+	size_t			p_tts;
 	unsigned int	p_mec;
 	size_t			start_time;
 }	t_options;
@@ -100,9 +100,7 @@ typedef enum e_action
 	SLEEP = 1,
 	EAT = 2,
 	THINK = 3,
-	T_FORK = 4,
-	P_ARE_FULL = 5,
-	P_IS_DEAD = 6
+	T_FORK = 4
 }	t_action;
 
 //Core
