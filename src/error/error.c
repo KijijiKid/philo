@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:47:10 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/30 11:43:20 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/01 16:07:17 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,10 @@ static int	ft_strlen(char *str)
 
 static int	write_input(char *msg1, char *msg2)
 {
-	int	bytes;
-
-	bytes = write(2, msg1, ft_strlen(msg1));
+	printf("%s", msg1);
 	if (msg2)
-		bytes += write(2, msg2, ft_strlen(msg2));
-	return (bytes);
+		printf("%s", msg2);
+	return (0);
 }
 
 int	throw_error(t_status status)

@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/01 13:47:58 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/01 15:11:45 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define D_MTX_FAILED "Destroying Mutexes failed\n"
 # define GTOD_FAILED "gettimeofday() failed\n"
 
+typedef struct s_meta t_meta;
+
 /// @brief 
 /// p_num Number of philosophers
 /// p_ttd Time to die
@@ -60,15 +62,14 @@ typedef struct s_philo
 	size_t			last_meal; //Time of the last meal == getcurrtime()
 	pthread_mutex_t	meal_count_lock; //For setting/reading meal count
 	unsigned int	total_meals; //Total meal counter of each philosopher
-	pthread_mutex_t	write_lock;  //Whenever printf or write gets called
-	pthread_mutex_t	alive_flag_lock; // Cpy from main struct
+	//Shared Check Flags
+	pthread_mutex_t	*write_lock;  //Whenever printf or write gets called
+	pthread_mutex_t	*alive_flag_lock; // Cpy from main struct
 	bool			philo_alive;
-	
-	//Monitor Check Flags
 	bool			*wait_flag; //Holds already created threads in a while loop as long as not all threads are created, set by init_meta()
-	pthread_mutex_t	wait_lock; //Lock for the threads for setting and reading the wait_flag
+	pthread_mutex_t	*wait_lock; //Lock for the threads for setting and reading the wait_flag
 	bool			*run_flag; // Condition for the philo routine while loop to run or not
-	pthread_mutex_t	run_lock; //Lock for the threads for setting and reading the run_flag
+	pthread_mutex_t	*run_lock; //Lock for the threads for setting and reading the run_flag
 }	t_philo;
 
 typedef struct s_meta
@@ -124,7 +125,7 @@ size_t	get_curr_time(void);
 int		input_parsing(int argc, char **argv, t_meta *philo_meta);
 int		init_meta(t_meta *meta);
 int		destroy_mutexes(t_meta *meta);
-int		write_action(t_philo *philo, t_action action, unsigned int id);
+int		write_action(t_philo *philo, t_action action);
 void 	ft_usleep(size_t ms);
 char	*ft_ltoa(long n);
 

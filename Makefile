@@ -2,7 +2,7 @@
 NAME	:= philo
 CC		:= cc
 # CFLAGS	:= -Wall -Werror -Wextra -pthread
-CFLAGS	:= -pthread
+CFLAGS	:= -g -pthread
 
 #Includes
 INC_FILES		:= inc
@@ -19,7 +19,7 @@ TOOL_DIR	:= tools/
 ERR_DIR		:= error/
 
 
-CORE_FILES	:= $(addprefix $(CORE_DIR), $(addsuffix .c, thread routine monitor sync_threads forks)) 
+CORE_FILES	:= $(addprefix $(CORE_DIR), $(addsuffix .c, init sync)) 
 TOOL_FILES	:= $(addprefix $(TOOL_DIR), $(addsuffix .c, time type_converters parsing init_structs destroy_mutexes output)) 
 ERR_FILES	:= $(addprefix $(ERR_DIR), $(addsuffix .c, error)) 
 

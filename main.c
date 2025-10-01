@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:03 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/01 13:58:02 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/01 16:08:11 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,7 @@ int	main(int argc, char **argv)
 			return(throw_error(WRONG_INPUT));
 		else
 		{
-			if (init_philos(&meta) != 0)
-				return (1);
-			init_monitor(&meta);
-			if (join_philos(&meta) != 0)
-				return (2);
+			
 		}
 	}
 	else
