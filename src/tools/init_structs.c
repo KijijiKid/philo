@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:47:02 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 19:12:10 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 20:00:09 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	fill_options(t_meta *meta, t_philo *philo)
 	philo->options.start_time = meta->options.start_time;
 }
 
-void	init_philo(t_meta *meta, t_philo *philo, unsigned int id)
+int	init_philo(t_meta *meta, t_philo *philo, unsigned int id)
 {
 	philo->id = id;
 	philo->meal_count = 0;
@@ -36,18 +36,26 @@ void	init_philo(t_meta *meta, t_philo *philo, unsigned int id)
 	philo->write_lock_ptr = &meta->write_lock;
 	philo->run_lock_ptr = &meta->run_lock;
 	philo->run_flag_ptr = &meta->run_flag;
-	pthread_mutex_init(&philo->meal_count_lock, NULL);
-	pthread_mutex_init(&philo->meal_time_lock, NULL);
-	pthread_mutex_init(&philo->alive_lock_ptr, NULL);
+	if (pthread_mutex_init(&philo->meal_count_lock, NULL) != 0)
+		return (throw_error(INIT_MUTEX_FAILED));
+	if (pthread_mutex_init(&philo->meal_time_lock, NULL) != 0)
+		return (throw_error(INIT_MUTEX_FAILED));
+	if (pthread_mutex_init(&philo->alive_lock, NULL))
+		return (throw_error(INIT_MUTEX_FAILED));
+	return (0);
 }
 
 /// @brief Initializes the locks in the
 /// meta struct 
-static void	create_meta_locks(t_meta *meta)
+static int	create_meta_locks(t_meta *meta)
 {
-	pthread_mutex_init(&meta->sync_lock, NULL);
-	pthread_mutex_init(&meta->write_lock, NULL);
-	pthread_mutex_init(&meta->run_lock, NULL);
+	if (pthread_mutex_init(&meta->sync_lock, NULL) != 0)
+		return (throw_error(INIT_MUTEX_FAILED));
+	if (pthread_mutex_init(&meta->write_lock, NULL))
+		return (throw_error(INIT_MUTEX_FAILED));
+	if (pthread_mutex_init(&meta->run_lock, NULL))
+		return (throw_error(INIT_MUTEX_FAILED));
+	return (0);
 }
 
 void	init_meta(t_meta *meta)

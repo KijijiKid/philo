@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 15:09:23 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 19:10:12 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 19:53:11 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ bool	is_alive(t_philo *philo)
 	sol = n - last_meal;
 	if (philo->options.p_ttd <= sol)
 	{
-		pthread_mutex_lock(&philo->alive_lock_ptr);
+		pthread_mutex_lock(&philo->alive_lock);
 		philo->alive = false;
-		pthread_mutex_unlock(&philo->alive_lock_ptr);
+		pthread_mutex_unlock(&philo->alive_lock);
 		return (false);
 	}
 	return (true);
