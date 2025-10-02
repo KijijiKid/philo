@@ -6,11 +6,27 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 13:48:36 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 14:02:43 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 14:20:37 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+/// @brief Destroys the forks/mutexes in the
+/// total forks array
+int	clean_total_forks(t_meta *meta)
+{
+	int i;
+
+	i = 0;
+	while (i < meta->options.p_num)
+	{
+		if (pthread_mutex_destroy(&meta->total_forks[i]) != 0)
+			return (throw_error(DSTRY_MUTEX_FAILED));
+		i++;
+	}
+}
+
 
 void	assign_forks(t_meta *meta, t_philo *philo)
 {
@@ -24,7 +40,7 @@ void	assign_forks(t_meta *meta, t_philo *philo)
 /// @brief Creates the total forks/mutex array 
 /// in the amount philo's need them
 /// Assigning to l/r happens later
-int	creat_total_forks(t_meta *meta)
+int	create_total_forks(t_meta *meta)
 {
 	int i;
 
