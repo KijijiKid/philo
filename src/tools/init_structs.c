@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:47:02 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 14:17:22 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 14:55:21 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,18 @@ void	init_philo(t_meta *meta, t_philo *philo, unsigned int id)
 	philo->run_flag_ptr =  &meta->run_flag;
 }
 
+/// @brief Initializes the locks in the
+/// meta struct 
+static void	create_meta_locks(t_meta *meta)
+{
+	pthread_mutex_init(&meta->sync_lock, NULL);
+	pthread_mutex_init(&meta->write_lock, NULL);
+	pthread_mutex_init(&meta->run_lock, NULL);
+}
+
 void	init_meta(t_meta *meta)
 {
 	meta->sync_flag = false;
 	meta->run_flag = true;
-	pthread_mutex_init(&meta->sync_lock, NULL);
-	pthread_mutex_init(&meta->write_lock, NULL);
-	pthread_mutex_init(&meta->run_lock, NULL);
 	create_total_forks(meta);
 }

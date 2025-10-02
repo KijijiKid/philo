@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 14:19:49 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 14:56:55 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void	init_monitor(t_meta *meta);
 void	assign_forks(t_meta *meta, t_philo *philo);
 int		create_total_forks(t_meta *meta);
 int		clean_total_forks(t_meta *meta);
+void	clean_res(t_meta *meta);
 
 //Tools
 int		ft_atoi(const char *str);

@@ -19,7 +19,7 @@ TOOL_DIR	:= tools/
 ERR_DIR		:= error/
 
 
-CORE_FILES	:= $(addprefix $(CORE_DIR), $(addsuffix .c, init sync routine monitor forks)) 
+CORE_FILES	:= $(addprefix $(CORE_DIR), $(addsuffix .c, init sync routine monitor forks clean)) 
 TOOL_FILES	:= $(addprefix $(TOOL_DIR), $(addsuffix .c, parsing type_converters time init_structs output)) #time type_converters parsing init_structs destroy_mutexes output
 ERR_FILES	:= $(addprefix $(ERR_DIR), $(addsuffix .c, error)) 
 
