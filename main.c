@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:03 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 13:29:31 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 14:17:01 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(int argc, char **argv)
 		{
 			init_threads(&meta);
 			init_monitor(&meta);
+			clean_res(&meta);
 		}
 	}
 	else
