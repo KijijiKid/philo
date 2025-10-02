@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:01:19 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 15:27:38 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 15:43:25 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,5 @@ int	write_action(t_philo *philo, t_action action)
 		print_status(philo, "is thinking");
 	else if (action == T_FORK)
 		print_status(philo, "has taking fork");
+	return(0);
 }
