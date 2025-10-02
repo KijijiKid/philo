@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 14:16:03 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 14:58:23 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,20 @@ static bool	is_alive(t_philo *philo)
 	return (true);
 }
 
+static int	think_routine(t_philo *philo)
+{
+	is_alive(philo);
+}
+
 static int	eat_routine(t_philo *philo)
 {
+	is_alive(philo);
 	write_action(philo, EAT);
 }
 
 static int	sleep_routine(t_philo *philo)
 {
+	is_alive(philo);
 	write_action(philo, SLEEP);
 }
 
