@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/01 16:56:39 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 13:35:48 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,33 @@ typedef struct s_options
 typedef struct s_philo
 {
 	pthread_t		thread;
+	unsigned int	id;
+	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	*r_fork;
+	bool			alive;
+	pthread_mutex_t	meal_time_lock;
+	size_t			last_meal;
+	t_options		options; //Params passed via argv by user
+
+	//Shared MEMORY (ALL THREADS)
 	pthread_mutex_t	*sync_lock_ptr;
 	bool			*sync_flag_ptr;
+	pthread_mutex_t	*write_lock_ptr;
+	pthread_mutex_t	*run_lock_ptr;
+	bool			*run_flag_ptr;
 }	t_philo;
 
 typedef struct s_meta
 {
 	t_options	options;
+	t_philo		philo[200];
+	
+	//Mutexes with Flags
 	pthread_mutex_t	sync_lock;
 	bool			sync_flag;
-	t_philo		philo[200];
+	pthread_mutex_t	write_lock;
+	pthread_mutex_t	run_lock;
+	bool			run_flag;
 }	t_meta;
 
 typedef enum e_status
@@ -85,7 +102,7 @@ typedef enum e_action
 
 //Core
 void	*routine(void *data);
-int		init_forks(t_meta *meta);
+int		init_threads(t_meta *meta);
 void	philo_hold(t_philo *philo);
 void	philo_start(t_meta *meta);
 void	init_monitor(t_meta *meta);
@@ -95,9 +112,11 @@ int		ft_atoi(const char *str);
 size_t	get_curr_time(void);
 // char	*formated_time(void);
 int		input_parsing(int argc, char **argv, t_meta *philo_meta);
-// int		write_action(t_philo *philo, t_action action);
+int		write_action(t_philo *philo, t_action action);
 void 	ft_usleep(size_t ms);
 char	*ft_ltoa(long n);
+void	init_philo(t_meta *meta, t_philo *philo, unsigned int id);
+void	init_meta(t_meta *meta);
 
 //Error
 int		throw_error(t_status status);
