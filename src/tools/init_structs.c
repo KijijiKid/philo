@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:47:02 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 15:26:32 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 15:43:07 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init_philo(t_meta *meta, t_philo *philo, unsigned int id)
 	philo->id = id;
 	philo->meal_count = 0;
 	philo->alive = true;
-
+	fill_options(meta, philo);
 	//Fork Assigning
 	assign_forks(meta, philo);
 	//Shared 
@@ -57,5 +57,6 @@ void	init_meta(t_meta *meta)
 	meta->sync_flag = false;
 	meta->run_flag = true;
 	meta->options.start_time = get_curr_time();
+	create_meta_locks(meta);
 	create_total_forks(meta);
 }

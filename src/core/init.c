@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:08:57 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 13:28:26 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 15:39:14 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	init_threads(t_meta *meta)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
 	init_meta(meta);
@@ -29,4 +29,5 @@ int	init_threads(t_meta *meta)
 		i++;
 	}
 	philo_start(meta);
+	return (0);
 }

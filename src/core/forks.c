@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 13:48:36 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 14:20:37 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 15:41:46 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /// total forks array
 int	clean_total_forks(t_meta *meta)
 {
-	int i;
+	unsigned int	i;
 
 	i = 0;
 	while (i < meta->options.p_num)
@@ -25,6 +25,7 @@ int	clean_total_forks(t_meta *meta)
 			return (throw_error(DSTRY_MUTEX_FAILED));
 		i++;
 	}
+	return (0);
 }
 
 
@@ -42,7 +43,7 @@ void	assign_forks(t_meta *meta, t_philo *philo)
 /// Assigning to l/r happens later
 int	create_total_forks(t_meta *meta)
 {
-	int i;
+	unsigned int	i;
 
 	i = 0;
 	while (i < meta->options.p_num)
@@ -51,4 +52,5 @@ int	create_total_forks(t_meta *meta)
 			return (throw_error(INIT_MUTEX_FAILED));
 		i++;
 	}
+	return (0);
 }

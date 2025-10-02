@@ -6,21 +6,11 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:47:10 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/01 16:07:17 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 15:43:51 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-static int	ft_strlen(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
 
 static int	write_input(char *msg1, char *msg2)
 {

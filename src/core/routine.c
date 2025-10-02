@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 15:22:25 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 15:41:07 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	think_routine(t_philo *philo)
 {
 	is_alive(philo);
+	return (0);
 }
 
 static int	eat_routine(t_philo *philo)
@@ -38,6 +39,8 @@ static int	eat_routine(t_philo *philo)
 	set_time_count(philo);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
+	think_routine(philo);
+	return (0);
 }
 
 static int	sleep_routine(t_philo *philo)
@@ -46,7 +49,8 @@ static int	sleep_routine(t_philo *philo)
 	write_action(philo, SLEEP);
 	ft_usleep(philo->options.p_tts);
 	//Calling think to inividually calculate 
-	//thinking time	
+	//thinking time
+	return (0);
 }
 
 void	*routine(void *data)
@@ -66,4 +70,5 @@ void	*routine(void *data)
 		eat_routine(philo);
 		sleep_routine(philo);
 	}
+	return (NULL);
 }
