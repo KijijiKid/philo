@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:55:45 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 17:39:51 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 17:45:34 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,4 @@ void	init_monitor(t_meta *meta)
 	pthread_mutex_lock(&meta->run_lock);
 	meta->run_flag =  false;
 	pthread_mutex_unlock(&meta->run_lock);
-	write(1, "DEAD\n", 5);
 }
