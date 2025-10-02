@@ -20,7 +20,7 @@ ERR_DIR		:= error/
 
 
 CORE_FILES	:= $(addprefix $(CORE_DIR), $(addsuffix .c, init sync routine monitor)) 
-TOOL_FILES	:= $(addprefix $(TOOL_DIR), $(addsuffix .c, parsing type_converters time)) #time type_converters parsing init_structs destroy_mutexes output
+TOOL_FILES	:= $(addprefix $(TOOL_DIR), $(addsuffix .c, parsing type_converters time init_structs output)) #time type_converters parsing init_structs destroy_mutexes output
 ERR_FILES	:= $(addprefix $(ERR_DIR), $(addsuffix .c, error)) 
 
 
