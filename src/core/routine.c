@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 15:46:14 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 16:18:56 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	think_routine(t_philo *philo)
 
 static int	eat_routine(t_philo *philo)
 {
-	if (is_alive(philo))
+	if (!is_alive(philo))
 		return (1);
 	if (philo->id % 2)
 	{
@@ -45,7 +45,8 @@ static int	eat_routine(t_philo *philo)
 
 static int	sleep_routine(t_philo *philo)
 {
-	is_alive(philo);
+	if (!is_alive(philo))
+		return (1);
 	write_action(philo, SLEEP);
 	ft_usleep(philo->options.p_tts);
 	//Calling think to inividually calculate 
@@ -60,6 +61,7 @@ void	*routine(void *data)
 
 	philo = (t_philo *)data;
 	philo_hold(philo);
+	set_first_meal_time(philo);
 	while (1)
 	{
 		pthread_mutex_lock(philo->run_lock_ptr);
@@ -69,7 +71,6 @@ void	*routine(void *data)
 			break ;
 		eat_routine(philo);
 		sleep_routine(philo);
-		ft_usleep(99999);
 	}
 	return (NULL);
 }

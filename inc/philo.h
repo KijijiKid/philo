@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 15:52:09 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 16:10:37 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int		clean_total_forks(t_meta *meta);
 void	clean_res(t_meta *meta);
 void	set_time_count(t_philo *philo);
 bool	is_alive(t_philo *philo);
+void	set_first_meal_time(t_philo *philo);
 
 //Tools
 int		ft_atoi(const char *str);

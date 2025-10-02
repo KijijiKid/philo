@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:55:45 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 15:57:00 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 16:17:06 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static bool	check_dead_flag(t_meta *meta)
 	while (i < meta->options.p_num)
 	{
 		pthread_mutex_lock(&meta->philo[i].alive_lock_ptr);
-		alive = meta->philo[i].alive;
+		alive = (meta->philo[i]).alive;
 		pthread_mutex_unlock(&meta->philo[i].alive_lock_ptr);
 		if (!alive)
 			return (true);		
