@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:09:24 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 19:13:22 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 20:18:41 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,5 @@ void	philo_hold(t_philo *philo)
 		pthread_mutex_unlock(philo->sync_lock_ptr);
 		if (start)
 			break ;
-		ft_usleep(1000);
 	}
 }
