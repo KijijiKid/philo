@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 16:18:56 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 16:19:47 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ static int	sleep_routine(t_philo *philo)
 		return (1);
 	write_action(philo, SLEEP);
 	ft_usleep(philo->options.p_tts);
-	//Calling think to inividually calculate 
-	//thinking time
 	return (0);
 }
 
