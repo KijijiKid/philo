@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:55:45 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 19:07:09 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 19:09:34 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static bool	check_if_fed_up(t_meta *meta)
 	unsigned int	meal_count;
 	bool			all_ate_enough;
 
-	// Diable eating terminator argc[5] isn't provieded
 	if (meta->options.p_mec == 0)
 		return (false);
 	i = 0;
@@ -52,10 +51,10 @@ static bool	check_dead_flag(t_meta *meta)
 		if (!alive)
 		{
 			pthread_mutex_lock(&meta->write_lock);
-			printf("%ld %d died\n", get_curr_time() - meta->options.start_time, 
-					meta->philo[i].id);
+			printf("%ld %d died\n", get_curr_time() - meta->options.start_time,
+				meta->philo[i].id);
 			pthread_mutex_unlock(&meta->write_lock);
-			return (true);		
+			return (true);
 		}
 		i++;
 	}
@@ -72,6 +71,6 @@ void	init_monitor(t_meta *meta)
 			break ;
 	}
 	pthread_mutex_lock(&meta->run_lock);
-	meta->run_flag =  false;
+	meta->run_flag = false;
 	pthread_mutex_unlock(&meta->run_lock);
 }

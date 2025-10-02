@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 13:48:36 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 19:01:21 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 19:13:53 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	clean_total_forks(t_meta *meta)
 	}
 	return (0);
 }
-
 
 void	assign_forks(t_meta *meta, t_philo *philo)
 {

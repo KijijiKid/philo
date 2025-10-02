@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 15:09:23 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 17:42:19 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 19:10:12 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@ void	set_time_count(t_philo *philo)
 bool	is_alive(t_philo *philo)
 {
 	size_t	last_meal;
+	size_t	n;
+	size_t	sol;
 
 	pthread_mutex_lock(&philo->meal_time_lock);
 	last_meal = philo->last_meal;
 	pthread_mutex_unlock(&philo->meal_time_lock);
-	size_t n = get_curr_time();
-	size_t sol = n - last_meal;
+	n = get_curr_time();
+	sol = n - last_meal;
 	if (philo->options.p_ttd <= sol)
 	{
 		pthread_mutex_lock(&philo->alive_lock_ptr);

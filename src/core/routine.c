@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 17:47:52 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 19:11:15 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static int	think_routine(t_philo *philo)
 	if (!is_alive(philo))
 		return (1);
 	pthread_mutex_lock(&philo->meal_time_lock);
-	time_to_think = (philo->options.p_ttd - (get_curr_time() - philo->last_meal)) / 2;
+	time_to_think = (philo->options.p_ttd - (get_curr_time()
+				- philo->last_meal)) / 2;
 	pthread_mutex_unlock(&philo->meal_time_lock);
 	write_action(philo, THINK);
 	ft_usleep(time_to_think);
 	return (0);
 }
-
 
 static int	eat_routine(t_philo *philo)
 {
@@ -46,17 +46,8 @@ static int	eat_routine(t_philo *philo)
 	write_action(philo, EAT);
 	set_time_count(philo);
 	ft_usleep(philo->options.p_tte);
-	// if (philo->id % 2)
-	// {
-	// 	pthread_mutex_unlock(philo->l_fork);
-	// 	pthread_mutex_unlock(philo->r_fork);
-	// }
-	// else
-	// {
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
-	// }
-	// return (think_routine(philo));
 	return (0);
 }
 

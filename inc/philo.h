@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 16:10:37 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 19:14:15 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ typedef struct s_philo
 	size_t			last_meal;
 	pthread_mutex_t	meal_count_lock;
 	unsigned int	meal_count;
-	t_options		options; //Params passed via argv by user
-
-	//Shared MEMORY (ALL THREADS)
+	t_options		options;
 	pthread_mutex_t	*sync_lock_ptr;
 	bool			*sync_flag_ptr;
 	pthread_mutex_t	*write_lock_ptr;
@@ -77,8 +75,6 @@ typedef struct s_meta
 	t_options			options;
 	t_philo				philo[200];
 	pthread_mutex_t		total_forks[200];
-	
-	//Mutexes with Flags
 	pthread_mutex_t		sync_lock;
 	bool				sync_flag;
 	pthread_mutex_t		write_lock;
@@ -124,7 +120,7 @@ size_t	get_curr_time(void);
 // char	*formated_time(void);
 int		input_parsing(int argc, char **argv, t_meta *philo_meta);
 int		write_action(t_philo *philo, t_action action);
-void 	ft_usleep(size_t ms);
+void	ft_usleep(size_t ms);
 char	*ft_ltoa(long n);
 void	init_philo(t_meta *meta, t_philo *philo, unsigned int id);
 void	init_meta(t_meta *meta);
