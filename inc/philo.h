@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 13:35:48 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 14:03:19 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,16 @@ typedef struct s_philo
 
 typedef struct s_meta
 {
-	t_options	options;
-	t_philo		philo[200];
+	t_options			options;
+	t_philo				philo[200];
+	pthread_mutex_t		total_forks[200];
 	
 	//Mutexes with Flags
-	pthread_mutex_t	sync_lock;
-	bool			sync_flag;
-	pthread_mutex_t	write_lock;
-	pthread_mutex_t	run_lock;
-	bool			run_flag;
+	pthread_mutex_t		sync_lock;
+	bool				sync_flag;
+	pthread_mutex_t		write_lock;
+	pthread_mutex_t		run_lock;
+	bool				run_flag;
 }	t_meta;
 
 typedef enum e_status
@@ -106,6 +107,8 @@ int		init_threads(t_meta *meta);
 void	philo_hold(t_philo *philo);
 void	philo_start(t_meta *meta);
 void	init_monitor(t_meta *meta);
+void	assign_forks(t_meta *meta, t_philo *philo);
+int		creat_total_forks(t_meta *meta);
 
 //Tools
 int		ft_atoi(const char *str);

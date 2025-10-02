@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:55:45 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 13:45:59 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 13:47:22 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 void	init_monitor(t_meta *meta)
 {
-
-	int i = 0;
-	while (i < 5)
+	while (1)
 	{
-		i++;
-		sleep(1);
+	
 	}
 	pthread_mutex_lock(&meta->run_lock);
 	meta->run_flag =  false;
