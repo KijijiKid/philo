@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 15:09:23 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 17:12:09 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 17:42:19 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	set_time_count(t_philo *philo)
 	philo->last_meal = get_curr_time();
 	pthread_mutex_unlock(&philo->meal_time_lock);
 	pthread_mutex_lock(&philo->meal_count_lock);
-	philo->meal_count =+ 1;
+	philo->meal_count += 1;
 	pthread_mutex_unlock(&philo->meal_count_lock);
 }
 
@@ -32,10 +32,8 @@ bool	is_alive(t_philo *philo)
 	pthread_mutex_lock(&philo->meal_time_lock);
 	last_meal = philo->last_meal;
 	pthread_mutex_unlock(&philo->meal_time_lock);
-	// usleep(10000);
 	size_t n = get_curr_time();
 	size_t sol = n - last_meal;
-	// printf("Death: %ld \n", sol);
 	if (philo->options.p_ttd <= sol)
 	{
 		pthread_mutex_lock(&philo->alive_lock_ptr);
