@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:29:09 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/30 11:37:23 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 17:26:57 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ size_t	get_curr_time(void)
 /// @return 
 void ft_usleep(size_t ms)
 {
-	int start;
+	size_t start;
 	
 	start = get_curr_time();
-	while (get_curr_time() - start < ms)
+	while ((get_curr_time() - start) < ms)
 		usleep(500);
 }
 
