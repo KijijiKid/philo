@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 20:23:07 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 20:43:05 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,11 @@ void	*routine(void *data)
 			break ;
 		if (eat_routine(philo))
 			break ;
-		if (sleep_routine(philo))
-			break ;
+		pthread_mutex_lock(philo->run_lock_ptr);
+		run = *(philo->run_flag_ptr);
+		pthread_mutex_unlock(philo->run_lock_ptr);
+		if (run)
+			sleep_routine(philo);
 	}
 	return (NULL);
 }
