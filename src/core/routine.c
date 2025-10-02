@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 15:41:07 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 15:46:14 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	*routine(void *data)
 			break ;
 		eat_routine(philo);
 		sleep_routine(philo);
+		ft_usleep(99999);
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 15:09:23 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 15:17:50 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 15:51:55 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ bool	is_alive(t_philo *philo)
 	pthread_mutex_unlock(&philo->meal_time_lock);
 	if (get_curr_time() - last_meal)
 	{
+		pthread_mutex_lock(&philo->alive_lock_ptr);
 		philo->alive = false;
+		pthread_mutex_unlock(&philo->alive_lock_ptr);
 		return (false);
 	}
 	return (true);

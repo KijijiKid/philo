@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:47:02 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 15:43:07 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 15:50:03 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	init_philo(t_meta *meta, t_philo *philo, unsigned int id)
 	//Inits mutexes
 	pthread_mutex_init(&philo->meal_count_lock, NULL);
 	pthread_mutex_init(&philo->meal_time_lock, NULL);
+	pthread_mutex_init(&philo->alive_lock_ptr, NULL);
 }
 
 /// @brief Initializes the locks in the
