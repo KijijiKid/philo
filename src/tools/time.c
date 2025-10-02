@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:29:09 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 17:26:57 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 19:13:07 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@
 /// of the seconds 
 size_t	get_curr_time(void)
 {
-	struct timeval time;
+	struct timeval	time;
 
 	if (gettimeofday(&time, NULL) == -1)
 		write(2, "Schaise\n", 8);
-	return((time.tv_sec * 1000) + (time.tv_usec / 1000));
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
 /// @brief Just a more accurate usleep fucntion
 /// @param ms Milliseconds to sleep
 /// @return 
-void ft_usleep(size_t ms)
+void	ft_usleep(size_t ms)
 {
-	size_t start;
-	
+	size_t	start;
+
 	start = get_curr_time();
 	while ((get_curr_time() - start) < ms)
 		usleep(500);
@@ -62,7 +62,6 @@ void ft_usleep(size_t ms)
 // 	unsigned int	sec;
 // 	unsigned int	ms;
 // 	unsigned int	pos;
-	
 // 	if (gettimeofday(&time, NULL) == -1)
 // 		throw_error(GET_TIME_FAILED);
 // 	seconds_in_day = time.tv_sec % 86400;

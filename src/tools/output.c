@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:01:19 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 17:43:13 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 19:12:26 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	write_action(t_philo *philo, t_action action)
 {
 	if (action == SLEEP)
 		print_status(philo, "is sleeping");
-	else if(action == EAT)
+	else if (action == EAT)
 		print_status(philo, "is eating");
 	else if (action == THINK)
 		print_status(philo, "is thinking");
 	else if (action == T_FORK)
 		print_status(philo, "has taking fork");
-	return(0);
+	return (0);
 }
