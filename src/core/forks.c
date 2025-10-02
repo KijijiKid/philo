@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 13:48:36 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 19:13:53 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 19:52:21 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ int	clean_total_forks(t_meta *meta)
 	while (i < meta->options.p_num)
 	{
 		if (pthread_mutex_destroy(&meta->total_forks[i]) != 0)
+			return (throw_error(DSTRY_MUTEX_FAILED));
+		if (pthread_mutex_destroy(&meta->philo[i].meal_count_lock) != 0)
+			return (throw_error(DSTRY_MUTEX_FAILED));
+		if (pthread_mutex_destroy(&meta->philo[i].meal_time_lock) != 0)
 			return (throw_error(DSTRY_MUTEX_FAILED));
 		i++;
 	}

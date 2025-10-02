@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 19:14:15 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 19:55:42 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_philo
 	unsigned int	id;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	alive_lock_ptr;
+	pthread_mutex_t	alive_lock;
 	bool			alive;
 	pthread_mutex_t	meal_time_lock;
 	size_t			last_meal;
@@ -122,7 +122,7 @@ int		input_parsing(int argc, char **argv, t_meta *philo_meta);
 int		write_action(t_philo *philo, t_action action);
 void	ft_usleep(size_t ms);
 char	*ft_ltoa(long n);
-void	init_philo(t_meta *meta, t_philo *philo, unsigned int id);
+int		init_philo(t_meta *meta, t_philo *philo, unsigned int id);
 void	init_meta(t_meta *meta);
 
 //Error
