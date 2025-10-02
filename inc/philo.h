@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 14:56:55 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/02 15:13:33 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ typedef struct s_philo
 	bool			alive;
 	pthread_mutex_t	meal_time_lock;
 	size_t			last_meal;
+	pthread_mutex_t	meal_count_lock;
+	unsigned int	meal_count;
 	t_options		options; //Params passed via argv by user
 
 	//Shared MEMORY (ALL THREADS)
@@ -111,6 +113,8 @@ void	assign_forks(t_meta *meta, t_philo *philo);
 int		create_total_forks(t_meta *meta);
 int		clean_total_forks(t_meta *meta);
 void	clean_res(t_meta *meta);
+void	set_time_count(t_philo *philo);
+bool	is_alive(t_philo *philo);
 
 //Tools
 int		ft_atoi(const char *str);
