@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:08:57 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/03 17:52:44 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/03 18:32:05 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	init_threads(t_meta *meta)
 			throw_error(THREAD_CREATION_FAILED);
 		i++;
 	}
+	meta->start_time = get_curr_time();
 	philo_start(meta);
 	return (0);
 }
