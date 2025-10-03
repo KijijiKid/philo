@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:55:45 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/03 16:10:27 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/03 18:53:02 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ static bool	check_dead_flag(t_meta *meta)
 			meta->run_flag = false;
 			pthread_mutex_unlock(&meta->run_lock);
 			pthread_mutex_lock(&meta->write_lock);
-			printf("%ld %d died\n", get_curr_time() - meta->options.start_time,
-				meta->philo[i].id);
+			printf("%ld %d died\n", get_curr_time()
+				- meta->start_time, meta->philo[i].id + 1);
 			pthread_mutex_unlock(&meta->write_lock);
 			return (true);
 		}

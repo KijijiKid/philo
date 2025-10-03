@@ -6,35 +6,46 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/03 16:34:41 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/03 19:34:57 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	think_routine(t_philo *philo)
+void	sim_start_delay(size_t start_time)
+{
+	while (get_curr_time() < start_time)
+		continue ;
+}
+
+static int	think_routine(t_philo *philo, bool write)
 {
 	long	time_to_think;
+	bool	write_flag;
 
 	if (!is_alive(philo))
 		return (1);
+	write_flag = write;
 	pthread_mutex_lock(&philo->meal_time_lock);
 	time_to_think = (philo->options.p_ttd
 			- (get_curr_time() - philo->last_meal)
-			- philo->options.p_tte) / 4;
+			- philo->options.p_tte) / 2;
 	pthread_mutex_unlock(&philo->meal_time_lock);
 	if (time_to_think < 0)
+	{
 		time_to_think = 0;
+		write_flag = false;
+	}
 	if (time_to_think == 0)
 		time_to_think = 1;
 	if (time_to_think > 600)
 		time_to_think = 200;
-	write_action(philo, THINK);
+	write_action(philo, THINK, write_flag);
 	ft_usleep(time_to_think);
 	return (0);
 }
 
-static int	eat_routine(t_philo *philo)
+static int	eat_routine(t_philo *philo, bool write)
 {
 	if (!is_alive(philo))
 		return (1);
@@ -48,23 +59,23 @@ static int	eat_routine(t_philo *philo)
 		pthread_mutex_lock(philo->r_fork);
 		pthread_mutex_lock(philo->l_fork);
 	}
-	write_action(philo, T_FORK);
-	write_action(philo, T_FORK);
-	write_action(philo, EAT);
-	set_time_count(philo);
+	write_action(philo, T_FORK, write);
+	write_action(philo, T_FORK, write);
+	write_action(philo, EAT, write);
 	ft_usleep(philo->options.p_tte);
+	set_time_count(philo);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
-	think_routine(philo);
 	return (0);
 }
 
-static int	sleep_routine(t_philo *philo)
+static int	sleep_routine(t_philo *philo, bool write)
 {
 	if (!is_alive(philo))
 		return (1);
-	write_action(philo, SLEEP);
+	write_action(philo, SLEEP, write);
 	ft_usleep(philo->options.p_tts);
+	think_routine(philo, write);
 	return (0);
 }
 
@@ -72,12 +83,15 @@ void	*routine(void *data)
 {
 	t_philo	*philo;
 	bool	run;
+	bool	write;
 
 	philo = (t_philo *)data;
 	philo_hold(philo);
 	set_first_meal_time(philo);
 	if (philo->id % 2)
-		think_routine(philo);
+		think_routine(philo, false);
+	write = true;
+	sim_start_delay(*philo->options.start_time);
 	while (1)
 	{
 		pthread_mutex_lock(philo->run_lock_ptr);
@@ -85,13 +99,9 @@ void	*routine(void *data)
 		pthread_mutex_unlock(philo->run_lock_ptr);
 		if (!run || !philo->alive)
 			break ;
-		if (eat_routine(philo))
-			break ;
-		pthread_mutex_lock(philo->run_lock_ptr);
-		run = *(philo->run_flag_ptr);
-		pthread_mutex_unlock(philo->run_lock_ptr);
-		if (run)
-			sleep_routine(philo);
+		if (eat_routine(philo, true))
+			write = false;
+		sleep_routine(philo, write);
 	}
 	return (NULL);
 }

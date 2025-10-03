@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/03 17:55:05 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/03 18:46:58 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_options
 	size_t			p_tte;
 	size_t			p_tts;
 	unsigned int	p_mec;
-	size_t			start_time;
+	size_t			*start_time;
 }	t_options;
 
 typedef struct s_philo
@@ -80,6 +80,7 @@ typedef struct s_meta
 	pthread_mutex_t		write_lock;
 	pthread_mutex_t		run_lock;
 	bool				run_flag;
+	size_t				start_time;
 }	t_meta;
 
 typedef enum e_status
@@ -118,7 +119,7 @@ void	set_first_meal_time(t_philo *philo);
 int		ft_atoi(const char *str);
 size_t	get_curr_time(void);
 int		input_parsing(int argc, char **argv, t_meta *philo_meta);
-int		write_action(t_philo *philo, t_action action);
+int		write_action(t_philo *philo, t_action action, bool visible);
 void	ft_usleep(size_t ms);
 char	*ft_ltoa(long n);
 int		init_philo(t_meta *meta, t_philo *philo, unsigned int id);

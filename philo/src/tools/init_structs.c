@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:47:02 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 20:00:09 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/03 18:35:09 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	fill_options(t_meta *meta, t_philo *philo)
 	philo->options.p_tte = meta->options.p_tte;
 	philo->options.p_tts = meta->options.p_tts;
 	philo->options.p_mec = meta->options.p_mec;
-	philo->options.start_time = meta->options.start_time;
+	philo->options.start_time = &meta->start_time;
 }
 
 int	init_philo(t_meta *meta, t_philo *philo, unsigned int id)
@@ -62,7 +62,7 @@ void	init_meta(t_meta *meta)
 {
 	meta->sync_flag = false;
 	meta->run_flag = true;
-	meta->options.start_time = get_curr_time();
+	meta->options.start_time = 0;
 	create_meta_locks(meta);
 	create_total_forks(meta);
 }
