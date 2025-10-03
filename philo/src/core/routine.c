@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 20:43:05 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/03 16:34:41 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,16 @@ static int	think_routine(t_philo *philo)
 	if (!is_alive(philo))
 		return (1);
 	pthread_mutex_lock(&philo->meal_time_lock);
-	time_to_think = (philo->options.p_ttd - (get_curr_time()
-				- philo->last_meal)) / 2;
+	time_to_think = (philo->options.p_ttd
+			- (get_curr_time() - philo->last_meal)
+			- philo->options.p_tte) / 4;
 	pthread_mutex_unlock(&philo->meal_time_lock);
+	if (time_to_think < 0)
+		time_to_think = 0;
+	if (time_to_think == 0)
+		time_to_think = 1;
+	if (time_to_think > 600)
+		time_to_think = 200;
 	write_action(philo, THINK);
 	ft_usleep(time_to_think);
 	return (0);
@@ -48,6 +55,7 @@ static int	eat_routine(t_philo *philo)
 	ft_usleep(philo->options.p_tte);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
+	think_routine(philo);
 	return (0);
 }
 
@@ -57,7 +65,7 @@ static int	sleep_routine(t_philo *philo)
 		return (1);
 	write_action(philo, SLEEP);
 	ft_usleep(philo->options.p_tts);
-	return (think_routine(philo));
+	return (0);
 }
 
 void	*routine(void *data)

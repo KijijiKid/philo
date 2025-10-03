@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:55:45 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 20:46:18 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/03 16:10:27 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static bool	check_dead_flag(t_meta *meta)
 	return (false);
 }
 
-void	init_monitor(t_meta *meta)
+int	init_monitor(t_meta *meta)
 {
 	while (1)
 	{
@@ -76,4 +76,5 @@ void	init_monitor(t_meta *meta)
 	pthread_mutex_lock(&meta->run_lock);
 	meta->run_flag = false;
 	pthread_mutex_unlock(&meta->run_lock);
+	return (0);
 }

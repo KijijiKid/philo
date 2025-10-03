@@ -42,12 +42,12 @@ all: $(NAME)
 
 #Compile executable including every .o file
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -Iinclude -I$(INC_FILES) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -I$(INC_FILES) -o $(NAME)
 
 #Rule to compile all .o files
 $(OBJS_DIR)%.o: %.c | $(OBJS_DIR)
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) -I $(INC_FILES) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(INC_FILES) -c $< -o $@
 
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)

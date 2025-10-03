@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:03 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 19:14:32 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/03 16:30:38 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ int	main(int argc, char **argv)
 			return (throw_error(WRONG_INPUT));
 		else
 		{
-			init_threads(&meta);
-			init_monitor(&meta);
-			clean_res(&meta);
+			if (init_threads(&meta) != 0)
+				return (1);
+			if (init_monitor(&meta) != 0)
+				return (2);
+			if (clean_res(&meta) != 0)
+				return (3);
 		}
 	}
 	else

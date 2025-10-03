@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:21:51 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 20:41:25 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/03 16:40:19 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ static int	clean_meta_locks(t_meta *meta)
 
 /// @brief Waits one second and than begins
 /// cleaning up all resources 
-void	clean_res(t_meta *meta)
+int	clean_res(t_meta *meta)
 {
-	ft_usleep(1000);
+	// ft_usleep(3000);
 	clean_total_forks(meta);
 	clean_meta_locks(meta);
+	return (0);
 }
