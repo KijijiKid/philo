@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/02 19:55:42 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/03 16:30:34 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,11 @@ void	*routine(void *data);
 int		init_threads(t_meta *meta);
 void	philo_hold(t_philo *philo);
 void	philo_start(t_meta *meta);
-void	init_monitor(t_meta *meta);
+int		init_monitor(t_meta *meta);
 void	assign_forks(t_meta *meta, t_philo *philo);
 int		create_total_forks(t_meta *meta);
 int		clean_total_forks(t_meta *meta);
-void	clean_res(t_meta *meta);
+int		clean_res(t_meta *meta);
 void	set_time_count(t_philo *philo);
 bool	is_alive(t_philo *philo);
 void	set_first_meal_time(t_philo *philo);
@@ -117,7 +117,6 @@ void	set_first_meal_time(t_philo *philo);
 //Tools
 int		ft_atoi(const char *str);
 size_t	get_curr_time(void);
-// char	*formated_time(void);
 int		input_parsing(int argc, char **argv, t_meta *philo_meta);
 int		write_action(t_philo *philo, t_action action);
 void	ft_usleep(size_t ms);
