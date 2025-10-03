@@ -6,38 +6,29 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/03 19:34:57 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/03 19:57:17 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	sim_start_delay(size_t start_time)
-{
-	while (get_curr_time() < start_time)
-		continue ;
-}
-
 static int	think_routine(t_philo *philo, bool write)
 {
 	long	time_to_think;
+	long	last_meal;
 	bool	write_flag;
 
-	if (!is_alive(philo))
-		return (1);
 	write_flag = write;
 	pthread_mutex_lock(&philo->meal_time_lock);
-	time_to_think = (philo->options.p_ttd
-			- (get_curr_time() - philo->last_meal)
-			- philo->options.p_tte) / 2;
+	last_meal = philo->last_meal;
 	pthread_mutex_unlock(&philo->meal_time_lock);
+	time_to_think = (philo->options.p_ttd
+			- (get_curr_time() - last_meal)
+			- philo->options.p_tte) / 2;
 	if (time_to_think < 0)
-	{
-		time_to_think = 0;
-		write_flag = false;
-	}
+		return (0);
 	if (time_to_think == 0)
-		time_to_think = 1;
+		return (0);
 	if (time_to_think > 600)
 		time_to_think = 200;
 	write_action(philo, THINK, write_flag);
@@ -91,7 +82,6 @@ void	*routine(void *data)
 	if (philo->id % 2)
 		think_routine(philo, false);
 	write = true;
-	sim_start_delay(*philo->options.start_time);
 	while (1)
 	{
 		pthread_mutex_lock(philo->run_lock_ptr);
