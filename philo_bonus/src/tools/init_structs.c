@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:47:02 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/04 19:24:10 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/04 19:39:22 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ void	init_meta(t_meta *meta)
 	meta->sync_flag = false;
 	meta->run_flag = true;
 	meta->options.start_time = 0;
+	meta->forks = sem_open("forks", O_CREAT);
 	create_meta_locks(meta);
-	create_total_forks(meta);
 }
