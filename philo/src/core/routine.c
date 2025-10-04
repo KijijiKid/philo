@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/03 19:57:17 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/04 13:08:50 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	*routine(void *data)
 	philo_hold(philo);
 	set_first_meal_time(philo);
 	if (philo->id % 2)
-		think_routine(philo, false);
+		sleep_routine(philo, false);
 	write = true;
 	while (1)
 	{
