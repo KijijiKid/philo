@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 13:48:36 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/03 16:19:38 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/04 19:26:35 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,17 @@ int	clean_total_forks(t_meta *meta)
 	i = 0;
 	while (i < meta->options.p_num)
 	{
-		if (pthread_mutex_destroy(&meta->total_forks[i]) != 0)
-			return (throw_error(DSTRY_MUTEX_FAILED));
-		if (pthread_mutex_destroy(&meta->philo[i].meal_count_lock) != 0)
-			return (throw_error(DSTRY_MUTEX_FAILED));
-		if (pthread_mutex_destroy(&meta->philo[i].meal_time_lock) != 0)
-			return (throw_error(DSTRY_MUTEX_FAILED));
-		if (pthread_mutex_destroy(&meta->philo[i].alive_lock) != 0)
-			return (throw_error(DSTRY_MUTEX_FAILED));
+		// if (pthread_mutex_destroy(&meta->total_forks[i]) != 0)
+		// 	return (throw_error(DSTRY_MUTEX_FAILED));
+		if (sem_close(&meta->philo[i].meal_count_lock) != 0)
+			return (throw_error(SEM_CLOSE_FAILED));
+		if (sem_close(&meta->philo[i].meal_time_lock) != 0)
+			return (throw_error(SEM_CLOSE_FAILED));
+		if (sem_close(&meta->philo[i].alive_lock) != 0)
+			return (throw_error(SEM_CLOSE_FAILED));
 		i++;
 	}
 	return (0);
-}
-
-void	assign_forks(t_meta *meta, t_philo *philo)
-{
-	philo->r_fork = &meta->total_forks[philo->id];
-	if (philo->id == 0)
-		philo->l_fork = &meta->total_forks[philo->options.p_num];
-	else
-		philo->l_fork = &meta->total_forks[philo->id - 1];
 }
 
 /// @brief Creates the total forks/mutex array 
