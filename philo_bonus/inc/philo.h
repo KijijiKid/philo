@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/04 14:29:43 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/04 18:02:38 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <stdbool.h>
+# include <fcntl.h>
+# include <sys/stat.h>
+# include <semaphore.h>
 
 //Time magic number UTC to ETC (hours
 # define TIME_ZONE_OFFSET 2
@@ -54,19 +57,19 @@ typedef struct s_philo
 {
 	pthread_t		thread;
 	unsigned int	id;
-	pthread_mutex_t	*l_fork;
-	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	alive_lock;
+	sem_t			*l_fork;
+	sem_t			*r_fork;
+	sem_t			alive_lock;
 	bool			alive;
-	pthread_mutex_t	meal_time_lock;
+	sem_t			meal_time_lock;
 	size_t			last_meal;
-	pthread_mutex_t	meal_count_lock;
+	sem_t			meal_count_lock;
 	unsigned int	meal_count;
 	t_options		options;
-	pthread_mutex_t	*sync_lock_ptr;
+	sem_t			*sync_lock_ptr;
 	bool			*sync_flag_ptr;
-	pthread_mutex_t	*write_lock_ptr;
-	pthread_mutex_t	*run_lock_ptr;
+	sem_t			*write_lock_ptr;
+	sem_t			*run_lock_ptr;
 	bool			*run_flag_ptr;
 }	t_philo;
 
@@ -74,11 +77,11 @@ typedef struct s_meta
 {
 	t_options			options;
 	t_philo				philo[200];
-	pthread_mutex_t		total_forks[200];
-	pthread_mutex_t		sync_lock;
+	sem_t				total_forks[200];
+	sem_t				sync_lock;
 	bool				sync_flag;
-	pthread_mutex_t		write_lock;
-	pthread_mutex_t		run_lock;
+	sem_t				write_lock;
+	sem_t				run_lock;
 	bool				run_flag;
 	size_t				start_time;
 }	t_meta;
