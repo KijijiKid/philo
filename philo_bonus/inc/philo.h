@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/04 18:02:38 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/04 19:15:27 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ typedef struct s_philo
 {
 	pthread_t		thread;
 	unsigned int	id;
-	sem_t			*l_fork;
-	sem_t			*r_fork;
 	sem_t			alive_lock;
 	bool			alive;
 	sem_t			meal_time_lock;
@@ -77,11 +75,11 @@ typedef struct s_meta
 {
 	t_options			options;
 	t_philo				philo[200];
-	sem_t				total_forks[200];
-	sem_t				sync_lock;
+	sem_t				*forks;
+	sem_t				*sync_lock;
 	bool				sync_flag;
-	sem_t				write_lock;
-	sem_t				run_lock;
+	sem_t				*write_lock;
+	sem_t				*run_lock;
 	bool				run_flag;
 	size_t				start_time;
 }	t_meta;
@@ -91,8 +89,8 @@ typedef enum e_status
 	WRONG_INPUT = 1,
 	THREAD_CREATION_FAILED = 2,
 	THREAD_JOIN_FAILED = 3,
-	INIT_MUTEX_FAILED = 4,
-	DSTRY_MUTEX_FAILED = 5,
+	SEM_CREATION = 4,
+	SEM_CLOSE_FAILED = 5,
 	GET_TIME_FAILED = 6
 }	t_status;
 
