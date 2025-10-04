@@ -6,12 +6,16 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:41:14 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/03 17:06:35 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/04 16:47:12 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+/// @brief Returns -1 if str contains a 
+/// different character than numbers
+/// @param str 
+/// @return 
 int	ft_atoi(const char *str)
 {
 	int	i;
@@ -35,6 +39,8 @@ int	ft_atoi(const char *str)
 		number += str[i] - '0';
 		i++;
 	}
+	if (str[i] < '0' || '9' < str[i])
+		return (-1);
 	number *= multiply;
 	return (number);
 }
