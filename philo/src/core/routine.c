@@ -6,11 +6,20 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/04 13:08:50 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/04 14:16:45 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static int	sleep_routine(t_philo *philo, bool write)
+{
+	if (!is_alive(philo))
+		return (1);
+	write_action(philo, SLEEP, write);
+	ft_usleep(philo->options.p_tts);
+	return (0);
+}
 
 static int	think_routine(t_philo *philo, bool write)
 {
@@ -18,6 +27,8 @@ static int	think_routine(t_philo *philo, bool write)
 	long	last_meal;
 	bool	write_flag;
 
+	if (!is_alive(philo))
+		return (1);
 	write_flag = write;
 	pthread_mutex_lock(&philo->meal_time_lock);
 	last_meal = philo->last_meal;
@@ -57,16 +68,7 @@ static int	eat_routine(t_philo *philo, bool write)
 	set_time_count(philo);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
-	return (0);
-}
-
-static int	sleep_routine(t_philo *philo, bool write)
-{
-	if (!is_alive(philo))
-		return (1);
-	write_action(philo, SLEEP, write);
-	ft_usleep(philo->options.p_tts);
-	think_routine(philo, write);
+	sleep_routine(philo, write);
 	return (0);
 }
 
@@ -91,7 +93,7 @@ void	*routine(void *data)
 			break ;
 		if (eat_routine(philo, true))
 			write = false;
-		sleep_routine(philo, write);
+		think_routine(philo, write);
 	}
 	return (NULL);
 }
