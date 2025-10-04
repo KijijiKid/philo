@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/04 19:15:27 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/04 19:23:55 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ typedef struct s_philo
 {
 	pthread_t		thread;
 	unsigned int	id;
-	sem_t			alive_lock;
+	sem_t			*alive_lock;
 	bool			alive;
-	sem_t			meal_time_lock;
+	sem_t			*meal_time_lock;
 	size_t			last_meal;
-	sem_t			meal_count_lock;
+	sem_t			*meal_count_lock;
 	unsigned int	meal_count;
 	t_options		options;
 	sem_t			*sync_lock_ptr;
