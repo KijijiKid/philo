@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:21:51 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/03 18:16:27 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/05 18:46:17 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ static int	join_threads(t_meta	*meta)
 
 static int	clean_meta_locks(t_meta *meta)
 {
-	if (pthread_mutex_destroy(&meta->sync_lock))
-		return (throw_error(DSTRY_MUTEX_FAILED));
-	if (pthread_mutex_destroy(&meta->write_lock))
-		return (throw_error(DSTRY_MUTEX_FAILED));
-	if (pthread_mutex_destroy(&meta->run_lock))
-		return (throw_error(DSTRY_MUTEX_FAILED));
+	if (sem_close(meta->sync_lock))
+		return (throw_error(SEM_CLOSE_FAILED));
+	if (sem_close(meta->write_lock))
+		return (throw_error(SEM_CLOSE_FAILED));
+	if (sem_close(meta->run_lock))
+		return (throw_error(SEM_CLOSE_FAILED));
 	return (0);
 }
 
