@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:47:02 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/04 19:39:22 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/05 20:19:56 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,14 @@ int	init_philo(t_meta *meta, t_philo *philo, unsigned int id)
 	philo->meal_count = 0;
 	philo->alive = true;
 	fill_options(meta, philo);
-	assign_forks(meta, philo);
-	philo->sync_lock_ptr = &meta->sync_lock;
+	philo->sync_lock_ptr = meta->sync_lock;
 	philo->sync_flag_ptr = &meta->sync_flag;
-	philo->write_lock_ptr = &meta->write_lock;
-	philo->run_lock_ptr = &meta->run_lock;
+	philo->write_lock_ptr = meta->write_lock;
+	philo->run_lock_ptr = meta->run_lock;
 	philo->run_flag_ptr = &meta->run_flag;
-	philo->meal_count_lock = sem_open("meal_count_lock", O_CREAT);
-	philo->meal_time_lock = sem_open("meal_time_lock", O_CREAT);
-	philo->alive_lock = sem_open("alive_lock", O_CREAT);
+	philo->meal_count_lock = sem_open(set_local_sem_name("meal_count_lock", id), O_CREAT, S_IRUSR | S_IWUSR, 1);
+	philo->meal_time_lock = sem_open(set_local_sem_name("meal_time_lock", id), O_CREAT, S_IRUSR | S_IWUSR, 1);
+	philo->alive_lock = sem_open(set_local_sem_name("alive_lock", id), O_CREAT, S_IRUSR | S_IWUSR, 1);
 	if (philo->meal_count_lock == SEM_FAILED)
 		return (throw_error(SEM_CREATION));
 	if (philo->meal_time_lock == SEM_FAILED)
@@ -52,9 +51,9 @@ int	init_philo(t_meta *meta, t_philo *philo, unsigned int id)
 /// meta struct 
 static int	create_meta_locks(t_meta *meta)
 {
-	meta->sync_lock = sem_open("sync_lock", O_CREAT);
-	meta->write_lock = sem_open("write_lock", O_CREAT);
-	meta->run_lock = sem_open("run_lock", O_CREAT);
+	meta->sync_lock = sem_open("sync_lock", O_CREAT, S_IRUSR | S_IWUSR, 1);
+	meta->write_lock = sem_open("write_lock", O_CREAT, S_IRUSR | S_IWUSR, 1);
+	meta->run_lock = sem_open("run_lock", O_CREAT, S_IRUSR | S_IWUSR, 1);
 	if (meta->sync_lock == SEM_FAILED)
 		return (throw_error(SEM_CREATION));
 	if (meta->write_lock == SEM_FAILED)
@@ -69,6 +68,6 @@ void	init_meta(t_meta *meta)
 	meta->sync_flag = false;
 	meta->run_flag = true;
 	meta->options.start_time = 0;
-	meta->forks = sem_open("forks", O_CREAT);
+	meta->forks = sem_open("forks", O_CREAT, S_IRUSR | S_IWUSR, meta->options.p_num);
 	create_meta_locks(meta);
 }

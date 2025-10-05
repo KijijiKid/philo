@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:09:24 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/04 16:23:39 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/05 18:49:21 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 /// routine
 void	philo_start(t_meta *meta)
 {
-	pthread_mutex_lock(&meta->sync_lock);
+	sem_wait(meta->sync_lock);
 	meta->sync_flag = true;
-	pthread_mutex_unlock(&meta->sync_lock);
+	sem_post(meta->sync_lock);
 }
 
 /// @brief Holds each thread/philo in a while loop

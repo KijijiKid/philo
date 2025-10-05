@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:41:14 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/04 18:01:48 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/05 19:04:30 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_atoi(const char *str)
 		number += str[i] - '0';
 		i++;
 	}
-	if (str[i] < '0' || '9' < str[i])
+	if ((str[i] < '0' || '9' < str[i]) && str[i] != '\0')
 		return (-1);
 	number *= multiply;
 	return (number);

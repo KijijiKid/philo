@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/04 19:20:28 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/05 18:50:09 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static int	think_routine(t_philo *philo, bool write)
 	if (!is_alive(philo))
 		return (1);
 	write_flag = write;
-	pthread_mutex_lock(&philo->meal_time_lock);
+	sem_wait(philo->meal_time_lock);
 	last_meal = philo->last_meal;
-	pthread_mutex_unlock(&philo->meal_time_lock);
+	sem_post(philo->meal_time_lock);
 	time_to_think = (philo->options.p_ttd
 			- (get_curr_time() - last_meal)
 			- philo->options.p_tte) / 2;
@@ -74,9 +74,9 @@ void	*routine(void *data)
 	write = true;
 	while (1)
 	{
-		pthread_mutex_lock(philo->run_lock_ptr);
+		sem_wait(philo->run_lock_ptr);
 		run = *(philo->run_flag_ptr);
-		pthread_mutex_unlock(philo->run_lock_ptr);
+		sem_post(philo->run_lock_ptr);
 		if (!run || !philo->alive)
 			break ;
 		if (eat_routine(philo, true))
