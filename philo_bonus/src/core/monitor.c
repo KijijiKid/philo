@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:55:45 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 16:33:41 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 16:50:44 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ static bool	check_dead_flag(t_meta *meta)
 	i = 0;
 	while (i < meta->options.p_num)
 	{
-		sem_wait((meta->philo[i]).alive_lock);
 		alive = meta->philo[i].alive;
-		sem_post((meta->philo[i]).alive_lock);
 		if (!alive)
 		{
 			sem_wait(meta->run_lock);
@@ -69,15 +67,9 @@ int	init_monitor(t_meta *meta)
 	while (1)
 	{
 		if (check_dead_flag(meta))
-		{
-			printf("Opt1\n");	
 			break ;
-		}
-		if (check_if_fed_up(meta))
-		{
-			printf("Opt2\n");	
+		if (check_if_fed_up(meta))	
 			break ;
-		}
 	}
 	sem_wait(meta->run_lock);
 	meta->run_flag = false;

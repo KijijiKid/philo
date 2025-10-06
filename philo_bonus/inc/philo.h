@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 15:52:22 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 16:50:16 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ typedef struct s_philo
 	unsigned int			id;
 	atomic_uint				*fork_flag_ptr;
 	sem_t					*forks;
-	sem_t					*alive_lock;
-	bool					alive;
+	atomic_bool				alive;
 	sem_t					*meal_time_lock;
 	size_t					last_meal;
 	sem_t					*meal_count_lock;

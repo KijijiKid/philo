@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 15:09:23 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 16:05:51 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 16:51:07 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ bool	is_alive(t_philo *philo)
 	sol = get_curr_time() - last_meal;
 	if (philo->options.p_ttd <= sol)
 	{
-		sem_wait(philo->alive_lock);
 		philo->alive = false;
-		sem_post(philo->alive_lock);
 		return (false);
 	}
 	return (true);
