@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 16:50:16 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 16:58:33 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,9 @@ void		ft_usleep(size_t ms);
 char		*ft_ltoa(long n);
 int			init_philo(t_meta *meta, t_philo *philo, unsigned int id);
 void		init_meta(t_meta *meta);
-char	*set_local_sem_name(const char *str, unsigned int id);
+char		*set_local_sem_name(const char *str, unsigned int id);
 
 //Error
-int		throw_error(t_status status);
+int			throw_error(t_status status);
 
 #endif

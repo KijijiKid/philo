@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:47:02 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 16:51:34 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 16:57:24 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ int	init_philo(t_meta *meta, t_philo *philo, unsigned int id)
 	philo->run_flag_ptr = &meta->run_flag;
 	philo->forks = meta->forks;
 	philo->fork_flag_ptr = &meta->fork_flag;
-	philo->meal_count_lock = sem_open(set_local_sem_name("meal_count_lock", id), O_CREAT, 0666, 1);
-	philo->meal_time_lock = sem_open(set_local_sem_name("meal_time_lock", id), O_CREAT, 0666, 1);
+	philo->meal_count_lock = sem_open(set_local_sem_name("meal_count_lock",
+				id), O_CREAT, 0666, 1);
+	philo->meal_time_lock = sem_open(set_local_sem_name("meal_time_lock",
+				id), O_CREAT, 0666, 1);
 	if (philo->meal_count_lock == SEM_FAILED)
 		return (throw_error(SEM_CREATION));
 	if (philo->meal_time_lock == SEM_FAILED)
@@ -68,6 +70,7 @@ void	init_meta(t_meta *meta)
 	meta->run_flag = true;
 	meta->options.start_time = 0;
 	meta->fork_flag = 0;
-	meta->forks = sem_open("forks", O_CREAT, S_IRUSR | S_IWUSR, meta->options.p_num);
+	meta->forks = sem_open("forks", O_CREAT, S_IRUSR | S_IWUSR,
+			meta->options.p_num);
 	create_meta_locks(meta);
 }
