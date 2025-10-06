@@ -1,5 +1,5 @@
 # <==== Meta Data =====>
-NAME	:= philo
+NAME	:= philo_bonus
 CC		:= cc
 CFLAGS	:= -Wall -Werror -Wextra -pthread
 

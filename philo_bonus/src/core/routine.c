@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 12:45:52 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 12:59:36 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static int	eat_routine(t_philo *philo, bool write)
 {
 	if (!is_alive(philo))
 		return (1);
-	sem_wait(philo->forks);
-	sem_wait(philo->forks);
+	sem_trywait(philo->forks);
+	sem_trywait(philo->forks);
 	write_action(philo, T_FORK, write);
 	write_action(philo, T_FORK, write);
 	write_action(philo, EAT, write);
