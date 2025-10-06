@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:01:19 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 16:09:50 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 17:03:30 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	print_status(t_philo *philo, char *str)
 {
 	sem_wait(philo->write_lock_ptr);
-	printf("%ld %d %s %d\n", get_curr_time() - *(philo->options.start_time),
-		philo->id + 1, str, philo->meal_count);
+	printf("%ld %d %s\n", get_curr_time() - *(philo->options.start_time),
+		philo->id + 1, str);
 	sem_post(philo->write_lock_ptr);
 }
 
