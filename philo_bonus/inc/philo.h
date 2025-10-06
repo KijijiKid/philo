@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/05 20:02:30 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 12:44:59 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_philo
 {
 	pthread_t		thread;
 	unsigned int	id;
+	sem_t			*forks;
 	sem_t			*alive_lock;
 	bool			alive;
 	sem_t			*meal_time_lock;

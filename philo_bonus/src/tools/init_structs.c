@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:47:02 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/05 20:19:56 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 12:45:19 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	init_philo(t_meta *meta, t_philo *philo, unsigned int id)
 	philo->write_lock_ptr = meta->write_lock;
 	philo->run_lock_ptr = meta->run_lock;
 	philo->run_flag_ptr = &meta->run_flag;
+	philo->forks = meta->forks;
 	philo->meal_count_lock = sem_open(set_local_sem_name("meal_count_lock", id), O_CREAT, S_IRUSR | S_IWUSR, 1);
 	philo->meal_time_lock = sem_open(set_local_sem_name("meal_time_lock", id), O_CREAT, S_IRUSR | S_IWUSR, 1);
 	philo->alive_lock = sem_open(set_local_sem_name("alive_lock", id), O_CREAT, S_IRUSR | S_IWUSR, 1);

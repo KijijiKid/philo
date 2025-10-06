@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/05 18:50:09 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 12:45:52 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,15 @@ static int	eat_routine(t_philo *philo, bool write)
 {
 	if (!is_alive(philo))
 		return (1);
+	sem_wait(philo->forks);
+	sem_wait(philo->forks);
 	write_action(philo, T_FORK, write);
 	write_action(philo, T_FORK, write);
 	write_action(philo, EAT, write);
 	ft_usleep(philo->options.p_tte);
 	set_time_count(philo);
+	sem_post(philo->forks);
+	sem_post(philo->forks);
 	sleep_routine(philo, write);
 	return (0);
 }
