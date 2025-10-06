@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 16:34:37 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 17:46:34 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,7 @@ void	*routine(void *data)
 	write = true;
 	while (1)
 	{
-		sem_wait(philo->run_lock_ptr);
 		run = *(philo->run_flag_ptr);
-		sem_post(philo->run_lock_ptr);
 		if (!run || !philo->alive)
 			break ;
 		if (eat_routine(philo, true))
