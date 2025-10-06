@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:55:45 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 16:50:44 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 16:58:12 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	init_monitor(t_meta *meta)
 	{
 		if (check_dead_flag(meta))
 			break ;
-		if (check_if_fed_up(meta))	
+		if (check_if_fed_up(meta))
 			break ;
 	}
 	sem_wait(meta->run_lock);
