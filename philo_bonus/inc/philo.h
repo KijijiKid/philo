@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 12:44:59 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 15:52:22 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <fcntl.h>
 # include <sys/stat.h>
 # include <semaphore.h>
+# include <stdatomic.h>
 
 //Time magic number UTC to ETC (hours
 # define TIME_ZONE_OFFSET 2
@@ -45,44 +46,46 @@
 /// p_mec Number of times each philo must have eaten
 typedef struct s_options
 {
-	unsigned int	p_num;
-	size_t			p_ttd;
-	size_t			p_tte;
-	size_t			p_tts;
-	unsigned int	p_mec;
-	size_t			*start_time;
+	unsigned int			p_num;
+	size_t					p_ttd;
+	size_t					p_tte;
+	size_t					p_tts;
+	unsigned int			p_mec;
+	size_t					*start_time;
 }	t_options;
 
 typedef struct s_philo
 {
-	pthread_t		thread;
-	unsigned int	id;
-	sem_t			*forks;
-	sem_t			*alive_lock;
-	bool			alive;
-	sem_t			*meal_time_lock;
-	size_t			last_meal;
-	sem_t			*meal_count_lock;
-	unsigned int	meal_count;
-	t_options		options;
-	sem_t			*sync_lock_ptr;
-	bool			*sync_flag_ptr;
-	sem_t			*write_lock_ptr;
-	sem_t			*run_lock_ptr;
-	bool			*run_flag_ptr;
+	pthread_t				thread;
+	unsigned int			id;
+	atomic_uint				*fork_flag_ptr;
+	sem_t					*forks;
+	sem_t					*alive_lock;
+	bool					alive;
+	sem_t					*meal_time_lock;
+	size_t					last_meal;
+	sem_t					*meal_count_lock;
+	unsigned int			meal_count;
+	t_options				options;
+	sem_t					*sync_lock;
+	bool					*sync_flag_ptr;
+	sem_t					*write_lock_ptr;
+	sem_t					*run_lock_ptr;
+	bool					*run_flag_ptr;
 }	t_philo;
 
 typedef struct s_meta
 {
-	t_options			options;
-	t_philo				philo[200];
-	sem_t				*forks;
-	sem_t				*sync_lock;
-	bool				sync_flag;
-	sem_t				*write_lock;
-	sem_t				*run_lock;
-	bool				run_flag;
-	size_t				start_time;
+	t_options				options;
+	t_philo					philo[200];
+	atomic_uint				fork_flag;
+	sem_t					*forks;
+	sem_t					*sync_lock;
+	bool					sync_flag;
+	sem_t					*write_lock;
+	sem_t					*run_lock;
+	bool					run_flag;
+	size_t					start_time;
 }	t_meta;
 
 typedef enum e_status

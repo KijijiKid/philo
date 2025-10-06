@@ -6,11 +6,17 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 15:09:23 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/05 18:52:16 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 16:05:51 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+// void	try_grab(t_philo *philo)
+// {
+// 	sem_wait(philo->forks);
+
+// }
 
 /// @brief Increments meal_count and sets last
 /// meal time to current time.
