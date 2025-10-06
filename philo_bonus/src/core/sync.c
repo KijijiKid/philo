@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:09:24 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/05 18:49:21 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 16:13:26 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	philo_hold(t_philo *philo)
 
 	while (1)
 	{
-		// pthread_mutex_lock(philo->sync_lock_ptr);
+		sem_wait(philo->sync_lock);
 		start = *(philo->sync_flag_ptr);
-		// pthread_mutex_unlock(philo->sync_lock_ptr);
+		sem_post(philo->sync_lock);
 		if (start)
 			break ;
 	}
