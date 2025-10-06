@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:55:45 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 16:58:12 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 17:46:49 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,12 @@ static bool	check_dead_flag(t_meta *meta)
 		alive = meta->philo[i].alive;
 		if (!alive)
 		{
-			sem_wait(meta->run_lock);
 			meta->run_flag = false;
-			sem_post(meta->run_lock);
-			sem_wait(meta->write_lock);
+			while(meta->write_flag)
+				continue ;
+			meta->write_flag = true;
 			printf("%ld %d died\n", get_curr_time()
 				- meta->start_time, meta->philo[i].id + 1);
-			sem_post(meta->write_lock);
 			return (true);
 		}
 		i++;
@@ -71,8 +70,6 @@ int	init_monitor(t_meta *meta)
 		if (check_if_fed_up(meta))
 			break ;
 	}
-	sem_wait(meta->run_lock);
 	meta->run_flag = false;
-	sem_post(meta->run_lock);
 	return (0);
 }

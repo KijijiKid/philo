@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 16:58:33 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 17:46:17 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,9 @@ typedef struct s_philo
 	sem_t					*meal_count_lock;
 	unsigned int			meal_count;
 	t_options				options;
-	sem_t					*sync_lock;
-	bool					*sync_flag_ptr;
-	sem_t					*write_lock_ptr;
-	sem_t					*run_lock_ptr;
-	bool					*run_flag_ptr;
+	atomic_bool				*sync_flag_ptr;
+	atomic_bool				*write_flag_ptr;
+	atomic_bool				*run_flag_ptr;
 }	t_philo;
 
 typedef struct s_meta
@@ -79,11 +77,9 @@ typedef struct s_meta
 	t_philo					philo[200];
 	atomic_uint				fork_flag;
 	sem_t					*forks;
-	sem_t					*sync_lock;
-	bool					sync_flag;
-	sem_t					*write_lock;
-	sem_t					*run_lock;
-	bool					run_flag;
+	atomic_bool				sync_flag;
+	atomic_bool				write_flag;
+	atomic_bool				run_flag;
 	size_t					start_time;
 }	t_meta;
 
@@ -130,5 +126,6 @@ char		*set_local_sem_name(const char *str, unsigned int id);
 
 //Error
 int			throw_error(t_status status);
+
 
 #endif
