@@ -6,12 +6,12 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 17:46:17 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 18:09:51 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
 
 /*Common Libaries*/
 # include <string.h>
@@ -63,8 +63,7 @@ typedef struct s_philo
 	atomic_bool				alive;
 	sem_t					*meal_time_lock;
 	size_t					last_meal;
-	sem_t					*meal_count_lock;
-	unsigned int			meal_count;
+	atomic_uint				meal_count;
 	t_options				options;
 	atomic_bool				*sync_flag_ptr;
 	atomic_bool				*write_flag_ptr;

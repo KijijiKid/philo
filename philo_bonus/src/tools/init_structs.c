@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:47:02 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 17:45:29 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 18:04:30 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,16 @@ static void	fill_options(t_meta *meta, t_philo *philo)
 int	init_philo(t_meta *meta, t_philo *philo, unsigned int id)
 {
 	philo->id = id;
-	philo->meal_count = 0;
 	philo->alive = true;
 	fill_options(meta, philo);
 	philo->sync_flag_ptr = &meta->sync_flag;
 	philo->write_flag_ptr = &meta->write_flag;
 	philo->run_flag_ptr = &meta->run_flag;
-	philo->run_flag_ptr = &meta->run_flag;
 	philo->forks = meta->forks;
 	philo->fork_flag_ptr = &meta->fork_flag;
-	philo->meal_count_lock = sem_open(set_local_sem_name("meal_count_lock",
-				id), O_CREAT, 0666, 1);
+	philo->meal_count = 0;
 	philo->meal_time_lock = sem_open(set_local_sem_name("meal_time_lock",
 				id), O_CREAT, 0666, 1);
-	if (philo->meal_count_lock == SEM_FAILED)
-		return (throw_error(SEM_CREATION));
 	if (philo->meal_time_lock == SEM_FAILED)
 		return (throw_error(SEM_CREATION));
 	return (0);
