@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 17:46:34 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/06 18:22:34 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ static int	eat_routine(t_philo *philo, bool write)
 	while (philo->options.p_num - 1 <= *philo->fork_flag_ptr)
 		continue ;
 	*philo->fork_flag_ptr += 2;
-	sem_trywait(philo->forks);
-	sem_trywait(philo->forks);
+	sem_wait(philo->forks);
+	sem_wait(philo->forks);
 	write_action(philo, T_FORK, write);
 	write_action(philo, T_FORK, write);
 	write_action(philo, EAT, write);
