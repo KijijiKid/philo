@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/07 18:29:08 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/07 18:39:39 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ static int	lone_philo(t_philo *philo)
 {
 	if (philo->options.p_num == 1)
 	{
-		printf("%ld %d philo died", *philo->options.start_time - get_curr_time(),
-					philo->id + 1);
+		printf("%ld %d philo died\n", *philo->options.start_time
+			- get_curr_time(), philo->id + 1);
 		return (1);
 	}
 	return (0);

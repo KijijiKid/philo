@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:55:45 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/07 17:27:46 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/07 18:38:53 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ static bool	check_dead_flag(t_meta *meta)
 
 int	init_monitor(t_meta *meta)
 {
+	if (meta->options.p_num == 1)
+	{
+		ft_usleep(10);
+		return (0);
+	}
 	while (1)
 	{
 		if (check_dead_flag(meta))
