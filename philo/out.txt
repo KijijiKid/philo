@@ -1,0 +1,2 @@
+Wrong Input
+Expected: NUM_PHILO(1-200) ttd tte tts [tepme]

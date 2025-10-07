@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:21:51 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/03 18:16:27 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/07 18:21:50 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static int	clean_meta_locks(t_meta *meta)
 /// cleaning up all resources 
 int	clean_res(t_meta *meta)
 {
+	if (meta->options.p_num == 1)
+		return (0);
 	join_threads(meta);
 	clean_total_forks(meta);
 	clean_meta_locks(meta);
