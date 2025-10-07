@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:47:02 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 18:04:30 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/07 16:59:57 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,10 @@ int	init_philo(t_meta *meta, t_philo *philo, unsigned int id)
 	philo->forks = meta->forks;
 	philo->fork_flag_ptr = &meta->fork_flag;
 	philo->meal_count = 0;
-	philo->meal_time_lock = sem_open(set_local_sem_name("meal_time_lock",
-				id), O_CREAT, 0666, 1);
-	if (philo->meal_time_lock == SEM_FAILED)
-		return (throw_error(SEM_CREATION));
 	return (0);
 }
 
+#include <assert.h>
 
 void	init_meta(t_meta *meta)
 {
@@ -50,6 +47,6 @@ void	init_meta(t_meta *meta)
 	meta->write_flag = false;
 	meta->options.start_time = 0;
 	meta->fork_flag = 0;
-	meta->forks = sem_open("forks", O_CREAT, S_IRUSR | S_IWUSR,
+	meta->forks = sem_open("forks", O_CREAT | O_EXCL, S_IRUSR | S_IWUSR,
 			meta->options.p_num);
 }

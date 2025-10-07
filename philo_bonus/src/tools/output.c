@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:01:19 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 18:00:25 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/07 15:53:42 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static void	print_status(t_philo *philo, char *str)
 {
-	while(*philo->write_flag_ptr)
-		continue ;
-	*philo->write_flag_ptr = true;
+	// while(*philo->write_flag_ptr)
+	// 	continue ;
+	// *philo->write_flag_ptr = true;
 	printf("%ld %d %s\n", get_curr_time() - *(philo->options.start_time),
 		philo->id + 1, str);
-	*philo->write_flag_ptr = false;
+	// *philo->write_flag_ptr = false;
 }
 
 int	write_action(t_philo *philo, t_action action, bool visible)
