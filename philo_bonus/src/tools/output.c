@@ -6,20 +6,18 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:01:19 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/07 15:53:42 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/07 17:27:50 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 static void	print_status(t_philo *philo, char *str)
 {
-	// while(*philo->write_flag_ptr)
-	// 	continue ;
-	// *philo->write_flag_ptr = true;
+	sem_wait(philo->write_sem);
 	printf("%ld %d %s\n", get_curr_time() - *(philo->options.start_time),
 		philo->id + 1, str);
-	// *philo->write_flag_ptr = false;
+	sem_post(philo->write_sem);
 }
 
 int	write_action(t_philo *philo, t_action action, bool visible)

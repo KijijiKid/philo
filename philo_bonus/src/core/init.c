@@ -6,11 +6,11 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:08:57 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 16:46:05 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/07 17:27:42 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 int	init_threads(t_meta *meta)
 {

@@ -6,11 +6,11 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:09:24 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 17:37:45 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/07 17:27:48 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 /// @brief After all threads are created this
 /// function called by the main thread sets the 
