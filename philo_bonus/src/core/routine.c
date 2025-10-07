@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/07 17:27:48 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/07 18:39:26 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,17 @@ static int	eat_routine(t_philo *philo, bool write)
 	return (0);
 }
 
+static int	lone_philo(t_philo *philo)
+{
+	if (philo->options.p_num == 1)
+	{
+		printf("%ld %d philo died\n", *philo->options.start_time
+			- get_curr_time(), philo->id + 1);
+		return (1);
+	}
+	return (0);
+}
+
 void	*routine(void *data)
 {
 	t_philo	*philo;
@@ -73,6 +84,8 @@ void	*routine(void *data)
 	bool	write;
 
 	philo = (t_philo *)data;
+	if (lone_philo(philo))
+		return (NULL);
 	philo_hold(philo);
 	set_first_meal_time(philo);
 	if (philo->id % 2)
