@@ -6,11 +6,11 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:21:51 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/07 17:02:34 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/07 17:27:39 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 static int	join_threads(t_meta	*meta)
 {
@@ -31,7 +31,9 @@ static int	join_threads(t_meta	*meta)
 int	clean_res(t_meta *meta)
 {
 	join_threads(meta);
-	if (sem_destroy(meta->forks) != 0)
-			return (throw_error(SEM_CLOSE_FAILED));
+	if (sem_unlink("forks") != 0)
+		return (throw_error(SEM_CLOSE_FAILED));
+	if (sem_unlink("write_sem") != 0)
+		return (throw_error(SEM_CLOSE_FAILED));
 	return (0);
 }

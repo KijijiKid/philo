@@ -6,11 +6,11 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:47:10 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/05 18:53:33 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/07 17:27:49 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 static int	write_input(char *msg1, char *msg2)
 {

@@ -1,4 +1,7 @@
 {
     "editor.insertSpaces": false,
     "editor.tabSize": 4,
+    "files.associations": {
+        "philo_bonus.h": "c"
+    },
 }

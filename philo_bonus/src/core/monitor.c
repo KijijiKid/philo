@@ -6,11 +6,11 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:55:45 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/06 18:05:46 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/07 17:27:46 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 static bool	check_if_fed_up(t_meta *meta)
 {
@@ -47,9 +47,10 @@ static bool	check_dead_flag(t_meta *meta)
 		if (!alive)
 		{
 			meta->run_flag = false;
-			meta->write_flag = true;
+			sem_wait(meta->write_sem);
 			printf("%ld %d died\n", get_curr_time()
 				- meta->start_time, meta->philo[i].id + 1);
+			sem_post(meta->write_sem);
 			return (true);
 		}
 		i++;

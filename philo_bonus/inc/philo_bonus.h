@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:25:50 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/07 16:59:24 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/07 17:45:21 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/stat.h>
 # include <semaphore.h>
 # include <stdatomic.h>
+# include <stdlib.h>
 
 //Time magic number UTC to ETC (hours
 # define TIME_ZONE_OFFSET 2
@@ -65,7 +66,7 @@ typedef struct s_philo
 	atomic_uint				meal_count;
 	t_options				options;
 	atomic_bool				*sync_flag_ptr;
-	atomic_bool				*write_flag_ptr;
+	sem_t					*write_sem;
 	atomic_bool				*run_flag_ptr;
 }	t_philo;
 
@@ -76,7 +77,7 @@ typedef struct s_meta
 	atomic_uint				fork_flag;
 	sem_t					*forks;
 	atomic_bool				sync_flag;
-	atomic_bool				write_flag;
+	sem_t					*write_sem;
 	atomic_bool				run_flag;
 	size_t					start_time;
 }	t_meta;
@@ -124,6 +125,5 @@ char		*set_local_sem_name(const char *str, unsigned int id);
 
 //Error
 int			throw_error(t_status status);
-
 
 #endif

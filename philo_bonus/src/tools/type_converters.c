@@ -6,11 +6,11 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:41:14 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/05 19:04:30 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/07 17:27:52 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 /// @brief Returns -1 if str contains a 
 /// different character than numbers

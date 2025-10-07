@@ -6,11 +6,11 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 17:56:13 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/05 19:03:50 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/07 17:27:51 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 int	input_parsing(int argc, char **argv, t_meta *philo_meta)
 {

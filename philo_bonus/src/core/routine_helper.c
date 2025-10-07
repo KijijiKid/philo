@@ -6,24 +6,17 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 15:09:23 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/07 17:00:33 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/07 17:46:35 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-
-// void	try_grab(t_philo *philo)
-// {
-// 	sem_wait(philo->forks);
-
-// }
+#include "philo_bonus.h"
 
 /// @brief Increments meal_count and sets last
 /// meal time to current time.
 /// Uses meal_time_lock and meal_count_lock
 void	set_time_count(t_philo *philo)
 {
-
 	philo->last_meal = get_curr_time();
 	philo->meal_count += 1;
 }
