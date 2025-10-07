@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:47:02 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/03 18:35:09 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/07 18:17:36 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	init_philo(t_meta *meta, t_philo *philo, unsigned int id)
 	philo->meal_count = 0;
 	philo->alive = true;
 	fill_options(meta, philo);
-	assign_forks(meta, philo);
+	if (1 < meta->options.p_num)
+		assign_forks(meta, philo);
 	philo->sync_lock_ptr = &meta->sync_lock;
 	philo->sync_flag_ptr = &meta->sync_flag;
 	philo->write_lock_ptr = &meta->write_lock;
