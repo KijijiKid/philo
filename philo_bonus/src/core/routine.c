@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/08 17:59:35 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/08 20:11:50 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,21 @@ static int	sleep_routine(t_philo *philo, bool write)
 
 static int	think_routine(t_philo *philo, bool write)
 {
+	long	time_to_think;
+	long	last_meal;
+
 	if (!is_alive(philo))
 		return (1);
+	last_meal = philo->last_meal;
+	time_to_think = (philo->options.p_ttd
+			- (get_curr_time() - last_meal)
+			- philo->options.p_tts);
+	if (time_to_think <= 0)
+		return (0);
+	if (time_to_think > 600)
+		time_to_think = 200;
 	write_action(philo, THINK, write);
+	ft_usleep(time_to_think);
 	return (0);
 }
 
@@ -39,7 +51,7 @@ static int	eat_routine(t_philo *philo, bool write)
 	{
 		philo_life = philo->last_meal - get_curr_time();
 		if (philo_life < philo->options.p_ttd
-			&& philo_life < 100)
+			&& philo_life < 50)
 			break ;
 	}
 	while (philo->options.p_num - 1 <= *philo->fork_flag_ptr)
