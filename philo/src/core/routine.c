@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/08 16:30:24 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/08 19:59:24 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,23 @@ static int	sleep_routine(t_philo *philo, bool write)
 
 static int	think_routine(t_philo *philo, bool write)
 {
+	long	time_to_think;
+	long	last_meal;
+
 	if (!is_alive(philo))
 		return (1);
+	pthread_mutex_lock(&philo->meal_time_lock);
+	last_meal = philo->last_meal;
+	pthread_mutex_unlock(&philo->meal_time_lock);
+	time_to_think = (philo->options.p_ttd
+			- (get_curr_time() - last_meal) - 
+				philo->options.p_tts);
+	if (time_to_think <= 0)
+		return (0);
+	if (time_to_think > 600)
+		time_to_think = 200;
 	write_action(philo, THINK, write);
+	ft_usleep(time_to_think);
 	return (0);
 }
 
@@ -36,15 +50,17 @@ static int	eat_routine(t_philo *philo, bool write)
 	if (philo->id % 2)
 	{
 		pthread_mutex_lock(philo->l_fork);
+		write_action(philo, T_FORK, write);
 		pthread_mutex_lock(philo->r_fork);
+		write_action(philo, T_FORK, write);
 	}
 	else
 	{
 		pthread_mutex_lock(philo->r_fork);
+		write_action(philo, T_FORK, write);
 		pthread_mutex_lock(philo->l_fork);
+		write_action(philo, T_FORK, write);
 	}
-	write_action(philo, T_FORK, write);
-	write_action(philo, T_FORK, write);
 	write_action(philo, EAT, write);
 	set_time_count(philo);
 	ft_usleep(philo->options.p_tte);
