@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:55:45 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/07 18:38:53 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/08 16:59:59 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,15 @@ static bool	check_dead_flag(t_meta *meta)
 	i = 0;
 	while (i < meta->options.p_num)
 	{
-		alive = meta->philo[i].alive;
-		if (!alive)
+		if (!is_alive(&(meta->philo[i])))
 		{
+			pthread_mutex_lock(&meta->run_lock);
 			meta->run_flag = false;
-			sem_wait(meta->write_sem);
+			pthread_mutex_unlock(&meta->run_lock);
+			pthread_mutex_lock(&meta->write_lock);
 			printf("%ld %d died\n", get_curr_time()
 				- meta->start_time, meta->philo[i].id + 1);
-			sem_post(meta->write_sem);
+			pthread_mutex_unlock(&meta->write_lock);
 			return (true);
 		}
 		i++;
