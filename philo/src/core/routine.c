@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/08 19:59:24 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/08 20:02:26 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static int	think_routine(t_philo *philo, bool write)
 	last_meal = philo->last_meal;
 	pthread_mutex_unlock(&philo->meal_time_lock);
 	time_to_think = (philo->options.p_ttd
-			- (get_curr_time() - last_meal) - 
-				philo->options.p_tts);
+			- (get_curr_time() - last_meal)
+			- philo->options.p_tts);
 	if (time_to_think <= 0)
 		return (0);
 	if (time_to_think > 600)
