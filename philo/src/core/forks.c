@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 13:48:36 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/03 16:19:38 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/08 16:11:14 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	assign_forks(t_meta *meta, t_philo *philo)
 {
 	philo->r_fork = &meta->total_forks[philo->id];
 	if (philo->id == 0)
-		philo->l_fork = &meta->total_forks[philo->options.p_num];
+		philo->l_fork = &meta->total_forks[philo->options.p_num - 1];
 	else
 		philo->l_fork = &meta->total_forks[philo->id - 1];
 }
