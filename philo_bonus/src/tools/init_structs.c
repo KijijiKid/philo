@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:47:02 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/07 17:47:09 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/08 16:58:10 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	init_philo(t_meta *meta, t_philo *philo, unsigned int id)
 	philo->forks = meta->forks;
 	philo->fork_flag_ptr = &meta->fork_flag;
 	philo->meal_count = 0;
+	philo->last_meal = 0;
 	return (0);
 }
 
