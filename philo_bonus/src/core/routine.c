@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:21:56 by mandre            #+#    #+#             */
-/*   Updated: 2025/10/08 16:04:02 by mandre           ###   ########.fr       */
+/*   Updated: 2025/10/08 16:07:35 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,9 @@ static int	think_routine(t_philo *philo, bool write)
 {
 	long	time_to_think;
 	long	last_meal;
-	bool	write_flag;
 
 	if (!is_alive(philo))
 		return (1);
-	write_flag = write;
 	last_meal = philo->last_meal;
 	time_to_think = (philo->options.p_ttd
 			- (get_curr_time() - last_meal)
