@@ -60,4 +60,4 @@ fclean: clean
 re: fclean
 	@make
 
-.PHONY: all clean fclean reINC_DIR
+.PHONY: all clean fclean re
